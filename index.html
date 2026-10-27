@@ -3,102 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- تگ‌های سئو و معرفی صفحه به گوگل -->
-    <title>راهنمای جامع خرید دانه قهوه تازه در تهرانپارس | کلبه چای و قهوه سیمرغ</title>
-    <meta name="description" content="راهنمای تخصصی خرید دانه قهوه تازه، انتخاب رست مناسب دستگاه اسپرسو و آشنایی با انواع ترکیب‌های عربیکا و روبوستا در تهرانپارس.">
-    <meta name="keywords" content="خرید قهوه در تهرانپارس, دانه قهوه تازه, قیمت قهوه تهرانپارس, کلبه چای و قهوه سیمرغ">
-    
-    <!-- استایل‌های ساده و خوانا برای متن (بدون نیاز به فایل‌های سنگین خارجی) -->
+    <title>کاتالوگ و لیست قیمت محصولات | کلبه چای و قهوه سیمرغ</title>
+    <meta name="description" content="کاتالوگ محصولات دانه قهوه تازه رست، ترکیب‌های اختصاصی عربیکا و روبوستا، و چای تخصصی کلبه چای و قهوه سیمرغ در تهرانپارس.">
     <style>
-        body {
-            font-family: Tahoma, Arial, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
+        :root {
+            --bg-color: #fcf8f2;
+            --primary-color: #4a2c11;
+            --accent-color: #d97706;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --telegram-color: #0088cc;
+            --rubika-color: #7b2cbf;
         }
+
+        body {
+            font-family: Tahoma, 'Segoe UI', Geneva, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+
+        header {
+            text-align: center;
+            padding: 20px 10px;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 25px;
+        }
+
         h1 {
-            color: #2c3e50;
-            font-size: 24px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
         }
-        h2 {
-            color: #34495e;
-            font-size: 20px;
-            margin-top: 30px;
+
+        .subtitle {
+            color: #666;
+            font-size: 0.95rem;
         }
-        p {
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-img-box {
+            width: 100%;
+            height: 180px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0 0 8px 0;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-color);
             margin-bottom: 15px;
-            text-align: justify;
         }
-        .footer-links {
-            background: #f1f8f6;
-            border-right: 4px solid #27ae60;
-            padding: 20px;
-            margin-top: 40px;
-            border-radius: 4px;
+
+        .order-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 0 15px 15px 15px;
         }
-        .footer-links h3 {
-            margin-top: 0;
-            color: #27ae60;
-            font-size: 18px;
-        }
-        .footer-links ul {
-            padding-right: 20px;
-            margin: 0;
-        }
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        .footer-links a {
-            color: #2980b9;
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 8px;
             text-decoration: none;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: opacity 0.2s;
         }
-        .footer-links a:hover {
-            text-decoration: underline;
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-telegram {
+            background-color: var(--telegram-color);
+        }
+
+        .btn-rubika {
+            background-color: var(--rubika-color);
+        }
+
+        footer {
+            margin-top: 35px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- عنوان اصلی مقاله (H1) -->
-        <h1>راهنمای جامع خرید دانه قهوه تازه در تهرانپارس</h1>
-        
-        <!-- مقدمه مقاله با کلمات کلیدی هدف -->
-        <p>اگر از علاقه‌مندان به قهوه هستید و در شرق تهران یا محله <strong>تهرانپارس</strong> سکونت دارید، حتماً می‌دانید که پیدا کردن دانه قهوه تازه‌رست و باکیفیت چقدر در طعم و عطر اسپرسوی نهایی تاثیر دارد. در این مقاله قصد داریم نکات کلیدی برای انتخاب بهترین دانه قهوه را بررسی کنیم.</p>
+<div class="container">
+    <header>
+        <h1>کاتالوگ محصولات کلبه چای و قهوه سیمرغ</h1>
+        <p class="subtitle">سفارش آنلاین دانه قهوه تازه رست و ترکیبات اختصاصی (تهرانپارس)</p>
+    </header>
 
-        <!-- تیتر بخش دوم (H2) -->
-        <h2>چرا تازگی دانه قهوه اهمیت دارد؟</h2>
-        <p>دانه‌های قهوه پس از برشته‌کاری (رست) به مرور زمان عطر و اسانس خود را از دست می‌دهند. به همین دلیل خرید از مراکزی که به صورت تخصصی روی ترکیب و فروش قهوه فعالیت دارند، تضمین‌کننده یک فنجان قهوه بی‌نظیر خواهد بود...</p>
+    <div class="catalog-grid">
 
-        <!-- تیتر بخش سوم (H2) -->
-        <h2>انتخاب بر اساس نوع دستگاه و طعم</h2>
-        <p>برای دستگاه‌های خانگی و نیمه‌صنعتی، نسبت‌های مختلف عربیکا و روبوستا (مثل ترکیب‌های پایه‌کلمبیا) استفاده می‌شود که بسته به ذائقه تلخی یا ترشی دلخواه شما تنظیم می‌گردد.</p>
-
-        <!-- بلوک لینک‌سازی نهایی (Closed-Loop) برای هدایت مخاطب و سئو -->
-        <div class="footer-links">
-            <h3>دسترسی به سایر بخش‌ها و ارتباط با ما:</h3>
-            <ul>
-                <li>🎬 <strong>تماشای ویدیوی آموزشی این مقاله در آپارات:</strong> <a href="لینک_ویدیوی_آپارات" target="_blank">مشاهده ویدیو</a></li>
-                <li>🎥 <strong>کانال ویدیوهای آموزشی در آپارات:</strong> <a href="لینک_کل_کانال_آپارات" target="_blank">تماشای ویدیوهای بیشتر سیمرغ</a></li>
-                <li>💬 <strong>مشاوره، موجودی لحظه‌ای و ثبت سفارش (تلگرام):</strong> <a href="لینک_کانال_تلگرام" target="_blank">ورود به کانال تلگرام</a></li>
-                <li>📲 <strong>پشتیبان شبکه داخلی / روزهای نت ملی (روبیکا):</strong> <a href="لینک_کانال_روبیکا" target="_blank">کانال روبیکا</a></li>
-                <li>📍 <strong>مراجعه حضوری:</strong> تهران، تهرانپارس، [آدرس دقیق مغازه کلبه چای و قهوه سیمرغ]</li>
-            </ul>
+        <!-- محصول اول -->
+        <div class="product-card">
+            <div class="product-img-box">
+                <!-- می‌توانید آدرس عکس واقعی محصول خودتان را جایگزین کنید -->
+                <img src="https://via.placeholder.com/300x180/4a2c11/ffffff?text=قهوه+ترکیبی+AR+80-20" alt="قهوه ترکیبی 80-20 سیمرغ">
+            </div>
+            <div class="product-info">
+                <h2 class="product-title">قهوه ترکیبی AR 80-20</h2>
+                <p class="product-desc">پایه عربیکا کلمبیا سوفیا همراه با روبوستا. عطر بالا، اسیدیته ملایم و تلخی کنترل‌شده.</p>
+                <div class="product-price">ثبت سفارش / استعلام قیمت روز</div>
+            </div>
+            <div class="order-buttons">
+                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR80-20+دارم" target="_blank">سفارش در تلگرام</a>
+                <a class="btn btn-rubika" href="https://rubika.ir/YOUR_RUBIKA_ID" target="_blank">سفارش در روبیکا</a>
+            </div>
         </div>
+
+        <!-- محصول دوم -->
+        <div class="product-card">
+            <div class="product-img-box">
+                <img src="https://via.placeholder.com/300x180/4a2c11/ffffff?text=قهوه+ترکیبی+AR+70-30" alt="قهوه ترکیبی 70-30 سیمرغ">
+            </div>
+            <div class="product-info">
+                <h2 class="product-title">قهوه ترکیبی AR 70-30</h2>
+                <p class="product-desc">ترکیب ۷۰٪ عربیکا کلمبیا و ۳۰٪ روبوستا. بافت عالی (کرما) و عطر متوازن برای اسپرسو.</p>
+                <div class="product-price">ثبت سفارش / استعلام قیمت روز</div>
+            </div>
+            <div class="order-buttons">
+                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR70-30+دارم" target="_blank">سفارش در تلگرام</a>
+                <a class="btn btn-rubika" href="https://rubika.ir/YOUR_RUBIKA_ID" target="_blank">سفارش در روبیکا</a>
+            </div>
+        </div>
+
+        <!-- محصول سوم -->
+        <div class="product-card">
+            <div class="product-img-box">
+                <img src="https://via.placeholder.com/300x180/4a2c11/ffffff?text=قهوه+ترکیبی+AR+60-40" alt="قهوه ترکیبی 60-40 سیمرغ">
+            </div>
+            <div class="product-info">
+                <h2 class="product-title">قهوه ترکیبی AR 60-40</h2>
+                <p class="product-desc">پایه عربیکا کلمبیا با کرما و گیرایی بیشتر. مناسب برای کافئین روزانه و قهوه‌های شیری.</p>
+                <div class="product-price">ثبت سفارش / استعلام قیمت روز</div>
+            </div>
+            <div class="order-buttons">
+                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR60-40+دارم" target="_blank">سفارش در تلگرام</a>
+                <a class="btn btn-rubika" href="https://rubika.ir/YOUR_RUBIKA_ID" target="_blank">سفارش در روبیکا</a>
+            </div>
+        </div>
+
     </div>
+
+    <footer>
+        <p><strong>کلبه چای و قهوه سیمرغ</strong></p>
+        <p>آدرس: تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
+    </footer>
+</div>
 
 </body>
 </html>
