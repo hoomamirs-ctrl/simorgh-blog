@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کاتالوگ و لیست قیمت محصولات | کلبه چای و قهوه سیمرغ</title>
-    <meta name="description" content="کاتالوگ رسمی دانه قهوه تازه رست، ترکیبات تخصصی عربیکا کلمبیا و روبوستا، و چای در کلبه چای و قهوه سیمرغ تهرانپارس.">
+    <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
+    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، و چای در تهرانپارس. سفارش آنلاین از طریق تلگرام و روبیکا.">
     <style>
         :root {
             --bg-color: #f7f4ef;
@@ -25,241 +25,130 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 12px;
-            line-height: 1.6;
+            padding: 15px;
+            line-height: 1.7;
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 25px 15px 15px;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            border-bottom: 3px solid var(--accent-color);
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin: 0 0 8px 0;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 0.9rem;
-            margin: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .nav-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 18px;
-        }
-
-        .product-card {
+            max-width: 650px;
+            margin: 30px auto;
             background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             border: 1px solid #e2ded7;
+            text-align: center;
+        }
+
+        .logo-area h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .tagline {
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .menu-links {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .product-img-box {
-            width: 100%;
-            height: 190px;
-            background-color: #eae5dc;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .product-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        .menu-btn {
+            display: block;
             background-color: var(--primary-color);
-            color: #fff;
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 6px;
-        }
-
-        .product-info {
-            padding: 15px;
-            flex-grow: 1;
-        }
-
-        .product-title {
-            font-size: 1.15rem;
-            color: var(--primary-color);
-            margin: 0 0 8px 0;
-        }
-
-        .product-desc {
-            font-size: 0.88rem;
-            color: #555;
-            margin-bottom: 12px;
-        }
-
-        .product-specs {
-            background-color: #fcfbfa;
-            border: 1px dashed #ded8cf;
-            padding: 8px 10px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            color: #444;
-            margin-bottom: 15px;
-        }
-
-        .order-buttons {
-            display: flex;
-            gap: 8px;
-            padding: 0 15px 15px 15px;
-        }
-
-        .btn {
-            flex: 1;
-            text-align: center;
-            padding: 10px 4px;
-            border-radius: 8px;
-            text-decoration: none;
             color: #ffffff;
-            font-size: 0.82rem;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 1.05rem;
             font-weight: bold;
-            transition: opacity 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .menu-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
-        .btn-telegram {
-            background-color: var(--telegram-color);
+        .menu-btn.secondary {
+            background-color: #555;
         }
 
-        .btn-rubika {
-            background-color: var(--rubika-color);
+        .menu-btn.secondary:hover {
+            background-color: var(--primary-color);
         }
+
+        .social-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .btn-tg { background-color: var(--telegram-color); }
+        .btn-rb { background-color: var(--rubika-color); }
 
         footer {
             margin-top: 30px;
-            padding: 20px;
-            text-align: center;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            font-size: 0.88rem;
-            border: 1px solid #e2ded7;
-        }
-
-        .footer-address {
-            color: #666;
-            margin-top: 5px;
+            font-size: 0.85rem;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
+    <div class="logo-area">
         <h1>کلبه چای و قهوه سیمرغ</h1>
-        <p class="subtitle">کاتالوگ رسمی ترکیبات اختصاصی دانه قهوه تازه رست</p>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">← بازگشت به مقاله اصلی</a>
-        </div>
-    </header>
+        <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
+    </div>
 
-    <div class="catalog-grid">
+    <p class="intro-text">
+        به وبلاگ و مرجع رسمی کلبه سیمرغ خوش آمدید. از طریق دکمه‌های زیر می‌توانید به کاتالوگ محصولات و مقالات آموزشی ما دسترسی داشته باشید و به صورت مستقیم ثبت سفارش کنید.
+    </p>
 
-        <!-- محصول ۱ -->
-        <div class="product-card">
-            <div class="product-img-box">
-                <span class="badge">پرفروش</span>
-                <img src="ar80-20.jpg" alt="قهوه ترکیبی AR 80-20 سیمرغ" onerror="this.src='https://via.placeholder.com/300x190/3d2314/ffffff?text=AR+80-20'">
-            </div>
-            <div class="product-info">
-                <h2 class="product-title">قهوه ترکیبی AR 80-20</h2>
-                <p class="product-desc">ترکیب ۸۰٪ عربیکا پایه کلمبیا سوفیا به همراه ۲۰٪ روبوستا. عطر پیچیده، ترشی (اسیدیته) ملایم و دلنشین.</p>
-                <div class="product-specs">
-                    <strong>مناسب برای:</strong> اسپرسو خانگی و صنعتی، فرانسه، موکاپات
-                </div>
-            </div>
-            <div class="order-buttons">
-                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR80-20+دارم" target="_blank">سفارش در تلگرام</a>
-                <a class="btn btn-rubika" href="https://rubika.ir/YOUR_RUBIKA_ID" target="_blank">سفارش در روبیکا</a>
-            </div>
-        </div>
+    <div class="menu-links">
+        <!-- لینک به کاتالوگ محصولات که با هم ساختیم -->
+        <a href="catalog.html" class="menu-btn">📋 مشاهده کاتالوگ محصولات و قیمت‌ها</a>
+        
+        <!-- لینک به مقاله راهنمای خرید قهوه -->
+        <a href="coffee-guide.html" class="menu-btn secondary">📖 راهنمای جامع خرید دانه قهوه</a>
+    </div>
 
-        <!-- محصول ۲ -->
-        <div class="product-card">
-            <div class="product-img-box">
-                <span class="badge">متوازن</span>
-                <img src="ar70-30.jpg" alt="قهوه ترکیبی AR 70-30 سیمرغ" onerror="this.src='https://via.placeholder.com/300x190/3d2314/ffffff?text=AR+70-30'">
-            </div>
-            <div class="product-info">
-                <h2 class="product-title">قهوه ترکیبی AR 70-30</h2>
-                <p class="product-desc">۷۰٪ عربیکا کلمبیا با ۳۰٪ روبوستا. بالانس عالی میان عطر عربیکا و کافئین و کرمای روبوستا.</p>
-                <div class="product-specs">
-                    <strong>مناسب برای:</strong> استفاده روزانه، اسپرسو، آメリکانو
-                </div>
-            </div>
-            <div class="order-buttons">
-                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR70-30+دارم" target="_blank">سفارش در تلگرام</a>
-                <a class="btn btn-rubika" href="https://rubika.ir/YOUR_RUBIKA_ID" target="_blank">سفارش در روبیکا</a>
-            </div>
-        </div>
-
-        <!-- محصول ۳ -->
-        <div class="product-card">
-            <div class="product-img-box">
-                <span class="badge">پرکافئین</span>
-                <img src="ar60-40.jpg" alt="قهوه ترکیبی AR 60-40 سیمرغ" onerror="this.src='https://via.placeholder.com/300x190/3d2314/ffffff?text=AR+60-40'">
-            </div>
-            <div class="product-info">
-                <h2 class="product-title">قهوه ترکیبی AR 60-40</h2>
-                <p class="product-desc">۶۰٪ عربیکا کلمبیا و ۴۰٪ روبوستا. فوم (کرما) بسیار متراکم، تلخی خوشایند و کافئین بالا.</p>
-                <div class="product-specs">
-                    <strong>مناسب برای:</strong> کافئین صبحگاهی، ترکیبات شیری (لاته/کاپوچینو)
-                </div>
-            </div>
-            <div class="order-buttons">
-                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR60-40+دارم" target="_blank">سفارش در تلگرام</a>
-                <a class="btn btn-rubika" href="https://rubika.ir/teacoffeesimorgh" target="_blank">سفارش در روبیکا</a>
-            </div>
-        </div>
-
+    <div class="social-box">
+        <a href="https://t.me/YOUR_TELEGRAM_ID" class="social-btn btn-tg" target="_blank">ارتباط در تلگرام</a>
+        <a href="https://rubika.ir/YOUR_RUBIKA_ID" class="social-btn btn-rb" target="_blank">ارتباط در روبیکا</a>
     </div>
 
     <footer>
-        <p><strong>کلبه چای و قهوه سیمرغ</strong></p>
-        <p class="footer-address">تهران، تهرانپارس | امکان تحویل حضوری و ارسال سریع</p>
+        <p>تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
     </footer>
 </div>
 
