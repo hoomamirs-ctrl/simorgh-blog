@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
-    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، و چای در تهرانپارس. سفارش آنلاین از طریق تلگرام و روبیکا.">
+    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، و چای در تهرانپارس. سفارش آنلاین از طریق تلگرام، روبیکا و تماس تلفنی.">
     <style>
         :root {
             --bg-color: #f7f4ef;
@@ -14,6 +14,8 @@
             --text-main: #2b2b2b;
             --telegram-color: #0088cc;
             --rubika-color: #6b21a8;
+            --map-color: #10b981;
+            --phone-color: #0284c7;
         }
 
         * {
@@ -56,7 +58,7 @@
         .intro-text {
             color: #555;
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding: 0 10px;
         }
 
@@ -64,7 +66,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .menu-btn {
@@ -85,24 +87,45 @@
             transform: translateY(-2px);
         }
 
-        .menu-btn.secondary {
-            background-color: #555;
+        .menu-btn.map-btn {
+            background-color: var(--map-color);
+        }
+        .menu-btn.map-btn:hover {
+            background-color: #059669;
         }
 
-        .menu-btn.secondary:hover {
-            background-color: var(--primary-color);
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .contact-btn {
+            background-color: var(--phone-color);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: block;
+            transition: opacity 0.2s;
+        }
+        .contact-btn:hover {
+            opacity: 0.9;
         }
 
         .social-box {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .social-btn {
             flex: 1;
-            padding: 10px;
+            padding: 12px 10px;
             border-radius: 8px;
             color: #fff;
             text-decoration: none;
@@ -114,7 +137,7 @@
         .btn-rb { background-color: var(--rubika-color); }
 
         footer {
-            margin-top: 30px;
+            margin-top: 25px;
             font-size: 0.85rem;
             color: #777;
             border-top: 1px solid #eee;
@@ -131,20 +154,24 @@
     </div>
 
     <p class="intro-text">
-        به وبلاگ و مرجع رسمی کلبه سیمرغ خوش آمدید. از طریق دکمه‌های زیر می‌توانید به کاتالوگ محصولات و مقالات آموزشی ما دسترسی داشته باشید و به صورت مستقیم ثبت سفارش کنید.
+        به وبلاگ و مرجع رسمی کلبه سیمرغ خوش آمدید. از طریق گزینه‌های زیر می‌توانید کاتالوگ محصولات را مشاهده کنید، مسیر لوکیشن را پیدا کنید یا مستقیماً با ما در ارتباط باشید.
     </p>
 
     <div class="menu-links">
-        <!-- لینک به کاتالوگ محصولات که با هم ساختیم -->
         <a href="catalog.html" class="menu-btn">📋 مشاهده کاتالوگ محصولات و قیمت‌ها</a>
-        
-        <!-- لینک به مقاله راهنمای خرید قهوه -->
-        <a href="coffee-guide.html" class="menu-btn secondary">📖 راهنمای جامع خرید دانه قهوه</a>
+        <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="menu-btn map-btn" target="_blank">📍 مسیریابی در گوگل مپ</a>
     </div>
 
+    <!-- دکمه‌های تماس تلفنی -->
+    <div class="contact-grid">
+        <a href="tel:02177341312" class="contact-btn">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
+        <a href="tel:09125183142" class="contact-btn">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
+    </div>
+
+    <!-- شبکه‌های اجتماعی -->
     <div class="social-box">
-        <a href="https://t.me/989125183142" class="social-btn btn-tg" target="_blank">ارتباط در تلگرام</a>
-        <a href="https://rubika.ir/YOUR_RUBIKA_ID" class="social-btn btn-rb" target="_blank">ارتباط در روبیکا</a>
+        <a href="https://t.me/YOUR_TELEGRAM_ID" class="social-btn btn-tg" target="_blank">تلگرام</a>
+        <a href="https://rubika.ir/YOUR_RUBIKA_ID" class="social-btn btn-rb" target="_blank">روبیکا</a>
     </div>
 
     <footer>
