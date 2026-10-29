@@ -74,6 +74,7 @@
             margin-bottom: 15px;
             border: 1px dashed #c86d12;
             color: #3d2314;
+            line-height: 1.6;
         }
         .status-badge {
             display: inline-block;
@@ -81,18 +82,19 @@
             border-radius: 12px;
             font-size: 0.85rem;
             font-weight: bold;
+            margin-top: 6px;
             margin-bottom: 6px;
         }
         .status-open { background-color: #d1fae5; color: #065f46; }
         .status-closed { background-color: #fee2e2; color: #991b1b; }
         .timer-box {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
-            margin-top: 5px;
+            margin-top: 4px;
         }
         .timer-count {
             color: #c86d12;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             direction: ltr;
             display: inline-block;
         }
@@ -148,9 +150,10 @@
         <div class="feature-box">🛵 ارسال سریع</div>
     </div>
 
+    <!-- بخش ساعت کاری و تایمر هوشمند -->
     <div class="hours-container">
-        <div>🕒 <strong>ساعت کاری:</strong> همه روزه از ۰۸:۰۰ الی ۲۲:۰۰</div>
-        <div style="margin-top: 8px;">
+        <div>🕒 <strong>ساعت کاری:</strong><br>شنبه تا پنجشنبه: ۰۸:۰۰ الی ۲۲:۰۰<br><strong>جمعه‌ها: ۰۸:۰۰ الی ۱۳:۰۰</strong></div>
+        <div>
             <span id="shop-status" class="status-badge">در حال بررسی...</span>
         </div>
         <div id="timer-display" class="timer-box">---</div>
@@ -179,54 +182,10 @@
 <script>
     function updateWorkingHoursTimer() {
         const now = new Date();
+        const dayOfWeek = now.getDay(); // 0 = Sunday, ..., 5 = Friday, 6 = Saturday
         const currentHour = now.getHours();
 
         const statusElement = document.getElementById('shop-status');
         const timerElement = document.getElementById('timer-display');
 
-        if (currentHour >= 8 && currentHour < 22) {
-            statusElement.textContent = "🟢 فروشگاه باز است";
-            statusElement.className = "status-badge status-open";
-
-            const closingTime = new Date(now);
-            closingTime.setHours(22, 0, 0, 0);
-            
-            const diff = closingTime - now;
-            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
-
-            const hStr = String(hoursLeft).padStart(2, '0');
-            const mStr = String(minutesLeft).padStart(2, '0');
-            const sStr = String(secondsLeft).padStart(2, '0');
-
-            timerElement.innerHTML = `زمان باقی‌مانده تا پایان شیفت کاری امروز: <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
-        } else {
-            statusElement.textContent = "🔴 فروشگاه بسته است";
-            statusElement.className = "status-badge status-closed";
-
-            const openingTime = new Date(now);
-            if (currentHour >= 22) {
-                openingTime.setDate(openingTime.getDate() + 1);
-            }
-            openingTime.setHours(8, 0, 0, 0);
-
-            const diff = openingTime - now;
-            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
-
-            const hStr = String(hoursLeft).padStart(2, '0');
-            const mStr = String(minutesLeft).padStart(2, '0');
-            const sStr = String(secondsLeft).padStart(2, '0');
-
-            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
-        }
-    }
-
-    setInterval(updateWorkingHoursTimer, 1000);
-    updateWorkingHoursTimer();
-</script>
-
-</body>
-</html>
+        // تعریف روز جمعه (در جاوااسکریپت جمعه
