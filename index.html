@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
+    
+    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، و چای مرغوب در تهرانپارس. خرید حضوری، سفارش آنلاین از طریق بله، اینستاگرام و تلفن.">
+    <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, بهترین قهوه فروشی تهرانپارس, قیمت قهوه تازه, سفارش آنلاین قهوه">
+
+    <meta property="og:title" content="کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس">
+    <meta property="og:description" content="عطر اصیل قهوه تازه رست، انواع دانه قهوه عربیکا، روبوستا و چای مرغوب. مشاهده کاتالوگ، مسیریابی و ارتباط مستقیم.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:image" content="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
+    <meta property="og:url" content="https://hoomamirs-ctrl.github.io/simorgh-blog/">
+
     <style>
         body {
             font-family: Tahoma, sans-serif;
@@ -56,8 +67,6 @@
             border: 1px solid #eedecc;
             color: #3d2314;
         }
-
-        /* استایل تایمرهای ساعت کاری */
         .hours-container {
             background: #fcf8f3;
             padding: 12px;
@@ -76,7 +85,6 @@
         }
         .status-open { background-color: #d1fae5; color: #065f46; }
         .status-closed { background-color: #fee2e2; color: #991b1b; }
-        
         .timer-box {
             font-size: 0.95rem;
             font-weight: bold;
@@ -88,7 +96,6 @@
             direction: ltr;
             display: inline-block;
         }
-
         .btn {
             display: block;
             background-color: #3d2314;
@@ -141,7 +148,6 @@
         <div class="feature-box">🛵 ارسال سریع</div>
     </div>
 
-    <!-- بخش ساعت کاری و تایمر زنده -->
     <div class="hours-container">
         <div>🕒 <strong>ساعت کاری:</strong> همه روزه از ۰۸:۰۰ الی ۲۲:۰۰</div>
         <div style="margin-top: 8px;">
@@ -162,4 +168,65 @@
     <a href="https://instagram.com/simorgh_coffee" class="btn btn-ig" target="_blank">📷 اینستاگرام سیمرغ</a>
     <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="btn btn-blog" target="_blank">🌐 وبلاگ سیمرغ</a>
     <a href="https://www.aparat.com/YOUR_APARAT_ID" class="btn btn-aparat" target="_blank">🎥 ویدیوهای آپارات</a>
-    <a href="
+    <a href="https://ble.ir/simorgh_coffee" class="btn btn-bale" target="_blank">📢 کانال بله سیمرغ</a>
+
+    <footer>
+        <div class="address-text">📍 آدرس حضوری: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
+        <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
+    </footer>
+</div>
+
+<script>
+    function updateWorkingHoursTimer() {
+        const now = new Date();
+        const currentHour = now.getHours();
+
+        const statusElement = document.getElementById('shop-status');
+        const timerElement = document.getElementById('timer-display');
+
+        if (currentHour >= 8 && currentHour < 22) {
+            statusElement.textContent = "🟢 فروشگاه باز است";
+            statusElement.className = "status-badge status-open";
+
+            const closingTime = new Date(now);
+            closingTime.setHours(22, 0, 0, 0);
+            
+            const diff = closingTime - now;
+            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const hStr = String(hoursLeft).padStart(2, '0');
+            const mStr = String(minutesLeft).padStart(2, '0');
+            const sStr = String(secondsLeft).padStart(2, '0');
+
+            timerElement.innerHTML = `زمان باقی‌مانده تا پایان شیفت کاری امروز: <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
+        } else {
+            statusElement.textContent = "🔴 فروشگاه بسته است";
+            statusElement.className = "status-badge status-closed";
+
+            const openingTime = new Date(now);
+            if (currentHour >= 22) {
+                openingTime.setDate(openingTime.getDate() + 1);
+            }
+            openingTime.setHours(8, 0, 0, 0);
+
+            const diff = openingTime - now;
+            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const hStr = String(hoursLeft).padStart(2, '0');
+            const mStr = String(minutesLeft).padStart(2, '0');
+            const sStr = String(secondsLeft).padStart(2, '0');
+
+            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
+        }
+    }
+
+    setInterval(updateWorkingHoursTimer, 1000);
+    updateWorkingHoursTimer();
+</script>
+
+</body>
+</html>
