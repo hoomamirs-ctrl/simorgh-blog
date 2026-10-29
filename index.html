@@ -3,204 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
-    
-    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، و چای مرغوب در تهرانپارس. خرید حضوری، سفارش آنلاین از طریق بله، اینستاگرام و تلفن.">
-    <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, بهترین قهوه فروشی تهرانپارس, قیمت قهوه تازه, سفارش آنلاین قهوه">
-
-    <meta property="og:title" content="کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس">
-    <meta property="og:description" content="عطر اصیل قهوه تازه رست، انواع دانه قهوه عربیکا، روبوستا و چای مرغوب. مشاهده کاتالوگ، مسیریابی و ارتباط مستقیم.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="fa_IR">
-    <meta property="og:image" content="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
-    <meta property="og:url" content="https://hoomamirs-ctrl.github.io/simorgh-blog/">
-
+    <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
     <style>
-        :root {
-            --bg-color: #f7f4ef;
-            --primary-color: #3d2314;
-            --accent-color: #c86d12;
-            --card-bg: #ffffff;
-            --text-main: #2b2b2b;
-            --bale-color: #00779b;
-            --aparat-color: #ed145b;
-            --blog-color: #6366f1;
-            --map-color: #10b981;
-            --phone-color: #0284c7;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: Tahoma, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: Tahoma, sans-serif;
+            background-color: #f7f4ef;
+            color: #2b2b2b;
             margin: 0;
             padding: 15px;
-            line-height: 1.7;
-        }
-
-        .container {
-            max-width: 650px;
-            margin: 30px auto;
-            background-color: var(--card-bg);
-            padding: 30px 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            border: 1px solid #e2ded7;
+            direction: rtl;
             text-align: center;
         }
-
-        .logo-area img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        img {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #c86d12;
             margin-bottom: 10px;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
-        .logo-area h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin: 0 0 10px 0;
+        h1 {
+            color: #3d2314;
+            font-size: 1.6rem;
+            margin: 5px 0;
         }
-
         .tagline {
-            color: var(--accent-color);
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .intro-text {
-            color: #555;
+            color: #c86d12;
             font-size: 0.95rem;
-            margin-bottom: 20px;
-            padding: 0 10px;
-        }
-
-        .features-box {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .feature-item {
-            background-color: #fcf8f3;
-            border: 1px solid #eedecc;
-            border-radius: 8px;
-            padding: 10px 5px;
-            font-size: 0.82rem;
-            color: var(--primary-color);
             font-weight: bold;
-            line-height: 1.4;
-        }
-
-        .work-hours {
-            background-color: #fcf8f3;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            border: 1px dashed var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .menu-btn {
-            display: block;
-            background-color: var(--primary-color);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-size: 1.05rem;
-            font-weight: bold;
-            transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .menu-btn:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .menu-btn.map-btn {
-            background-color: var(--map-color);
-        }
-        .menu-btn.map-btn:hover {
-            background-color: #059669;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
             margin-bottom: 15px;
         }
-
-        .contact-btn {
-            background-color: var(--phone-color);
+        .features {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .feature-box {
+            flex: 1;
+            background: #fcf8f3;
+            padding: 8px 4px;
+            border-radius: 6px;
+            border: 1px solid #eedecc;
+            color: #3d2314;
+        }
+        .hours {
+            background: #fcf8f3;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            border: 1px dashed #c86d12;
+            color: #3d2314;
+        }
+        .btn {
+            display: block;
+            background-color: #3d2314;
             color: #fff;
             text-decoration: none;
-            padding: 12px 10px;
+            padding: 12px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: bold;
-            display: block;
-            transition: opacity 0.2s;
+            margin-bottom: 10px;
         }
-        .contact-btn:hover {
-            opacity: 0.9;
-        }
-
-        .social-box {
+        .btn:hover { background-color: #c86d12; }
+        .btn-map { background-color: #10b981; }
+        .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
-
-        .social-btn {
-            padding: 12px 10px;
-            border-radius: 8px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: bold;
-            display: block;
-            transition: opacity 0.2s;
-        }
-        .social-btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-bl { background-color: var(--bale-color); }
-        .btn-ap { background-color: var(--aparat-color); }
-        .btn-blog { background-color: var(--blog-color); }
+        .btn-phone { background-color: #0284c7; font-size: 0.85rem; padding: 10px; }
+        .btn-bale { background-color: #00779b; }
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .full-width { grid-column: span 2; }
-
+        .btn-blog { background-color: #6366f1; }
+        .btn-aparat { background-color: #ed145b; }
         footer {
-            margin-top: 25px;
-            font-size: 0.85rem;
+            margin-top: 20px;
+            font-size: 0.8rem;
             color: #777;
             border-top: 1px solid #eee;
-            padding-top: 15px;
+            padding-top: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="
+<div class="container">
+    <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="لوگو سیمرغ">
+    <h1>کلبه چای و قهوه سیمرغ</h1>
+    <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
+
+    <div class="features">
+        <div class="feature-box">🌱 دانه تازه رست</div>
+        <div class="feature-box">☕ خلوص بالا</div>
+        <div class="feature-box">🛵 ارسال سریع</div>
+    </div>
+
+    <div class="hours">
+        🕒 <strong>ساعت کاری:</strong> همه روزه ۱۰ الی ۲۲ (پنجشنبه‌ها تا ۲۳)
+    </div>
+
+    <a href="catalog.html" class="btn">📋 کاتالوگ محصولات و قیمت‌ها</a>
+    <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="btn btn-map" target="_blank">📍 مسیریابی در گوگل مپ</a>
+
+    <div class="grid-2">
+        <a href="tel:02177341312" class="btn btn-phone">📞 ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
+        <a href="tel:09125183142" class="btn btn-phone">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
+    </div>
+
+    <a href="https://ble.ir/simorgh_coffee" class="btn btn-bale" target="_blank">💬 ارتباط در بله</a>
+    <a href="https://instagram.com/simorgh_coffee" class="btn btn-ig" target="_blank">📷 اینستاگرام سیمرغ</a>
+    <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="btn btn-blog" target="_blank">🌐 وبلاگ سیمرغ</a>
+    <a href="https://www.aparat.com/YOUR_APARAT_ID" class="btn btn-aparat" target="_blank">🎥 ویدیوهای آپارات</a>
+    <a href="https://ble.ir/simorgh_coffee" class="btn btn-bale" target="_blank">📢 کانال بله سیمرغ</a>
+
+    <footer>
+        <p>تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
+    </footer>
+</div>
+
+</body>
+</html>
