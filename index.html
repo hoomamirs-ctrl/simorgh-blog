@@ -82,8 +82,38 @@
         .intro-text {
             color: #555;
             font-size: 0.95rem;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             padding: 0 10px;
+        }
+
+        /* استایل باکس ویژگی‌ها */
+        .features-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            background-color: #fcf8f3;
+            border: 1px solid #eedecc;
+            border-radius: 8px;
+            padding: 10px 5px;
+            font-size: 0.82rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        /* استایل ساعت کاری */
+        .work-hours {
+            background-color: #fcf8f3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            border: 1px dashed var(--accent-color);
+            color: var(--primary-color);
         }
 
         .menu-links {
@@ -163,6 +193,7 @@
 
         .btn-tg { background-color: var(--telegram-color); }
         .btn-bl { background-color: var(--bale-color); }
+        .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 
         footer {
             margin-top: 25px;
@@ -187,6 +218,18 @@
         به وبلاگ و مرجع رسمی کلبه سیمرغ خوش آمدید. از طریق گزینه‌های زیر می‌توانید کاتالوگ محصولات را مشاهده کنید، مسیر لوکیشن را پیدا کنید یا مستقیماً با ما در ارتباط باشید.
     </p>
 
+    <!-- ویژگی‌ها و مزایای رقابتی -->
+    <div class="features-box">
+        <div class="feature-item">🌱 دانه تازه رست هفتگی</div>
+        <div class="feature-item">☕ خلوص بالا (عربیکا و روبوستا)</div>
+        <div class="feature-item">🛵 تحویل حضوری و ارسال سریع</div>
+    </div>
+
+    <!-- ساعت کاری فروشگاه -->
+    <div class="work-hours">
+        🕒 <strong>ساعت کاری:</strong> همه روزه از ۱۰ صبح الی ۲۲ (پنجشنبه‌ها تا ۲۳)
+    </div>
+
     <div class="menu-links">
         <a href="catalog.html" class="menu-btn">📋 مشاهده کاتالوگ محصولات و قیمت‌ها</a>
         <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="menu-btn map-btn" target="_blank">📍 مسیریابی در گوگل مپ</a>
@@ -195,21 +238,4 @@
     <!-- دکمه‌های تماس تلفنی -->
     <div class="contact-grid">
         <a href="tel:02177341312" class="contact-btn">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
-        <a href="tel:09125183142" class="contact-btn">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
-    </div>
-
-    <!-- شبکه‌های اجتماعی و کانال‌ها -->
-    <div class="social-box">
-        <a href="https://t.me/simorgh_coffee" class="social-btn btn-tg" target="_blank">💬 تلگرام سیمرغ</a>
-        <a href="https://ble.ir/simorgh_coffee" class="social-btn btn-bl" target="_blank">💬 ارتباط در بله</a>
-        <!-- دکمه کانال بله (اگر لینک دعوت یا آیدی کانال متفاوتی دارید، جایگزین کنید) -->
-        <a href="https://ble.ir/simorgh_coffee" class="social-btn btn-bl" target="_blank" style="grid-column: span 2;">📢 پیوستن به کانال بله سیمرغ</a>
-    </div>
-
-    <footer>
-        <p>تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
-    </footer>
-</div>
-
-</body>
-</html>
+        <a href="tel:09125183142
