@@ -3,23 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
-    
-    <!-- تگ‌های توضیحات سئو (Meta Description) -->
-    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، و چای مرغوب در تهرانپارس. خرید حضوری، سفارش آنلاین از طریق تلگرام، روبیکا و تلفن.">
-    
-    <!-- تگ کلمات کلیدی (Meta Keywords) -->
-    <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, بهترین قهوه فروشی تهرانپارس, قیمت قهوه تازه, سفارش آنلاین قهوه">
-
-    <!-- تگ‌های اشتراک‌گذاری شبکه‌های اجتماعی (Open Graph / Telegram / Rubika) -->
-    <meta property="og:title" content="کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس">
-    <meta property="og:description" content="عطر اصیل قهوه تازه رست، انواع دانه قهوه عربیکا، روبوستا و چای مرغوب. مشاهده کاتالوگ، مسیریابی و ارتباط مستقیم.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="fa_IR">
-    <!-- اگر تصویر لوگو یا مغازه دارید، لینک آن را جایگزین لینک زیر کنید -->
-    <meta property="og:image" content="https://yourdomain.com/images/simorgh-og-image.jpg">
-    <meta property="og:url" content="https://yourdomain.com/">
-
+    <title>کاتالوگ محصولات و قیمت‌ها | کلبه چای و قهوه سیمرغ</title>
+    <meta name="description" content="کاتالوگ رسمی دانه قهوه تازه رست، ترکیبات تخصصی عربیکا و روبوستا در کلبه چای و قهوه سیمرغ تهرانپارس.">
     <style>
         :root {
             --bg-color: #f7f4ef;
@@ -28,9 +13,7 @@
             --card-bg: #ffffff;
             --text-main: #2b2b2b;
             --telegram-color: #0088cc;
-            --rubika-color: #6b21a8;
-            --map-color: #10b981;
-            --phone-color: #0284c7;
+            --bale-color: #00a651; /* رنگ سبز مخصوص پیام‌رسان بله */
         }
 
         * {
@@ -47,149 +30,196 @@
         }
 
         .container {
-            max-width: 650px;
-            margin: 30px auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px 20px;
             background-color: var(--card-bg);
-            padding: 30px 20px;
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             border: 1px solid #e2ded7;
-            text-align: center;
-        }
-
-        .logo-area h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin: 0 0 10px 0;
-        }
-
-        .tagline {
-            color: var(--accent-color);
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .intro-text {
-            color: #555;
-            font-size: 0.95rem;
             margin-bottom: 25px;
-            padding: 0 10px;
         }
 
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin: 0 0 8px 0;
         }
 
-        .menu-btn {
-            display: block;
-            background-color: var(--primary-color);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-size: 1.05rem;
+        .subtitle {
+            color: var(--accent-color);
+            font-size: 0.95rem;
             font-weight: bold;
-            transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .menu-btn:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .menu-btn.map-btn {
-            background-color: var(--map-color);
-        }
-        .menu-btn.map-btn:hover {
-            background-color: #059669;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
             margin-bottom: 15px;
         }
 
-        .contact-btn {
-            background-color: var(--phone-color);
-            color: #fff;
+        .back-link {
+            display: inline-block;
+            background-color: #eee;
+            color: #444;
             text-decoration: none;
-            padding: 12px 10px;
+            padding: 8px 15px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            display: block;
+            transition: background 0.2s;
+        }
+
+        .back-link:hover {
+            background-color: #ddd;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e2ded7;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .product-specs {
+            background-color: #fcfbfa;
+            border: 1px dashed #ded8cf;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .order-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 0 20px 20px 20px;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: bold;
             transition: opacity 0.2s;
         }
-        .contact-btn:hover {
+
+        .btn:hover {
             opacity: 0.9;
         }
 
-        .social-box {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
+        .btn-telegram {
+            background-color: var(--telegram-color);
         }
 
-        .social-btn {
-            flex: 1;
-            padding: 12px 10px;
-            border-radius: 8px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: bold;
+        .btn-bale {
+            background-color: var(--bale-color);
         }
-
-        .btn-tg { background-color: var(--telegram-color); }
-        .btn-rb { background-color: var(--rubika-color); }
 
         footer {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
+            margin-top: 30px;
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e2ded7;
+            font-size: 0.9rem;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="logo-area">
-        <h1>کلبه چای و قهوه سیمرغ</h1>
-        <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
-    </div>
+    <header>
+        <h1>کاتالوگ محصولات و قیمت‌ها</h1>
+        <div class="subtitle">کلبه چای و قهوه سیمرغ (تهرانپارس)</div>
+        <a href="index.html" class="back-link">← بازگشت به صفحه اصلی</a>
+    </header>
 
-    <p class="intro-text">
-        به وبلاگ و مرجع رسمی کلبه سیمرغ خوش آمدید. از طریق گزینه‌های زیر می‌توانید کاتالوگ محصولات را مشاهده کنید، مسیر لوکیشن را پیدا کنید یا مستقیماً با ما در ارتباط باشید.
-    </p>
+    <div class="catalog-grid">
 
-    <div class="menu-links">
-        <a href="catalog.html" class="menu-btn">📋 مشاهده کاتالوگ محصولات و قیمت‌ها</a>
-        <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="menu-btn map-btn" target="_blank">📍 مسیریابی در گوگل مپ</a>
-    </div>
+        <!-- محصول اول -->
+        <div class="product-card">
+            <div class="product-info">
+                <h2 class="product-title">قهوه ترکیبی AR 80-20</h2>
+                <p class="product-desc">ترکیب ۸۰٪ عربیکا پایه کلمبیا به همراه ۲۰٪ روبوستا. عطر پیچیده، ترشی ملایم و دلنشین.</p>
+                <div class="product-specs">
+                    <strong>مناسب برای:</strong> اسپرسو خانگی، صنعتی و موکاپات
+                </div>
+            </div>
+            <div class="order-buttons">
+                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR80-20+دارم" target="_blank">سفارش در تلگرام</a>
+                <a class="btn btn-bale" href="https://ble.ir/YOUR_BALE_ID" target="_blank">سفارش در بله</a>
+            </div>
+        </div>
 
-    <!-- دکمه‌های تماس تلفنی -->
-    <div class="contact-grid">
-        <a href="tel:02177341312" class="contact-btn">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
-        <a href="tel:09125183142" class="contact-btn">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
-    </div>
+        <!-- محصول دوم -->
+        <div class="product-card">
+            <div class="product-info">
+                <h2 class="product-title">قهوه ترکیبی AR 70-30</h2>
+                <p class="product-desc">ترکیب ۷۰٪ عربیکا کلمبیا با ۳۰٪ روبوستا. بالانس عالی میان عطر عربیکا و کافئین و کرمای روبوستا.</p>
+                <div class="product-specs">
+                    <strong>مناسب برای:</strong> استفاده روزانه، اسپرسو و آمریکانو
+                </div>
+            </div>
+            <div class="order-buttons">
+                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR70-30+دارم" target="_blank">سفارش در تلگرام</a>
+                <a class="btn btn-bale" href="https://ble.ir/YOUR_BALE_ID" target="_blank">سفارش در بله</a>
+            </div>
+        </div>
 
-    <!-- شبکه‌های اجتماعی -->
-    <div class="social-box">
-        <a href="https://t.me/YOUR_TELEGRAM_ID" class="social-btn btn-tg" target="_blank">تلگرام</a>
-        <a href="https://rubika.ir/teacoffeesimorgh" class="social-btn btn-rb" target="_blank">روبیکا</a>
+        <!-- محصول سوم -->
+        <div class="product-card">
+            <div class="product-info">
+                <h2 class="product-title">قهوه ترکیبی AR 60-40</h2>
+                <p class="product-desc">۶۰٪ عربیکا کلمبیا و ۴۰٪ روبوستا. فوم (کرما) بسیار متراکم، تلخی خوشایند و کافئین بالا.</p>
+                <div class="product-specs">
+                    <strong>مناسب برای:</strong> کافئین صبحگاهی و نوشیدنی‌های شیری
+                </div>
+            </div>
+            <div class="order-buttons">
+                <a class="btn btn-telegram" href="https://t.me/YOUR_TELEGRAM_ID?text=سلام،+سفارش+قهوه+AR60-40+دارم" target="_blank">سفارش در تلگرام</a>
+                <a class="btn btn-bale" href="https://ble.ir/YOUR_BALE_ID" target="_blank">سفارش در بله</a>
+            </div>
+        </div>
+
     </div>
 
     <footer>
+        <p><strong>کلبه چای و قهوه سیمرغ</strong></p>
         <p>تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
     </footer>
 </div>
