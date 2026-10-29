@@ -56,15 +56,39 @@
             border: 1px solid #eedecc;
             color: #3d2314;
         }
-        .hours {
+
+        /* استایل تایمرهای ساعت کاری */
+        .hours-container {
             background: #fcf8f3;
-            padding: 8px;
-            border-radius: 6px;
+            padding: 12px;
+            border-radius: 8px;
             margin-bottom: 15px;
-            font-size: 0.85rem;
             border: 1px dashed #c86d12;
             color: #3d2314;
         }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .status-open { background-color: #d1fae5; color: #065f46; }
+        .status-closed { background-color: #fee2e2; color: #991b1b; }
+        
+        .timer-box {
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .timer-count {
+            color: #c86d12;
+            font-size: 1.1rem;
+            direction: ltr;
+            display: inline-block;
+        }
+
         .btn {
             display: block;
             background-color: #3d2314;
@@ -111,8 +135,13 @@
         <div class="feature-box">🛵 ارسال سریع</div>
     </div>
 
-    <div class="hours">
-        🕒 <strong>ساعت کاری:</strong> همه روزه ۱۰ الی ۲۲ (پنجشنبه‌ها تا ۲۳)
+    <!-- بخش ساعت کاری و تایمر زنده -->
+    <div class="hours-container">
+        <div>🕒 <strong>ساعت کاری:</strong> همه روزه از ۰۸:۰۰ الی ۲۲:۰۰</div>
+        <div style="margin-top: 8px;">
+            <span id="shop-status" class="status-badge">در حال بررسی...</span>
+        </div>
+        <div id="timer-display" class="timer-box">---</div>
     </div>
 
     <a href="catalog.html" class="btn">📋 کاتالوگ محصولات و قیمت‌ها</a>
@@ -133,6 +162,66 @@
         <p>تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
     </footer>
 </div>
+
+<script>
+    function updateWorkingHoursTimer() {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentSecond = now.getSeconds();
+
+        const statusElement = document.getElementById('shop-status');
+        const timerElement = document.getElementById('timer-display');
+
+        // تایمر اول: بین ساعت 8 تا 22 (فروشگاه باز است)
+        if (currentHour >= 8 && currentHour < 22) {
+            statusElement.textContent = "🟢 فروشگاه باز است";
+            statusElement.className = "status-badge status-open";
+
+            // محاسبه زمان باقی‌مانده تا ساعت 22:00:00
+            const closingTime = new Date(now);
+            closingTime.setHours(22, 0, 0, 0);
+            
+            const diff = closingTime - now;
+            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const hStr = String(hoursLeft).padStart(2, '0');
+            const mStr = String(minutesLeft).padStart(2, '0');
+            const sStr = String(secondsLeft).padStart(2, '0');
+
+            timerElement.innerHTML = `زمان باقی‌مانده تا پایان شیفت کاری امروز: <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
+        } 
+        // تایمر دوم معکوس: بین ساعت 22 تا 8 صبح روز بعد (فروشگاه بسته است)
+        else {
+            statusElement.textContent = "🔴 فروشگاه بسته است";
+            statusElement.className = "status-badge status-closed";
+
+            // محاسبه زمان باقی‌مانده معکوس تا ساعت 8:00 صبح
+            const openingTime = new Date(now);
+            if (currentHour >= 22) {
+                openingTime.setDate(openingTime.getDate() + 1);
+            }
+            openingTime.setHours(8, 0, 0, 0);
+
+            const diff = openingTime - now;
+            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const hStr = String(hoursLeft).padStart(2, '0');
+            const mStr = String(minutesLeft).padStart(2, '0');
+            const sStr = String(secondsLeft).padStart(2, '0');
+
+            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
+        }
+    }
+
+    // به‌روزرسانی تایمر در هر ثانیه
+    setInterval(updateWorkingHoursTimer, 1000);
+    updateWorkingHoursTimer();
+</script>
 
 </body>
 </html>
