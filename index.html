@@ -141,20 +141,24 @@
         }
 
         .social-box {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 15px;
         }
 
         .social-btn {
-            flex: 1;
             padding: 12px 10px;
             border-radius: 8px;
             color: #fff;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: bold;
+            display: block;
+            transition: opacity 0.2s;
+        }
+        .social-btn:hover {
+            opacity: 0.9;
         }
 
         .btn-tg { background-color: var(--telegram-color); }
@@ -194,10 +198,12 @@
         <a href="tel:09125183142" class="contact-btn">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
     </div>
 
-    <!-- شبکه‌های اجتماعی (تلگرام و بله با آیدی simorgh_coffee) -->
+    <!-- شبکه‌های اجتماعی و کانال‌ها -->
     <div class="social-box">
-        <a href="https://t.me/simorgh_coffee" class="social-btn btn-tg" target="_blank">تلگرام</a>
-        <a href="https://ble.ir/simorgh_coffee" class="social-btn btn-bl" target="_blank">بله</a>
+        <a href="https://t.me/simorgh_coffee" class="social-btn btn-tg" target="_blank">💬 تلگرام سیمرغ</a>
+        <a href="https://ble.ir/simorgh_coffee" class="social-btn btn-bl" target="_blank">💬 ارتباط در بله</a>
+        <!-- دکمه کانال بله (اگر لینک دعوت یا آیدی کانال متفاوتی دارید، جایگزین کنید) -->
+        <a href="https://ble.ir/simorgh_coffee" class="social-btn btn-bl" target="_blank" style="grid-column: span 2;">📢 پیوستن به کانال بله سیمرغ</a>
     </div>
 
     <footer>
