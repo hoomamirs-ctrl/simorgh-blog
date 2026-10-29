@@ -115,10 +115,16 @@
         .btn-aparat { background-color: #ed145b; }
         footer {
             margin-top: 20px;
-            font-size: 0.8rem;
-            color: #777;
+            font-size: 0.85rem;
+            color: #555;
             border-top: 1px solid #eee;
-            padding-top: 10px;
+            padding-top: 12px;
+            line-height: 1.6;
+        }
+        .address-text {
+            color: #3d2314;
+            font-weight: bold;
+            margin-bottom: 4px;
         }
     </style>
 </head>
@@ -156,72 +162,4 @@
     <a href="https://instagram.com/simorgh_coffee" class="btn btn-ig" target="_blank">📷 اینستاگرام سیمرغ</a>
     <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="btn btn-blog" target="_blank">🌐 وبلاگ سیمرغ</a>
     <a href="https://www.aparat.com/YOUR_APARAT_ID" class="btn btn-aparat" target="_blank">🎥 ویدیوهای آپارات</a>
-    <a href="https://ble.ir/simorgh_coffee" class="btn btn-bale" target="_blank">📢 کانال بله سیمرغ</a>
-
-    <footer>
-        <p>تهران، تهرانپارس | امکان تحویل حضوری و ارسال پیکی</p>
-    </footer>
-</div>
-
-<script>
-    function updateWorkingHoursTimer() {
-        const now = new Date();
-        const currentHour = now.getHours();
-        const currentMinute = now.getMinutes();
-        const currentSecond = now.getSeconds();
-
-        const statusElement = document.getElementById('shop-status');
-        const timerElement = document.getElementById('timer-display');
-
-        // تایمر اول: بین ساعت 8 تا 22 (فروشگاه باز است)
-        if (currentHour >= 8 && currentHour < 22) {
-            statusElement.textContent = "🟢 فروشگاه باز است";
-            statusElement.className = "status-badge status-open";
-
-            // محاسبه زمان باقی‌مانده تا ساعت 22:00:00
-            const closingTime = new Date(now);
-            closingTime.setHours(22, 0, 0, 0);
-            
-            const diff = closingTime - now;
-            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
-
-            const hStr = String(hoursLeft).padStart(2, '0');
-            const mStr = String(minutesLeft).padStart(2, '0');
-            const sStr = String(secondsLeft).padStart(2, '0');
-
-            timerElement.innerHTML = `زمان باقی‌مانده تا پایان شیفت کاری امروز: <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
-        } 
-        // تایمر دوم معکوس: بین ساعت 22 تا 8 صبح روز بعد (فروشگاه بسته است)
-        else {
-            statusElement.textContent = "🔴 فروشگاه بسته است";
-            statusElement.className = "status-badge status-closed";
-
-            // محاسبه زمان باقی‌مانده معکوس تا ساعت 8:00 صبح
-            const openingTime = new Date(now);
-            if (currentHour >= 22) {
-                openingTime.setDate(openingTime.getDate() + 1);
-            }
-            openingTime.setHours(8, 0, 0, 0);
-
-            const diff = openingTime - now;
-            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
-
-            const hStr = String(hoursLeft).padStart(2, '0');
-            const mStr = String(minutesLeft).padStart(2, '0');
-            const sStr = String(secondsLeft).padStart(2, '0');
-
-            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${hStr}:${mStr}:${sStr}</span>`;
-        }
-    }
-
-    // به‌روزرسانی تایمر در هر ثانیه
-    setInterval(updateWorkingHoursTimer, 1000);
-    updateWorkingHoursTimer();
-</script>
-
-</body>
-</html>
+    <a href="
