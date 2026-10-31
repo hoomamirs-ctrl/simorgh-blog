@@ -5,22 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
     
-    <!-- سئو و متا تگ‌های حرفه‌ای -->
-    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، چای مرغوب، حلوا ارده، شیره و نبات در تهرانپارس. خرید حضوری و ارسال سریع. آدرس: تهرانپارس، خیابان جشنواره، پلاک ۴۸.">
-    <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, حلوا ارده تهرانپارس, قیمت شیره و نبات, بهترین قهوه فروشی تهرانپارس">
+    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، چای مرغوب، حلوا ارده، شیره و نبات در تهرانپارس. آدرس: تهرانپارس، خیابان جشنواره، پلاک ۴۸.">
     
     <style>
         * { box-sizing: border-box; }
-        body { font-family: Tahoma, sans-serif; background-color: #f7f4ef; color: #2b2b2b; margin: 0; padding: 15px; direction: rtl; text-align: center; }
-        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        body { 
+            font-family: Tahoma, sans-serif; 
+            background-color: #f7f4ef; 
+            color: #2b2b2b; 
+            margin: 0; 
+            padding: 15px; 
+            padding-bottom: 80px; /* فضای خالی برای دکمه شناور */
+            direction: rtl; 
+            text-align: center; 
+        }
+        .container { max-width: 600px; margin: 10px auto; background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         img.logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #c86d12; margin-bottom: 10px; }
         h1 { color: #3d2314; font-size: 1.6rem; margin: 5px 0; }
         .tagline { color: #c86d12; font-size: 0.95rem; font-weight: bold; margin-bottom: 15px; }
+        
         .features { display: flex; gap: 5px; margin-bottom: 15px; font-size: 0.8rem; font-weight: bold; }
         .feature-box { flex: 1; background: #fcf8f3; padding: 8px 4px; border-radius: 6px; border: 1px solid #eedecc; color: #3d2314; }
+        
         .categories-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 15px; }
         .cat-item { background-color: #fcf8f3; border: 1px solid #eedecc; border-radius: 8px; padding: 10px 4px; font-size: 0.78rem; color: #3d2314; font-weight: bold; line-height: 1.4; text-decoration: none; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-color 0.2s; }
         .cat-item:hover { background-color: #f2ede4; }
+        
         .hours-container { background: #fcf8f3; padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #c86d12; color: #3d2314; line-height: 1.6; }
         .status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; margin: 6px 0; }
         .status-open { background-color: #d1fae5; color: #065f46; }
@@ -28,7 +38,7 @@
         .timer-box { font-size: 0.9rem; font-weight: bold; margin-top: 4px; }
         .timer-count { color: #c86d12; font-size: 1.05rem; direction: ltr; display: inline-block; }
 
-        .dropdown-container { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #e2ded7; }
+        .dropdown-container { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #e2ded7; text-align: right; }
         .dropdown-toggle { width: 100%; background-color: #3d2314; color: #fff; padding: 12px 15px; font-size: 1rem; font-weight: bold; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: Tahoma, sans-serif; }
         .dropdown-toggle:hover { background-color: #c86d12; }
         .dropdown-content { display: none; background-color: #fcf8f3; padding: 10px; flex-direction: column; gap: 8px; }
@@ -41,7 +51,26 @@
         .btn-blog { background-color: #6366f1; }
         .btn-aparat { background-color: #ed145b; }
 
-        footer { margin-top: 20px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 12px; line-height: 1.6; }
+        /* دکمه شناور تماس */
+        .fab-contact {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #10b981;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 999;
+        }
+
+        footer { margin-top: 20px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 12px; line-height: 1.6; text-align: center; }
         .address-text { color: #3d2314; font-weight: bold; margin-bottom: 4px; }
     </style>
 </head>
@@ -102,6 +131,12 @@
         <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
     </footer>
 </div>
+
+<!-- دکمه شناور تماس سریع -->
+<a href="tel:02177341312" class="fab-contact">
+    <span>📞</span>
+    <span>تماس سریع</span>
+</a>
 
 <script>
     function toggleDropdown(menuId, button) {
