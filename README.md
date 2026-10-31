@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوغاتی‌ها و شیرین‌کام‌ها | کلبه چای و قهوه سیمرغ</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Tahoma, sans-serif; background-color: #f7f4ef; color: #2b2b2b; margin: 0; padding: 15px; direction: rtl; text-align: right; }
+        .container { max-width: 650px; margin: 20px auto; background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .header { text-align: center; border-bottom: 2px solid #f2ede4; padding-bottom: 15px; margin-bottom: 20px; }
+        .header img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #c86d12; margin-bottom: 8px; }
+        .header h1 { color: #3d2314; font-size: 1.4rem; margin: 0; }
+        .back-btn { display: inline-block; background-color: #3d2314; color: #fff; text-decoration: none; padding: 8px 15px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; text-align: center; }
+        .back-btn:hover { background-color: #c86d12; }
+        
+        .menu-section { background-color: #fcf8f3; border: 1px solid #eedecc; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
+        .menu-title { color: #3d2314; font-size: 1.1rem; font-weight: bold; border-bottom: 1px dashed #c86d12; padding-bottom: 8px; margin-bottom: 12px; text-align: center; }
+        
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f2ede4; font-size: 0.88rem; }
+        .item-row:last-child { border-bottom: none; }
+        .item-name { font-weight: bold; color: #2b2b2b; }
+        .item-desc { font-size: 0.78rem; color: #555; margin-top: 3px; line-height: 1.4; }
+        .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fff; padding: 5px 10px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.85rem; }
+        
+        .guide-box { background-color: #e6f4ea; border: 1px solid #ceead6; color: #137333; padding: 12px; border-radius: 8px; font-size: 0.85rem; text-align: center; font-weight: bold; line-height: 1.5; margin-top: 15px; }
+        footer { margin-top: 20px; text-align: center; font-size: 0.8rem; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی</a>
+
+    <div class="header">
+        <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="کلبه سیمرغ">
+        <h1>سوغاتی‌ها و شیرین‌کام‌ها</h1>
+    </div>
+
+    <div class="menu-section">
+        <div class="menu-title">🍯 حلوا ارده، شیره، نبات و تنقلات سنتی</div>
+        
+        <div class="item-row">
+            <div>
+                <div class="item-name">حلوا ارده سنتی درجه یک</div>
+                <div class="item-desc">مقوی، مقطر با کنجداصل و شیره طبیعی، مناسب صبحانه</div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row">
+            <div>
+                <div class="item-name">شیره انگور و توت طبیعی</div>
+                <div class="item-desc">خالص، سنتی و سرشار از انرژی و آهن</div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row">
+            <div>
+                <div class="item-name">نبات زعفرانی و سفید (شاخه و چوبی)</div>
+                <div class="item-desc">خلوص بالا، خوش‌عطر، مناسب انواع چای و دمنوش</div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row">
+            <div>
+                <div class="item-name">ارده کنجد خالص</div>
+                <div class="item-desc">تهیه شده از کنجد مرغوب، بدون افزودنی</div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row">
+            <div>
+                <div class="item-name">سوغاتی‌ها و تنقلات ویژه</div>
+                <div class="item-desc">محصولات منتخب و سنتی جهت هدیه و پذیرایی</div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+    </div>
+
+    <div class="guide-box">
+        💡 برای استعلام قیمت روز و ثبت سفارش سوغاتی‌ها و تنقلات، می‌توانید از طریق راه‌های ارتباطی در صفحه اصلی اقدام فرمایید.
+    </div>
+
+    <footer>
+        <p>تهران، تهرانپارس، خیابان جشنواره، پلاک ۴۸ | کلبه چای و قهوه سیمرغ</p>
+    </footer>
+</div>
+
+</body>
+</html>
