@@ -6,7 +6,17 @@
     <title>سوغاتی‌ها و شیرین‌کام‌ها | کلبه چای و قهوه سیمرغ</title>
     <style>
         * { box-sizing: border-box; }
-        body { font-family: Tahoma, sans-serif; background-color: #f7f4ef; color: #2b2b2b; margin: 0; padding: 0; padding-top: 60px; padding-bottom: 90px; direction: rtl; text-align: right; }
+        body { 
+            font-family: Tahoma, sans-serif; 
+            background-color: #f7f4ef; 
+            color: #2b2b2b; 
+            margin: 0; 
+            padding: 0; 
+            padding-top: 65px; 
+            padding-bottom: 100px; /* فضای کافی برای دیده شدن دکمه‌های شناور */
+            direction: rtl; 
+            text-align: right; 
+        }
         
         .sticky-header {
             position: fixed; top: 0; left: 0; right: 0; height: 55px;
@@ -42,15 +52,34 @@
         .item-desc { font-size: 0.75rem; color: #666; margin-top: 3px; line-height: 1.4; }
         .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fcf8f3; padding: 5px 10px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.8rem; }
         
-        /* دکمه‌های شناور پایین صفحه */
+        /* دکمه‌های شناور ۱۰۰٪ تضمینی پایین صفحه */
         .floating-buttons {
-            position: fixed; bottom: 15px; left: 15px; right: 15px;
-            max-width: 650px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: rgba(247, 244, 239, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 12px 15px;
+            display: flex; 
+            gap: 10px; 
+            z-index: 9999;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.08);
+            border-top: 1px solid #eedecc;
         }
         .fab-btn {
-            flex: 1; padding: 12px; border-radius: 30px; text-decoration: none;
-            font-weight: bold; font-size: 0.9rem; color: #ffffff; display: flex;
-            align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex: 1; 
+            padding: 12px; 
+            border-radius: 30px; 
+            text-decoration: none;
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            color: #ffffff; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
         .fab-call { background-color: #10b981; }
         .fab-bale { background-color: #00779b; }
@@ -183,3 +212,57 @@
                 </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="قند">
+                <div>
+                    <div class="item-name">قند شکسته دو کیلویی - هلو گلاب</div>
+                    <div class="item-desc">شیرینی ملایم، باکیفیت و خوش‌دانه</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="قند">
+                <div>
+                    <div class="item-name">قند شکسته دو کیلویی</div>
+                    <div class="item-desc">مفید، خوش‌ساخت و درجه یک</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تهران، تهرانپارس، خیابان جشنواره، پلاک ۴۸ | کلبه چای و قهوه سیمرغ</p>
+    </footer>
+</div>
+
+<!-- دکمه‌های شناور پایین صفحه (تضمینی و چسبنده) -->
+<div class="floating-buttons">
+    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank">💬 پیام در بله</a>
+    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
+</div>
+
+<script>
+    function filterProducts() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let items = document.querySelectorAll('.product-item');
+
+        items.forEach(item => {
+            let text = item.innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
