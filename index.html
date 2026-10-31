@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کلبه چای و قهوه سیمرغ</title>
+    <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
+    
+    <!-- سئو و متا تگ‌های حرفه‌ای -->
+    <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، چای مرغوب، حلوا ارده، شیره و نبات در تهرانپارس. خرید حضوری و ارسال سریع. آدرس: تهرانپارس، خیابان جشنواره، پلاک ۴۸.">
+    <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, حلوا ارده تهرانپارس, قیمت شیره و نبات, بهترین قهوه فروشی تهرانپارس">
+    
     <style>
+        * { box-sizing: border-box; }
         body { font-family: Tahoma, sans-serif; background-color: #f7f4ef; color: #2b2b2b; margin: 0; padding: 15px; direction: rtl; text-align: center; }
         .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         img.logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #c86d12; margin-bottom: 10px; }
         h1 { color: #3d2314; font-size: 1.6rem; margin: 5px 0; }
         .tagline { color: #c86d12; font-size: 0.95rem; font-weight: bold; margin-bottom: 15px; }
+        .features { display: flex; gap: 5px; margin-bottom: 15px; font-size: 0.8rem; font-weight: bold; }
+        .feature-box { flex: 1; background: #fcf8f3; padding: 8px 4px; border-radius: 6px; border: 1px solid #eedecc; color: #3d2314; }
         .categories-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 15px; }
-        .cat-item { background-color: #fcf8f3; border: 1px solid #eedecc; border-radius: 8px; padding: 12px 4px; font-size: 0.78rem; color: #3d2314; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; }
+        .cat-item { background-color: #fcf8f3; border: 1px solid #eedecc; border-radius: 8px; padding: 10px 4px; font-size: 0.78rem; color: #3d2314; font-weight: bold; line-height: 1.4; text-decoration: none; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-color 0.2s; }
         .cat-item:hover { background-color: #f2ede4; }
-        .hours-container { background: #fcf8f3; padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #c86d12; color: #3d2314; }
-        .dropdown-container { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #e2ded7; text-align: right; }
-        .dropdown-toggle { width: 100%; background-color: #3d2314; color: #fff; padding: 12px 15px; font-size: 1rem; font-weight: bold; border: none; cursor: pointer; display: flex; justify-content: space-between; font-family: Tahoma, sans-serif; }
+        .hours-container { background: #fcf8f3; padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #c86d12; color: #3d2314; line-height: 1.6; }
+        .status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; margin: 6px 0; }
+        .status-open { background-color: #d1fae5; color: #065f46; }
+        .status-closed { background-color: #fee2e2; color: #991b1b; }
+        .timer-box { font-size: 0.9rem; font-weight: bold; margin-top: 4px; }
+        .timer-count { color: #c86d12; font-size: 1.05rem; direction: ltr; display: inline-block; }
+
+        .dropdown-container { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #e2ded7; }
+        .dropdown-toggle { width: 100%; background-color: #3d2314; color: #fff; padding: 12px 15px; font-size: 1rem; font-weight: bold; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: Tahoma, sans-serif; }
+        .dropdown-toggle:hover { background-color: #c86d12; }
         .dropdown-content { display: none; background-color: #fcf8f3; padding: 10px; flex-direction: column; gap: 8px; }
         .dropdown-content.show { display: flex; }
         .sub-btn { display: block; color: #fff; text-decoration: none; padding: 10px; border-radius: 6px; font-size: 0.9rem; font-weight: bold; text-align: center; }
@@ -23,48 +38,68 @@
         .btn-map { background-color: #10b981; }
         .btn-bale { background-color: #00779b; }
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
-        footer { margin-top: 20px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 12px; }
+        .btn-blog { background-color: #6366f1; }
+        .btn-aparat { background-color: #ed145b; }
+
+        footer { margin-top: 20px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 12px; line-height: 1.6; }
+        .address-text { color: #3d2314; font-weight: bold; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="لوگو" class="logo">
+    <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="لوگو کلبه چای و قهوه سیمرغ" class="logo">
     <h1>کلبه چای و قهوه سیمرغ</h1>
     <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
 
+    <div class="features">
+        <div class="feature-box">🌱 دانه تازه رست</div>
+        <div class="feature-box">☕ خلوص بالا</div>
+        <div class="feature-box">🛵 ارسال سریع</div>
+    </div>
+
+    <!-- ۳ دسته محصولات متصل به صفحات مجزا -->
     <div class="categories-box">
-        <a href="coffee.html" class="cat-item">☕ بار قهوه</a>
-        <div class="cat-item">🍵 چای اصیل</div>
-        <a href="souvenirs.html" class="cat-item">🍯 سوغاتی‌ها</a>
+        <a href="coffee.html" class="cat-item">☕ بار قهوه و دان تخصصی</a>
+        <div class="cat-item">🍵 چای اصیل و دمنوش‌ها</div>
+        <a href="souvenirs.html" class="cat-item">🍯 سوغاتی‌ها و شیرین‌کام‌ها</a>
     </div>
 
+    <!-- ساعت کاری و تایمر هوشمند -->
     <div class="hours-container">
-        🕒 ساعت کاری: شنبه تا پنجشنبه ۸ الی ۲۲ | جمعه‌ها ۸ الی ۱۳
+        <div>🕒 <strong>ساعت کاری:</strong><br>شنبه تا پنجشنبه: ۰۸:۰۰ الی ۲۲:۰۰<br><strong>جمعه‌ها: ۰۸:۰۰ الی ۱۳:۰۰</strong></div>
+        <div><span id="shop-status" class="status-badge">در حال بررسی...</span></div>
+        <div id="timer-display" class="timer-box">---</div>
     </div>
 
+    <!-- منوی آبشاری ۱: تماس و مسیریابی -->
     <div class="dropdown-container">
         <button type="button" class="dropdown-toggle" onclick="toggleDropdown('contactMenu', this)">
             📞 تماس با ما و مسیریابی <span>▼</span>
         </button>
         <div id="contactMenu" class="dropdown-content">
             <a href="tel:02177341312" class="sub-btn btn-phone">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
+            <a href="tel:09125183142" class="sub-btn btn-phone">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
             <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="sub-btn btn-map" target="_blank">📍 مسیریابی در گوگل مپ</a>
         </div>
     </div>
 
+    <!-- منوی آبشاری ۲: شبکه‌های اجتماعی -->
     <div class="dropdown-container">
         <button type="button" class="dropdown-toggle" onclick="toggleDropdown('socialMenu', this)">
-            🌐 شبکه‌های اجتماعی <span>▼</span>
+            🌐 شبکه‌های اجتماعی و وبلاگ <span>▼</span>
         </button>
         <div id="socialMenu" class="dropdown-content">
-            <a href="https://ble.ir/simorgh_coffee" class="sub-btn btn-bale" target="_blank">💬 بله سیمرغ</a>
-            <a href="https://instagram.com/simorgh_coffee" class="sub-btn btn-ig" target="_blank">📷 اینستاگرام</a>
+            <a href="https://ble.ir/simorgh_coffee" class="sub-btn btn-bale" target="_blank">💬 ارتباط در بله</a>
+            <a href="https://instagram.com/simorgh_coffee" class="sub-btn btn-ig" target="_blank">📷 اینستاگرام سیمرغ</a>
+            <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="sub-btn btn-blog" target="_blank">🌐 وبلاگ سیمرغ</a>
+            <a href="https://www.aparat.com/YOUR_APARAT_ID" class="sub-btn btn-aparat" target="_blank">🎥 ویدیوهای آپارات</a>
         </div>
     </div>
 
     <footer>
-        📍 تهرانپارس، خیابان جشنواره، پلاک ۴۸
+        <div class="address-text">📍 آدرس حضوری: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
+        <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
     </footer>
 </div>
 
@@ -79,6 +114,45 @@
             button.querySelector('span').textContent = '▲';
         }
     }
+
+    function updateWorkingHoursTimer() {
+        const now = new Date();
+        const dayOfWeek = now.getDay(); 
+        const currentHour = now.getHours();
+        const statusElement = document.getElementById('shop-status');
+        const timerElement = document.getElementById('timer-display');
+        if (!statusElement || !timerElement) return;
+
+        const isFriday = (dayOfWeek === 5);
+        const closingHour = isFriday ? 13 : 22;
+
+        if (currentHour >= 8 && currentHour < closingHour) {
+            statusElement.textContent = "🟢 فروشگاه باز است";
+            statusElement.className = "status-badge status-open";
+            const closingTime = new Date(now);
+            closingTime.setHours(closingHour, 0, 0, 0);
+            const diff = closingTime - now;
+            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            timerElement.innerHTML = `زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">${h}:${m}:${s}</span>`;
+        } else {
+            statusElement.textContent = "🔴 فروشگاه بسته است";
+            statusElement.className = "status-badge status-closed";
+            const openingTime = new Date(now);
+            if (currentHour >= closingHour || (isFriday && currentHour >= 13)) {
+                openingTime.setDate(openingTime.getDate() + 1);
+            }
+            openingTime.setHours(8, 0, 0, 0);
+            const diff = openingTime - now;
+            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
+        }
+    }
+    setInterval(updateWorkingHoursTimer, 1000);
+    updateWorkingHoursTimer();
 </script>
 
 </body>
