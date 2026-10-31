@@ -6,145 +6,170 @@
     <title>سوغاتی‌ها و شیرین‌کام‌ها | کلبه چای و قهوه سیمرغ</title>
     <style>
         * { box-sizing: border-box; }
-        body { font-family: Tahoma, sans-serif; background-color: #f7f4ef; color: #2b2b2b; margin: 0; padding: 15px; direction: rtl; text-align: right; }
-        .container { max-width: 650px; margin: 20px auto; background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .header { text-align: center; border-bottom: 2px solid #f2ede4; padding-bottom: 15px; margin-bottom: 20px; }
-        .header img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #c86d12; margin-bottom: 8px; }
-        .header h1 { color: #3d2314; font-size: 1.4rem; margin: 0; }
-        .back-btn { display: inline-block; background-color: #3d2314; color: #fff; text-decoration: none; padding: 8px 15px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; text-align: center; }
-        .back-btn:hover { background-color: #c86d12; }
+        body { font-family: Tahoma, sans-serif; background-color: #f7f4ef; color: #2b2b2b; margin: 0; padding: 0; padding-top: 60px; padding-bottom: 80px; direction: rtl; text-align: right; }
         
-        .menu-section { background-color: #fcf8f3; border: 1px solid #eedecc; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
-        .menu-title { color: #3d2314; font-size: 1.1rem; font-weight: bold; border-bottom: 1px dashed #c86d12; padding-bottom: 8px; margin-bottom: 12px; text-align: center; }
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background-color: #3d2314;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        .sticky-header h2 { font-size: 1rem; margin: 0; color: #fff; }
+        .back-home-btn {
+            color: #fff;
+            text-decoration: none;
+            background-color: #c86d12;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .container { max-width: 650px; margin: 15px auto; padding: 0 15px; }
+
+        .menu-section { background-color: #ffffff; border: 1px solid #eedecc; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .menu-title { color: #3d2314; font-size: 1.05rem; font-weight: bold; border-bottom: 1px dashed #c86d12; padding-bottom: 8px; margin-bottom: 12px; text-align: center; }
         
-        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f2ede4; font-size: 0.88rem; }
+        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f2ede4; gap: 10px; }
         .item-row:last-child { border-bottom: none; }
-        .item-name { font-weight: bold; color: #2b2b2b; }
-        .item-desc { font-size: 0.78rem; color: #555; margin-top: 3px; line-height: 1.4; }
-        .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fff; padding: 5px 10px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.85rem; }
+        .item-detail { display: flex; align-items: center; gap: 12px; }
+        .product-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; border: 1px solid #eedecc; background-color: #fcf8f3; }
+        .item-name { font-weight: bold; color: #2b2b2b; font-size: 0.88rem; }
+        .item-desc { font-size: 0.75rem; color: #666; margin-top: 3px; line-height: 1.4; }
+        .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fcf8f3; padding: 5px 10px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.8rem; }
         
-        .guide-box { background-color: #e6f4ea; border: 1px solid #ceead6; color: #137333; padding: 12px; border-radius: 8px; font-size: 0.85rem; text-align: center; font-weight: bold; line-height: 1.5; margin-top: 15px; }
-        footer { margin-top: 20px; text-align: center; font-size: 0.8rem; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
+        .fab-contact {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #10b981;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 999;
+        }
+
+        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی</a>
+<header class="sticky-header">
+    <h2>🍯 سوغاتی‌ها و شیرین‌کام‌ها</h2>
+    <a href="index.html" class="back-home-btn">🏠 اصلی</a>
+</header>
 
-    <div class="header">
-        <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="کلبه سیمرغ">
-        <h1>سوغاتی‌ها و شیرین‌کام‌ها</h1>
-    </div>
+<div class="container">
 
     <div class="menu-section">
-        <div class="menu-title">🍯 ارده، حلوا، شیره، نبات و تنقلات سنتی</div>
+        <div class="menu-title">ارده، حلوا، شیره و محصولات سنتی</div>
         
         <div class="item-row">
-            <div>
-                <div class="item-name">ارده ۷۰۰ گرمی ممتاز اعلا</div>
-                <div class="item-desc">تهیه شده از کنجد خالص و مرغوب، مقوی و پرانرژی</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=100&q=80" class="product-img" alt="ارده">
+                <div>
+                    <div class="item-name">ارده (۷۰۰ و ۴۰۰ گرمی ممتاز اعلا)</div>
+                    <div class="item-desc">تهیه شده از کنجد خالص، پرانرژی و مقوی</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
 
         <div class="item-row">
-            <div>
-                <div class="item-name">ارده ۴۰۰ گرمی ممتاز اعلا</div>
-                <div class="item-desc">بسته بندی استاندارد، کیفیت ارکانی و خالص</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&q=80" class="product-img" alt="حلوا">
+                <div>
+                    <div class="item-name">حلوارده ممتاز (۷۰۰ و ۵۰۰ گرمی)</div>
+                    <div class="item-desc">طعم سنتی اصیل، بافت نرم و تازه</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
 
         <div class="item-row">
-            <div>
-                <div class="item-name">حلوارده ۷۰۰ گرمی ممتاز اعلا</div>
-                <div class="item-desc">خوشمزه، سنتی و مقوی مناسب صبحانه و عصرانه</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&q=80" class="product-img" alt="حلوا شکری">
+                <div>
+                    <div class="item-name">حلواشکری رولی ۴۰۰ گرمی</div>
+                    <div class="item-desc">برش آسان، مناسب پذیرایی و صبحانه</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
 
         <div class="item-row">
-            <div>
-                <div class="item-name">حلوارده ۵۰۰ گرمی ممتاز اعلا</div>
-                <div class="item-desc">بافت نرم، طعم اصیل و باکیفیت بالا</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=100&q=80" class="product-img" alt="نان">
+                <div>
+                    <div class="item-name">نان خشک سنتی (۶.۸ کیلوگرم)</div>
+                    <div class="item-desc">ترد و خوش‌طعم، مناسب همراهی با غذا</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
 
         <div class="item-row">
-            <div>
-                <div class="item-name">حلواشکری رولی ۴۰۰ گرمی</div>
-                <div class="item-desc">برش آسان، مناسب پذیرایی و مصرف روزانه</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="نبات">
+                <div>
+                    <div class="item-name">نبات کاسه دو آتیشه (۲ کیلویی)</div>
+                    <div class="item-desc">خلوص بالا و معطر برای چای و دمنوش</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
 
         <div class="item-row">
-            <div>
-                <div class="item-name">نون خشک (۶.۸ کیلوگرم)</div>
-                <div class="item-desc">سنتی، ترد و تازه، مناسب همراهی با غذا و لبنیات</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=100&q=80" class="product-img" alt="شیره">
+                <div>
+                    <div class="item-name">انواع شیره (زعفرانی / خرما / انگور)</div>
+                    <div class="item-desc">خالص، ۵۰۰ گرمی اعلا و سرشار از آهن</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
 
         <div class="item-row">
-            <div>
-                <div class="item-name">نبات کاسه دو آتیشه (۲ کیلویی)</div>
-                <div class="item-desc">خلوص بالا، خوش‌رنگ و معطر، مناسب انواع چای و دمنوش</div>
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="قند">
+                <div>
+                    <div class="item-name">قند شکسته دو کیلویی (ساده / هلو گلاب)</div>
+                    <div class="item-desc">کیفیت عالی، خوش‌دانه و خوش‌طعم</div>
+                </div>
             </div>
             <div class="item-price">تماس بگیرید</div>
         </div>
-
-        <div class="item-row">
-            <div>
-                <div class="item-name">شیره زعفرانی ۵۰۰ گرمی</div>
-                <div class="item-desc">ترکیب عطر زعفران اصیل با شیره طبیعی</div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row">
-            <div>
-                <div class="item-name">شیره خرما ۵۰۰ گرمی اعلا</div>
-                <div class="item-desc">سرشار از ویتامین و آهن، کاملاً ارگانیک</div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row">
-            <div>
-                <div class="item-name">شیره انگور ۵۰۰ گرمی اعلا</div>
-                <div class="item-desc">خالص، سنتی و تهیه شده از بهترین انگورها</div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row">
-            <div>
-                <div class="item-name">قند شکسته دو کیلویی - هلو گلاب</div>
-                <div class="item-desc">شیرینی ملایم، باکیفیت و خوش‌دانه</div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row">
-            <div>
-                <div class="item-name">قند شکسته دو کیلویی</div>
-                <div class="item-desc">مفید، خوش‌ساخت و درجه یک</div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-    </div>
-
-    <div class="guide-box">
-        💡 برای استعلام قیمت روز و ثبت سفارش محصولات، می‌توانید از طریق راه‌های ارتباطی در صفحه اصلی اقدام فرمایید.
     </div>
 
     <footer>
         <p>تهران، تهرانپارس، خیابان جشنواره، پلاک ۴۸ | کلبه چای و قهوه سیمرغ</p>
     </footer>
 </div>
+
+<a href="tel:02177341312" class="fab-contact">
+    <span>📞</span>
+    <span>تماس سریع</span>
+</a>
 
 </body>
 </html>
