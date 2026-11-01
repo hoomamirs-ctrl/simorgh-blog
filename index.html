@@ -47,12 +47,6 @@
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
         .btn-blog { background-color: #6366f1; }
 
-        /* بخش نظرات مشتریان */
-        .testimonials-box { background: #fcf8f3; border: 1px solid #eedecc; border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: right; }
-        .testimonial-title { font-size: 0.9rem; font-weight: bold; color: #3d2314; margin-bottom: 8px; border-bottom: 1px dashed #c86d12; padding-bottom: 5px; text-align: center; }
-        .testimonial-item { font-size: 0.78rem; color: #555; margin-bottom: 6px; line-height: 1.4; border-right: 2px solid #c86d12; padding-right: 6px; }
-        .testimonial-author { font-weight: bold; color: #c86d12; }
-
         .floating-buttons {
             position: fixed; bottom: 15px; left: 15px; right: 15px;
             max-width: 600px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
@@ -96,13 +90,6 @@
         <div id="timer-display" class="timer-box">---</div>
     </div>
 
-    <!-- بخش نظرات مشتریان حضوری -->
-    <div class="testimonials-box">
-        <div class="testimonial-title">💬 نظرات مشتریان محلی سیمرغ</div>
-        <div class="testimonial-item">«عطر قهوه‌های تازه‌رست‌شون توی خیابان جشنواره همیشه بی‌نظیره. همیشه میکس فول‌کافئین می‌گیرم.» <span class="testimonial-author">- رضا از تهرانپارس</span></div>
-        <div class="testimonial-item">«ارده و حلواهاشون فوق‌العاده باکیفیت و اصله. برخوردشون هم خیلی صمیمیه.» <span class="testimonial-author">- سارا م.</span></div>
-    </div>
-
     <!-- منوی آبشاری ۱ -->
     <div class="dropdown-container">
         <button type="button" class="dropdown-toggle" onclick="toggleDropdown('contactMenu', this)">
@@ -144,52 +131,4 @@
         const menu = document.getElementById(menuId);
         const isOpen = menu.classList.contains('show');
         document.querySelectorAll('.dropdown-content').forEach(item => item.classList.remove('show'));
-        document.querySelectorAll('.dropdown-toggle span').forEach(item => item.textContent = '▼');
-        if (!isOpen) {
-            menu.classList.add('show');
-            button.querySelector('span').textContent = '▲';
-        }
-    }
-
-    function updateWorkingHoursTimer() {
-        const now = new Date();
-        const dayOfWeek = now.getDay(); 
-        const currentHour = now.getHours();
-        const statusElement = document.getElementById('shop-status');
-        const timerElement = document.getElementById('timer-display');
-        if (!statusElement || !timerElement) return;
-
-        const isFriday = (dayOfWeek === 5);
-        const closingHour = isFriday ? 13 : 22;
-
-        if (currentHour >= 8 && currentHour < closingHour) {
-            statusElement.textContent = "🟢 فروشگاه باز است";
-            statusElement.className = "status-badge status-open";
-            const closingTime = new Date(now);
-            closingTime.setHours(closingHour, 0, 0, 0);
-            const diff = closingTime - now;
-            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">${h}:${m}:${s}</span>`;
-        } else {
-            statusElement.textContent = "🔴 فروشگاه بسته است";
-            statusElement.className = "status-badge status-closed";
-            const openingTime = new Date(now);
-            if (currentHour >= closingHour || (isFriday && currentHour >= 13)) {
-                openingTime.setDate(openingTime.getDate() + 1);
-            }
-            openingTime.setHours(8, 0, 0, 0);
-            const diff = openingTime - now;
-            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
-        }
-    }
-    setInterval(updateWorkingHoursTimer, 1000);
-    updateWorkingHoursTimer();
-</script>
-
-</body>
-</html>
+        document.
