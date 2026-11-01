@@ -100,10 +100,10 @@
     </div>
 
     <div class="tabs-container" id="tabsList">
-        <button class="tab-btn active" id="btn-single" onclick="switchTab('single', this)">🟣 تک‌دان</button>
-        <button class="tab-btn" id="btn-mixes" onclick="switchTab('mixes', this)">🟤 میکس‌ها</button>
-        <button class="tab-btn" id="btn-powders" onclick="switchTab('powders', this)">🟠 قهوه فوری</button>
-        <button class="tab-btn" id="btn-warm" onclick="switchTab('warm', this)">🟡 پودریجات</button>
+        <button class="tab-btn active" onclick="switchTab('single', this)">🟣 تک‌دان</button>
+        <button class="tab-btn" onclick="switchTab('mixes', this)">🟤 میکس‌ها</button>
+        <button class="tab-btn" onclick="switchTab('powders', this)">🟠 قهوه فوری</button>
+        <button class="tab-btn" onclick="switchTab('warm', this)">🟡 پودریجات</button>
     </div>
 
     <!-- تب ۱: تک دان -->
@@ -352,38 +352,60 @@
 
 <script>
     function switchTab(tabId, btnElement) {
+        // پاک کردن سرچ‌باکس هنگام جابجایی بین تب‌ها
+        document.getElementById('searchInput').value = '';
+        document.getElementById('tabsList').style.display = 'flex';
+
+        // غیرفعال کردن همه تب‌ها و محتواها
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
         
+        // نمایش تب و محتوای انتخاب شده
         document.getElementById(tabId).classList.add('active');
-        if(btnElement) btnElement.classList.add('active');
-        
-        document.getElementById('searchInput').value = '';
-        filterProducts();
+        if (btnElement) {
+            btnElement.classList.add('active');
+        }
+
+        // نمایش مجدد همه آیتم‌های داخل تب انتخاب شده (در صورتی که قبلاً فیلتر شده بودند)
+        document.querySelectorAll('#' + tabId + ' .product-item').forEach(item => {
+            item.style.display = 'flex';
+        });
     }
 
     function filterProducts() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let items = document.querySelectorAll('.product-item');
+        let input = document.getElementById('searchInput').value.toLowerCase().trim();
         let tabsList = document.getElementById('tabsList');
+        let allItems = document.querySelectorAll('.product-item');
 
-        if (input.trim() !== "") {
+        if (input !== "") {
+            // هنگام جستجو، تب‌ها مخفی شده و تمام محصولات برای جستجوی سراسری فعال می‌شوند
             tabsList.style.display = "none";
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('active'));
+
+            allItems.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = "flex";
+                } else {
+                    item.style.display = "none";
+                }
+            });
         } else {
+            // وقتی جستجو پاک شد، تب‌ها برمی‌گردند و فقط تب اول (تک‌دان) باز می‌شود
             tabsList.style.display = "flex";
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById('single').classList.add('active');
-        }
+            
+            // فعال‌سازی دکمه اول
+            document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+                if (index === 0) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
 
-        items.forEach(item => {
-            let text = item.innerText.toLowerCase();
-            if (text.includes(input)) {
+            allItems.forEach(item => {
                 item.style.display = "flex";
-            } else {
-                item.style.display = "none";
-            }
-        });
+            });
+        }
     }
 </script>
 
