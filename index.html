@@ -131,4 +131,52 @@
         const menu = document.getElementById(menuId);
         const isOpen = menu.classList.contains('show');
         document.querySelectorAll('.dropdown-content').forEach(item => item.classList.remove('show'));
-        document.
+        document.querySelectorAll('.dropdown-toggle span').forEach(item => item.textContent = '▼');
+        if (!isOpen) {
+            menu.classList.add('show');
+            button.querySelector('span').textContent = '▲';
+        }
+    }
+
+    function updateWorkingHoursTimer() {
+        const now = new Date();
+        const dayOfWeek = now.getDay(); 
+        const currentHour = now.getHours();
+        const statusElement = document.getElementById('shop-status');
+        const timerElement = document.getElementById('timer-display');
+        if (!statusElement || !timerElement) return;
+
+        const isFriday = (dayOfWeek === 5);
+        const closingHour = isFriday ? 13 : 22;
+
+        if (currentHour >= 8 && currentHour < closingHour) {
+            statusElement.textContent = "🟢 فروشگاه باز است";
+            statusElement.className = "status-badge status-open";
+            const closingTime = new Date(now);
+            closingTime.setHours(closingHour, 0, 0, 0);
+            const diff = closingTime - now;
+            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            timerElement.innerHTML = `زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">${h}:${m}:${s}</span>`;
+        } else {
+            statusElement.textContent = "🔴 فروشگاه بسته است";
+            statusElement.className = "status-badge status-closed";
+            const openingTime = new Date(now);
+            if (currentHour >= closingHour || (isFriday && currentHour >= 13)) {
+                openingTime.setDate(openingTime.getDate() + 1);
+            }
+            openingTime.setHours(8, 0, 0, 0);
+            const diff = openingTime - now;
+            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
+        }
+    }
+    setInterval(updateWorkingHoursTimer, 1000);
+    updateWorkingHoursTimer();
+</script>
+
+</body>
+</html>
