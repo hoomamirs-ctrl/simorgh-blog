@@ -33,10 +33,8 @@
 
         .container { max-width: 650px; margin: 15px auto; padding: 0 15px; }
 
-        /* باکس راهنمای مشاوره سریع */
         .guide-box { background: #e6f4ea; border: 1px solid #ceead6; color: #137333; padding: 10px 12px; border-radius: 10px; font-size: 0.82rem; font-weight: bold; text-align: center; margin-bottom: 12px; line-height: 1.5; }
 
-        /* نوار جستجو */
         .search-box { margin-bottom: 15px; }
         .search-input {
             width: 100%; padding: 12px 15px; border-radius: 10px;
@@ -68,7 +66,6 @@
         .item-desc { font-size: 0.75rem; color: #666; margin-top: 3px; line-height: 1.4; }
         .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fcf8f3; padding: 5px 10px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.8rem; }
         
-        /* دکمه‌های شناور پایین صفحه */
         .floating-buttons {
             position: fixed; bottom: 15px; left: 15px; right: 15px;
             max-width: 650px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
@@ -99,119 +96,4 @@
 
     <!-- نوار جستجو -->
     <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 جستجوی نام قهوه (مثلا: ویتنام، کلمبیا...)" onkeyup="filterProducts()">
-    </div>
-
-    <div class="tabs-container" id="tabsList">
-        <button class="tab-btn active" onclick="switchTab('single')">🟣 تک‌دان</button>
-        <button class="tab-btn" onclick="switchTab('mixes')">🟤 میکس‌ها</button>
-        <button class="tab-btn" onclick="switchTab('powders')">🟠 قهوه فوری</button>
-        <button class="tab-btn" onclick="switchTab('warm')">🟡 پودریجات</button>
-    </div>
-
-    <!-- تب ۱: تک دان -->
-    <div id="single" class="tab-content active">
-        <div class="menu-section">
-            <div class="sub-category">روبوستا</div>
-            
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">ویتنام اسکرین ۱۸ تاپ گرید ۱ وت پالیش</div>
-                        <div class="item-desc">طعم‌یاد شکلاتی، بادی خوب و کرمای غلیظ</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">پی بی (PB)</div>
-                        <div class="item-desc">دانه‌های گرد، کافئین بالا و طعم شکلاتی غنی</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">چری AA گرید ۱ گرین پرو</div>
-                        <div class="item-desc">مرغوب‌ترین روبوستای هند با کرمای عالی</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">اوگاندا اسکرین ۱۸ گرید ۱</div>
-                        <div class="item-desc">تلخی استاندارد، بادی پر و کافئین مناسب</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">اندونزی جاوه AP1</div>
-                        <div class="item-desc">طعم خاص شکلاتی، کرمای عالی برای اسپرسو</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="sub-category">عربیکا</div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">کلمبیا کافه صوفیا اسکرین ۱۹ گرید ۱</div>
-                        <div class="item-desc">عطر دلنشین، اسیدیته ملایم و طعم لطیف</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">برزیل ریو اسکرین ۱۸</div>
-                        <div class="item-desc">عطر مطبوع، تن‌وای شکلاتی و متعادل</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">برزیل سانتوس</div>
-                        <div class="item-desc">ملایم، شیرینی طبیعی و طعم‌یاد شکلاتی</div>
-                    </div>
-                </div>
-                <div class="item-price">تماس بگیرید</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- تب ۲: میکس ها -->
-    <div id="mixes" class="tab-content">
-        <div class="menu-section">
-            <div class="item-row product-item">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس فول کافئین (۴ دانه پایه ویتنام)</div>
-                        <div class="item-desc">کرمای بالا، انرژی زیاد و طعم شکلاتی</div>
+        <input type
