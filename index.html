@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
     
-    <!-- سئو و متا تگ‌های حرفه‌ای -->
     <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، چای مرغوب، حلوا ارده، شیره و نبات در تهرانپارس. آدرس: تهرانپارس، خیابان جشنواره، پلاک ۴۸.">
     <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, حلوا ارده تهرانپارس">
 
-    <!-- سئوی محلی (Geo Tags) -->
     <meta name="geo.region" content="IR-08">
     <meta name="geo.placename" content="Tehranpars, Tehran">
     <meta name="geo.position" content="35.73;51.53">
@@ -30,11 +28,11 @@
         .cat-item { background-color: #fcf8f3; border: 1px solid #eedecc; border-radius: 8px; padding: 10px 4px; font-size: 0.78rem; color: #3d2314; font-weight: bold; line-height: 1.4; text-decoration: none; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-color 0.2s; }
         .cat-item:hover { background-color: #f2ede4; }
         
-        .hours-container { background: #fcf8f3; padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #c86d12; color: #3d2314; line-height: 1.6; }
+        .hours-container { background: #fcf8f3; padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #c86d12; color: #3d2314; line-height: 1.6; text-align: right; }
         .status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; margin: 6px 0; }
         .status-open { background-color: #d1fae5; color: #065f46; }
         .status-closed { background-color: #fee2e2; color: #991b1b; }
-        .timer-box { font-size: 0.9rem; font-weight: bold; margin-top: 4px; }
+        .timer-box { font-size: 0.9rem; font-weight: bold; margin-top: 4px; text-align: center; }
         .timer-count { color: #c86d12; font-size: 1.05rem; direction: ltr; display: inline-block; }
 
         .dropdown-container { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #e2ded7; text-align: right; }
@@ -49,31 +47,20 @@
         .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
         .btn-blog { background-color: #6366f1; }
 
-        /* دکمه‌های شناور پایین صفحه */
+        /* بخش نظرات مشتریان */
+        .testimonials-box { background: #fcf8f3; border: 1px solid #eedecc; border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: right; }
+        .testimonial-title { font-size: 0.9rem; font-weight: bold; color: #3d2314; margin-bottom: 8px; border-bottom: 1px dashed #c86d12; padding-bottom: 5px; text-align: center; }
+        .testimonial-item { font-size: 0.78rem; color: #555; margin-bottom: 6px; line-height: 1.4; border-right: 2px solid #c86d12; padding-right: 6px; }
+        .testimonial-author { font-weight: bold; color: #c86d12; }
+
         .floating-buttons {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-            z-index: 999;
+            position: fixed; bottom: 15px; left: 15px; right: 15px;
+            max-width: 600px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
         }
         .fab-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex: 1; padding: 12px; border-radius: 30px; text-decoration: none;
+            font-weight: bold; font-size: 0.9rem; color: #ffffff; display: flex;
+            align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .fab-call { background-color: #10b981; }
         .fab-bale { background-color: #00779b; }
@@ -105,8 +92,15 @@
     <!-- ساعت کاری و تایمر هوشمند -->
     <div class="hours-container">
         <div>🕒 <strong>ساعت کاری:</strong><br>شنبه تا پنجشنبه: ۰۸:۰۰ الی ۲۲:۰۰<br><strong>جمعه‌ها: ۰۸:۰۰ الی ۱۳:۰۰</strong></div>
-        <div><span id="shop-status" class="status-badge">در حال بررسی...</span></div>
+        <div style="text-align: center;"><span id="shop-status" class="status-badge">در حال بررسی...</span></div>
         <div id="timer-display" class="timer-box">---</div>
+    </div>
+
+    <!-- بخش نظرات مشتریان حضوری -->
+    <div class="testimonials-box">
+        <div class="testimonial-title">💬 نظرات مشتریان محلی سیمرغ</div>
+        <div class="testimonial-item">«عطر قهوه‌های تازه‌رست‌شون توی خیابان جشنواره همیشه بی‌نظیره. همیشه میکس فول‌کافئین می‌گیرم.» <span class="testimonial-author">- رضا از تهرانپارس</span></div>
+        <div class="testimonial-item">«ارده و حلواهاشون فوق‌العاده باکیفیت و اصله. برخوردشون هم خیلی صمیمیه.» <span class="testimonial-author">- سارا م.</span></div>
     </div>
 
     <!-- منوی آبشاری ۱ -->
