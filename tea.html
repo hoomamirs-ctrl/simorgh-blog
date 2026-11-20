@@ -20,179 +20,94 @@
         }
 
         .sticky-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 55px;
-            background-color: #3d2314;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; right: 0; height: 55px;
+            background-color: #3d2314; color: #fff;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 1000;
         }
-        .sticky-header h2 {
-            font-size: 1rem;
-            margin: 0;
-            color: #fff;
-        }
+        .sticky-header h2 { font-size: 1rem; margin: 0; color: #fff; }
         .back-home-btn {
-            color: #fff;
-            text-decoration: none;
-            background-color: #c86d12;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            color: #fff; text-decoration: none; background-color: #c86d12;
+            padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
         }
 
-        .container {
-            max-width: 650px;
-            margin: 15px auto;
-            padding: 0 15px;
-        }
+        .container { max-width: 650px; margin: 15px auto; padding: 0 15px; }
 
         .guide-box {
-            background: #e6f4ea;
-            border: 1px solid #ceead6;
-            color: #137333;
-            padding: 10px 12px;
-            border-radius: 10px;
-            font-size: 0.82rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 12px;
-            line-height: 1.5;
+            background: #e6f4ea; border: 1px solid #ceead6; color: #137333;
+            padding: 10px 12px; border-radius: 10px; font-size: 0.82rem;
+            font-weight: bold; text-align: center; margin-bottom: 12px; line-height: 1.5;
         }
 
-        .search-box {
-            margin-bottom: 15px;
-        }
+        .search-box { margin-bottom: 10px; }
         .search-input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid #eedecc;
-            background-color: #fff;
-            font-family: Tahoma, sans-serif;
-            font-size: 0.9rem;
-            outline: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            width: 100%; padding: 12px 15px; border-radius: 10px;
+            border: 1px solid #eedecc; background-color: #fff; font-family: Tahoma, sans-serif;
+            font-size: 0.9rem; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-        .search-input:focus {
-            border-color: #c86d12;
+        .search-input:focus { border-color: #c86d12; }
+
+        .quick-tags {
+            display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px;
+            margin-bottom: 12px; scrollbar-width: none;
+        }
+        .quick-tags::-webkit-scrollbar { display: none; }
+        .tag-btn {
+            background-color: #ffffff; border: 1px solid #eedecc; color: #3d2314;
+            padding: 7px 13px; border-radius: 18px; font-size: 0.78rem; font-weight: bold;
+            white-space: nowrap; cursor: pointer; font-family: Tahoma, sans-serif;
+        }
+        .tag-btn.active {
+            background-color: #c86d12; color: #fff; border-color: #c86d12;
         }
 
         .menu-section {
-            background-color: #ffffff;
-            border: 1px solid #eedecc;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            background-color: #ffffff; border: 1px solid #eedecc; border-radius: 12px;
+            padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         .menu-title {
-            color: #3d2314;
-            font-size: 1.05rem;
-            font-weight: bold;
-            border-bottom: 1px dashed #c86d12;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            text-align: center;
+            color: #3d2314; font-size: 1.05rem; font-weight: bold;
+            border-bottom: 1px dashed #c86d12; padding-bottom: 8px;
+            margin-bottom: 12px; text-align: center;
         }
         .sub-category {
-            font-weight: bold;
-            color: #c86d12;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            border-right: 3px solid #c86d12;
-            padding-right: 8px;
+            font-weight: bold; color: #c86d12; margin-top: 15px; margin-bottom: 10px;
+            font-size: 0.95rem; border-right: 3px solid #c86d12; padding-right: 8px;
         }
 
-        .item-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f2ede4;
-            gap: 10px;
-        }
-        .item-row:last-child {
-            border-bottom: none;
-        }
-        .item-detail {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .product-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid #eedecc;
-            background-color: #fcf8f3;
-        }
-        .item-name {
-            font-weight: bold;
-            color: #2b2b2b;
-            font-size: 0.88rem;
-        }
-        .item-desc {
-            font-size: 0.75rem;
-            color: #666;
-            margin-top: 3px;
-            line-height: 1.4;
-        }
-        .item-price {
-            color: #c86d12;
-            font-weight: bold;
+        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f2ede4; gap: 10px; }
+        .item-row:last-child { border-bottom: none; }
+        .item-detail { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .product-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; border: 1px solid #eedecc; background-color: #fcf8f3; flex-shrink: 0; }
+        .item-name { font-weight: bold; color: #2b2b2b; font-size: 0.88rem; }
+        .item-desc { font-size: 0.75rem; color: #666; margin-top: 3px; line-height: 1.4; }
+
+        .item-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+        .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fcf8f3; padding: 4px 8px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.76rem; }
+        .action-row { display: flex; gap: 5px; }
+        .order-bale-btn {
+            background-color: #00779b; color: #fff; text-decoration: none;
+            font-size: 0.72rem; font-weight: bold; padding: 4px 8px; border-radius: 6px;
             white-space: nowrap;
-            background: #fcf8f3;
-            padding: 5px 10px;
-            border-radius: 6px;
-            border: 1px solid #eedecc;
-            font-size: 0.8rem;
+        }
+        .share-item-btn {
+            background-color: #f7f4ef; color: #3d2314; border: 1px solid #eedecc;
+            font-size: 0.75rem; padding: 3px 7px; border-radius: 6px; cursor: pointer;
         }
 
         .floating-buttons {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            max-width: 650px;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-            z-index: 999;
+            position: fixed; bottom: 15px; left: 15px; right: 15px;
+            max-width: 650px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
         }
         .fab-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex: 1; padding: 12px; border-radius: 30px; text-decoration: none;
+            font-weight: bold; font-size: 0.9rem; color: #ffffff; display: flex;
+            align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .fab-call { background-color: #10b981; }
         .fab-bale { background-color: #00779b; }
 
-        footer {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #777;
-            margin-top: 20px;
-        }
+        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -212,12 +127,19 @@
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 جستجوی چای یا دمنوش (مثلا: سیلان، باروتی، سلامت، بابونه...)" onkeyup="filterProducts()">
     </div>
 
+    <div class="quick-tags">
+        <button type="button" class="tag-btn active" onclick="filterByTag('all', this)">همه</button>
+        <button type="button" class="tag-btn" onclick="filterByTag('tea', this)">🍵 چای اصیل</button>
+        <button type="button" class="tag-btn" onclick="filterByTag('calm', this)">🌿 آرامش‌بخش</button>
+        <button type="button" class="tag-btn" onclick="filterByTag('vitality', this)">✨ نشاط‌آور و تناسب</button>
+    </div>
+
     <div class="menu-section">
         <div class="menu-title">انواع چای اصیل و دمنوش‌های گیاهی</div>
 
         <div class="sub-category">انواع چای</div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="tea">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="چای قلم سیلان">
                 <div>
@@ -225,10 +147,16 @@
                     <div class="item-desc">برگ درشت و اصیل، خوش‌عطر با طعم گس ملایم و دلنشین</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="چای قلم سیلان" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('چای قلم سیلان')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="tea">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="چای باروتی">
                 <div>
@@ -236,10 +164,16 @@
                     <div class="item-desc">برگ‌های لوله‌شده و فشرده با رنگ‌دهی بالا و طعم قوی</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="چای باروتی" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('چای باروتی')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="tea">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="چای شکسته">
                 <div>
@@ -247,10 +181,16 @@
                     <div class="item-desc">دم‌آوری سریع، خوش‌رنگ و مناسب مصرف روزانه</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="چای شکسته" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('چای شکسته')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="tea">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="چای CTC">
                 <div>
@@ -258,10 +198,16 @@
                     <div class="item-desc">بسیار پررنگ و غلیظ، ایده‌آل برای چای کرک و چای شیر</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="چای CTC" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('چای CTC')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="tea vitality">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=100&q=80" class="product-img" alt="چای سبز">
                 <div>
@@ -269,12 +215,18 @@
                     <div class="item-desc">سرشار از آنتی‌اکسیدان، سبک و نشاط‌آور</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="چای سبز" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('چای سبز')">📤</button>
+                </div>
+            </div>
         </div>
 
         <div class="sub-category">دمنوش‌ها</div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="vitality">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=100&q=80" class="product-img" alt="دمنوش سلامت">
                 <div>
@@ -282,10 +234,16 @@
                     <div class="item-desc">ترکیب گیاهان مفید برای تقویت سیستم ایمنی و نشاط روزانه</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="دمنوش سلامت" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('دمنوش سلامت')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="vitality">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="دمنوش تناسب">
                 <div>
@@ -293,10 +251,16 @@
                     <div class="item-desc">ترکیب گیاهان معطر مناسب افزایش متابولیسم و سبک‌سازی</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="دمنوش تناسب" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('دمنوش تناسب')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="vitality">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="دمنوش چای ترش">
                 <div>
@@ -304,10 +268,16 @@
                     <div class="item-desc">طعم ملس و یاقوتی، قابل سرو به صورت گرم و سرد</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="دمنوش چای ترش" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('دمنوش چای ترش')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="vitality calm">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=100&q=80" class="product-img" alt="دمنوش سبز و سفید">
                 <div>
@@ -315,10 +285,16 @@
                     <div class="item-desc">ترکیب لطیف چای سبز و سفید با خواص آنتی‌اکسیدانی بالا</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="دمنوش سبز و سفید" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('دمنوش سبز و سفید')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="calm">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="دمنوش بابونه">
                 <div>
@@ -326,10 +302,16 @@
                     <div class="item-desc">آرامش‌بخش طبیعی، گوارا و مناسب استراحت عصرانه</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="دمنوش بابونه" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('دمنوش بابونه')">📤</button>
+                </div>
+            </div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="calm">
             <div class="item-detail">
                 <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="دمنوش معطر">
                 <div>
@@ -337,7 +319,13 @@
                     <div class="item-desc">ترکیبی خوش‌عطر از گل‌ها و گیاهان معطر طبیعی</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="دمنوش معطر" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('دمنوش معطر')">📤</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -347,24 +335,57 @@
 </div>
 
 <div class="floating-buttons">
-    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank">💬 پیام در بله</a>
+    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
     <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
 </div>
 
 <script>
-    function filterProducts() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let items = document.querySelectorAll('.product-item');
+    function initBaleOrderLinks() {
+        document.querySelectorAll('.order-bale-btn').forEach(btn => {
+            const name = btn.getAttribute('data-order');
+            const text = encodeURIComponent(`سلام، درباره «${name}» و نحوه سفارش راهنمایی می‌خواستم.`);
+            btn.href = `https://ble.ir/simorgh_coffee?text=${text}`;
+        });
+    }
 
-        items.forEach(item => {
-            let text = item.innerText.toLowerCase();
-            if (text.includes(input)) {
-                item.style.display = "flex";
+    function filterByTag(tag, btnElement) {
+        document.getElementById('searchInput').value = '';
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+
+        document.querySelectorAll('.product-item').forEach(item => {
+            if (tag === 'all') {
+                item.style.display = 'flex';
             } else {
-                item.style.display = "none";
+                const tags = (item.getAttribute('data-tags') || '').split(' ');
+                item.style.display = tags.includes(tag) ? 'flex' : 'none';
             }
         });
     }
+
+    function filterProducts() {
+        const input = document.getElementById('searchInput').value.toLowerCase().trim();
+        document.querySelectorAll('.product-item').forEach(item => {
+            const text = item.innerText.toLowerCase();
+            item.style.display = text.includes(input) ? "flex" : "none";
+        });
+    }
+
+    async function shareProduct(productName) {
+        const shareData = {
+            title: productName,
+            text: `«${productName}» در کلبه چای و قهوه سیمرغ:`,
+            url: window.location.href
+        };
+        if (navigator.share) {
+            try { await navigator.share(shareData); } catch (e) {}
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(`${productName} - ${window.location.href}`);
+            alert('نام و لینک محصول کپی شد!');
+        }
+    }
+
+    initBaleOrderLinks();
 </script>
 
 </body>
