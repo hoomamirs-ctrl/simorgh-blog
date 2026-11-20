@@ -1,29 +1,53 @@
-const CACHE_NAME = 'simorgh-home-v7';
-const ASSETS = ['./', './index.html', './manifest.json'];
+const CACHE_NAME = 'simorgh-home-v8';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './manifest.json',
+  'https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg'
+];
 
-self.addEventListener('install', function(e) {
-  e.waitUntil(caches.open(CACHE_NAME).then(function(c) { return c.addAll(ASSETS).catch(function(){}); }));
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(ASSETS_TO_CACHE).catch(function() {});
+    })
+  );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', function(e) {
-  e.waitUntil(caches.keys().then(function(keys) {
-    return Promise.all(keys.filter(function(k) { return k !== CACHE_NAME; }).map(function(k) { return caches.delete(k); }));
-  }));
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(keys) {
+      return Promise.all(
+        keys.filter(function(key) {
+          return key !== CACHE_NAME;
+        }).map(function(key) {
+          return caches.delete(key);
+        })
+      );
+    })
+  );
   self.clients.claim();
 });
 
-self.addEventListener('fetch', function(e) {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(
-    fetch(e.request).then(function(res) {
-      if (res && res.status === 200) {
-        var copy = res.clone();
-        caches.open(CACHE_NAME).then(function(c) { c.put(e.request, copy).catch(function(){}); });
-      }
-      return res;
-    }).catch(function() {
-      return caches.match(e.request).then(function(r) { return r || caches.match('./index.html'); });
-    })
+self.addEventListener('fetch', function(event) {
+  if (event.request.method !== 'GET') return;
+
+  event.respondWith(
+    fetch(event.request)
+      .then(function(networkResponse) {
+        if (networkResponse && networkResponse.status === 200) {
+          var responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, responseClone).catch(function() {});
+          });
+        }
+        return networkResponse;
+      })
+      .catch(function() {
+        return caches.match(event.request).then(function(cachedResponse) {
+          return cachedResponse || caches.match('./index.html');
+        });
+      })
   );
 });
