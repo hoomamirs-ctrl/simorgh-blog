@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
 
-    <!-- سئوی محلی و متا تگ‌ها -->
     <meta name="description" content="مرکز تخصصی ارائه دانه قهوه تازه رست، ترکیبات اختصاصی عربیکا و روبوستا، چای اصیل، دمنوش‌ها، حلوا ارده، شیره و نبات در تهرانپارس. آدرس: تهرانپارس، خیابان جشنواره، پلاک ۴۸.">
     <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, دمنوش گیاهی تهرانپارس, حلوا ارده تهرانپارس">
     <meta name="geo.region" content="IR-08">
@@ -13,7 +12,6 @@
     <meta name="geo.position" content="35.73;51.53">
     <meta name="ICBM" content="35.73, 51.53">
 
-    <!-- Schema.org LocalBusiness -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -123,8 +121,6 @@
             justify-content: center;
             text-align: center;
             cursor: pointer;
-            position: relative;
-            z-index: 2;
             transition: background-color 0.2s, border-color 0.2s;
         }
         .cat-item:hover {
@@ -368,90 +364,3 @@
 
 </body>
 </html>
-an>
-        </button>
-        <div id="socialMenu" class="dropdown-content">
-            <a href="https://ble.ir/simorgh_coffee" class="sub-btn btn-bale" target="_blank" rel="noopener noreferrer">💬 ارتباط در پیام‌رسان بله</a>
-            <a href="https://instagram.com/simorgh_coffee" class="sub-btn btn-ig" target="_blank" rel="noopener noreferrer">📷 اینستاگرام سیمرغ</a>
-            <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="sub-btn btn-blog" target="_blank" rel="noopener noreferrer">🌐 وبلاگ سیمرغ (مقالات آموزشی)</a>
-        </div>
-    </div>
-
-    <footer>
-        <div class="address-text">📍 آدرس حضوری: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
-        <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
-    </footer>
-</div>
-
-<!-- دکمه‌های شناور پایین صفحه -->
-<div class="floating-buttons">
-    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
-    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
-</div>
-
-<script>
-    function toggleDropdown(menuId, button) {
-        const menu = document.getElementById(menuId);
-        const isOpen = menu.classList.contains('show');
-        document.querySelectorAll('.dropdown-content').forEach(item => item.classList.remove('show'));
-        document.querySelectorAll('.dropdown-toggle span').forEach(item => item.textContent = '▼');
-        if (!isOpen) {
-            menu.classList.add('show');
-            button.querySelector('span').textContent = '▲';
-        }
-    }
-
-    function updateWorkingHoursTimer() {
-        const now = new Date();
-        const dayOfWeek = now.getDay();
-        const currentHour = now.getHours();
-        const statusElement = document.getElementById('shop-status');
-        const timerElement = document.getElementById('timer-display');
-        if (!statusElement || !timerElement) return;
-
-        const isFriday = (dayOfWeek === 5);
-        const closingHour = isFriday ? 13 : 22;
-
-        if (currentHour >= 8 && currentHour < closingHour) {
-            statusElement.textContent = "🟢 فروشگاه باز است";
-            statusElement.className = "status-badge status-open";
-            const closingTime = new Date(now);
-            closingTime.setHours(closingHour, 0, 0, 0);
-            const diff = closingTime - now;
-            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">${h}:${m}:${s}</span>`;
-        } else {
-            statusElement.textContent = "🔴 فروشگاه بسته است";
-            statusElement.className = "status-badge status-closed";
-            const openingTime = new Date(now);
-            if (currentHour >= closingHour || (isFriday && currentHour >= 13)) {
-                openingTime.setDate(openingTime.getDate() + 1);
-            }
-            openingTime.setHours(8, 0, 0, 0);
-            const diff = openingTime - now;
-            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
-        }
-    }
-
-    setInterval(updateWorkingHoursTimer, 1000);
-    updateWorkingHoursTimer();
-</script>
-
-</body>
-</html>
-= String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
-        }
-    }
-    setInterval(updateWorkingHoursTimer, 1000);
-    updateWorkingHoursTimer();
-</script>
-
-</body>
-    </html>
