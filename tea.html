@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چای اصیل و دمنوش‌ها | کلبه چای و قهوه سیمرغ</title>
+    <meta name="description" content="خرید انواع چای سیلان، چای باروتی، شکسته، CTC، چای سبز و دمنوش‌های سلامت، تناسب و بابونه در تهرانپارس. کلبه چای و قهوه سیمرغ.">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f7f4ef;
+            color: #2b2b2b;
+            margin: 0;
+            padding: 0;
+            padding-top: 65px;
+            padding-bottom: 90px;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background-color: #3d2314;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        .sticky-header h2 {
+            font-size: 1rem;
+            margin: 0;
+            color: #fff;
+        }
+        .back-home-btn {
+            color: #fff;
+            text-decoration: none;
+            background-color: #c86d12;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 15px auto;
+            padding: 0 15px;
+        }
+
+        .guide-box {
+            background: #e6f4ea;
+            border: 1px solid #ceead6;
+            color: #137333;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .search-box {
+            margin-bottom: 15px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid #eedecc;
+            background-color: #fff;
+            font-family: Tahoma, sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .search-input:focus {
+            border-color: #c86d12;
+        }
+
+        .menu-section {
+            background-color: #ffffff;
+            border: 1px solid #eedecc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .menu-title {
+            color: #3d2314;
+            font-size: 1.05rem;
+            font-weight: bold;
+            border-bottom: 1px dashed #c86d12;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .sub-category {
+            font-weight: bold;
+            color: #c86d12;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            border-right: 3px solid #c86d12;
+            padding-right: 8px;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f2ede4;
+            gap: 10px;
+        }
+        .item-row:last-child {
+            border-bottom: none;
+        }
+        .item-detail {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .product-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #eedecc;
+            background-color: #fcf8f3;
+        }
+        .item-name {
+            font-weight: bold;
+            color: #2b2b2b;
+            font-size: 0.88rem;
+        }
+        .item-desc {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 3px;
+            line-height: 1.4;
+        }
+        .item-price {
+            color: #c86d12;
+            font-weight: bold;
+            white-space: nowrap;
+            background: #fcf8f3;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid #eedecc;
+            font-size: 0.8rem;
+        }
+
+        .floating-buttons {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            max-width: 650px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
+        }
+        .fab-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .fab-call { background-color: #10b981; }
+        .fab-bale { background-color: #00779b; }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <h2>🍵 چای اصیل و دمنوش‌ها</h2>
+    <a href="index.html" class="back-home-btn">🏠 صفحه اصلی</a>
+</header>
+
+<div class="container">
+
+    <div class="guide-box">
+        💬 برای انتخاب چای خوش‌عطر متناسب با ذائقه یا دمنوش گیاهی مناسب مزاج خود، با ما تماس بگیرید یا در بله پیام دهید.
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 جستجوی چای یا دمنوش (مثلا: سیلان، باروتی، سلامت، بابونه...)" onkeyup="filterProducts()">
+    </div>
+
+    <div class="menu-section">
+        <div class="menu-title">انواع چای اصیل و دمنوش‌های گیاهی</div>
+
+        <div class="sub-category">انواع چای</div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="چای قلم سیلان">
+                <div>
+                    <div class="item-name">چای قلم سیلان</div>
+                    <div class="item-desc">برگ درشت و اصیل، خوش‌عطر با طعم گس ملایم و دلنشین</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="چای باروتی">
+                <div>
+                    <div class="item-name">چای باروتی</div>
+                    <div class="item-desc">برگ‌های لوله‌شده و فشرده با رنگ‌دهی بالا و طعم قوی</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="چای شکسته">
+                <div>
+                    <div class="item-name">چای شکسته</div>
+                    <div class="item-desc">دم‌آوری سریع، خوش‌رنگ و مناسب مصرف روزانه</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="چای CTC">
+                <div>
+                    <div class="item-name">چای CTC</div>
+                    <div class="item-desc">بسیار پررنگ و غلیظ، ایده‌آل برای چای کرک و چای شیر</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=100&q=80" class="product-img" alt="چای سبز">
+                <div>
+                    <div class="item-name">چای سبز</div>
+                    <div class="item-desc">سرشار از آنتی‌اکسیدان، سبک و نشاط‌آور</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="sub-category">دمنوش‌ها</div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=100&q=80" class="product-img" alt="دمنوش سلامت">
+                <div>
+                    <div class="item-name">دمنوش سلامت</div>
+                    <div class="item-desc">ترکیب گیاهان مفید برای تقویت سیستم ایمنی و نشاط روزانه</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="دمنوش تناسب">
+                <div>
+                    <div class="item-name">دمنوش تناسب</div>
+                    <div class="item-desc">ترکیب گیاهان معطر مناسب افزایش متابولیسم و سبک‌سازی</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="دمنوش چای ترش">
+                <div>
+                    <div class="item-name">دمنوش چای ترش</div>
+                    <div class="item-desc">طعم ملس و یاقوتی، قابل سرو به صورت گرم و سرد</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=100&q=80" class="product-img" alt="دمنوش سبز و سفید">
+                <div>
+                    <div class="item-name">دمنوش سبز و سفید</div>
+                    <div class="item-desc">ترکیب لطیف چای سبز و سفید با خواص آنتی‌اکسیدانی بالا</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="دمنوش بابونه">
+                <div>
+                    <div class="item-name">دمنوش بابونه</div>
+                    <div class="item-desc">آرامش‌بخش طبیعی، گوارا و مناسب استراحت عصرانه</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+
+        <div class="item-row product-item">
+            <div class="item-detail">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="دمنوش معطر">
+                <div>
+                    <div class="item-name">دمنوش معطر</div>
+                    <div class="item-desc">ترکیبی خوش‌عطر از گل‌ها و گیاهان معطر طبیعی</div>
+                </div>
+            </div>
+            <div class="item-price">تماس بگیرید</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تهران، تهرانپارس، خیابان جشنواره، پلاک ۴۸ | کلبه چای و قهوه سیمرغ</p>
+    </footer>
+</div>
+
+<div class="floating-buttons">
+    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank">💬 پیام در بله</a>
+    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
+</div>
+
+<script>
+    function filterProducts() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let items = document.querySelectorAll('.product-item');
+
+        items.forEach(item => {
+            let text = item.innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
