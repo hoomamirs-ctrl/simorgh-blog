@@ -12,6 +12,14 @@
     <meta name="geo.position" content="35.73;51.53">
     <meta name="ICBM" content="35.73, 51.53">
 
+    <!-- PWA & Mobile App Meta -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3d2314">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="سیمرغ">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -126,6 +134,55 @@
         .cat-item:hover {
             background-color: #f2ede4;
             border-color: #c86d12;
+        }
+
+        .utility-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .util-btn {
+            flex: 1;
+            background-color: #fcf8f3;
+            border: 1px solid #eedecc;
+            color: #3d2314;
+            padding: 9px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Tahoma, sans-serif;
+            transition: background-color 0.2s;
+        }
+        .util-btn:hover {
+            background-color: #f2ede4;
+        }
+        .install-banner {
+            display: none;
+            background: #e6f4ea;
+            border: 1px solid #ceead6;
+            color: #137333;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            text-align: right;
+        }
+        .install-btn {
+            background-color: #137333;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Tahoma, sans-serif;
+            white-space: nowrap;
         }
 
         .hours-container {
@@ -270,6 +327,16 @@
         <a href="./souvenirs.html" class="cat-item">🍯 سوغاتی‌ها و شیرین‌کام‌ها</a>
     </nav>
 
+    <div id="installBanner" class="install-banner">
+        <span>📲 نصب اپلیکیشن سیمرغ روی گوشی</span>
+        <button type="button" class="install-btn" id="installBtn">نصب سریع</button>
+    </div>
+
+    <div class="utility-bar">
+        <button type="button" class="util-btn" onclick="sharePage()">📤 اشتراک‌گذاری صفحه</button>
+        <button type="button" class="util-btn" onclick="toggleInstallTip()">📱 افزودن به صفحه اصلی</button>
+    </div>
+
     <div class="hours-container">
         <div>🕒 <strong>ساعت کاری:</strong><br>شنبه تا پنجشنبه: ۰۸:۰۰ الی ۲۲:۰۰<br><strong>جمعه‌ها: ۰۸:۰۰ الی ۱۳:۰۰</strong></div>
         <div style="text-align: center;"><span id="shop-status" class="status-badge">در حال بررسی...</span></div>
@@ -356,6 +423,42 @@
             const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
             timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
         }
+    }
+
+    async function sharePage() {
+        const shareData = {
+            title: 'کلبه چای و قهوه سیمرغ',
+            text: 'صفحه رسمی کلبه چای و قهوه سیمرغ (دانه قهوه تازه رست، چای اصیل و دمنوش‌ها در تهرانپارس):',
+            url: window.location.href
+        };
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (e) {}
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(window.location.href);
+            alert('لینک صفحه در کلیپ‌بورد کپی شد!');
+        }
+    }
+
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('installBanner').style.display = 'flex';
+    });
+
+    document.getElementById('installBtn').addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            document.getElementById('installBanner').style.display = 'none';
+        }
+    });
+
+    function toggleInstallTip() {
+        alert('برای افزودن به صفحه اصلی گوشی:\n• در اندروید/کروم/بریو: منوی مرورگر (⋮) > Add to Home screen\n• در آیفون/سافاری: دکمه Share > Add to Home Screen');
     }
 
     setInterval(updateWorkingHoursTimer, 1000);
