@@ -14,6 +14,7 @@
 
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#3d2314">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="سیمرغ">
@@ -209,7 +210,7 @@
             border: 1px solid #f0e4d6;
             border-radius: 7px;
             padding: 7px 10px;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             flex-wrap: wrap;
         }
         .hours-time {
@@ -359,8 +360,8 @@
     </div>
 
     <div class="utility-bar">
-        <button type="button" class="util-btn" onclick="sharePage()">📤 اشتراک‌گذاری صفحه</button>
-        <button type="button" class="util-btn" onclick="toggleInstallTip()">📱 افزودن به صفحه اصلی</button>
+        <button type="button" class="util-btn" id="sharePageBtn">📤 اشتراک‌گذاری صفحه</button>
+        <button type="button" class="util-btn" id="addHomeBtn">📱 افزودن به صفحه اصلی</button>
     </div>
 
     <div class="hours-container">
@@ -412,26 +413,33 @@
         var menu = document.getElementById(menuId);
         if (!menu) return;
         var isOpen = menu.classList.contains('show');
-        document.querySelectorAll('.dropdown-content').forEach(function(item) {
-            item.classList.remove('show');
-        });
-        document.querySelectorAll('.dropdown-toggle span').forEach(function(item) {
-            item.textContent = '▼';
-        });
+        var allMenus = document.querySelectorAll('.dropdown-content');
+        for (var i = 0; i < allMenus.length; i++) {
+            allMenus[i].classList.remove('show');
+        }
+        var allArrows = document.querySelectorAll('.dropdown-toggle span');
+        for (var j = 0; j < allArrows.length; j++) {
+            allArrows[j].textContent = '▼';
+        }
         if (!isOpen) {
             menu.classList.add('show');
-            if (button && button.querySelector('span')) {
-                button.querySelector('span').textContent = '▲';
+            if (button) {
+                var span = button.querySelector('span');
+                if (span) span.textContent = '▲';
             }
         }
     }
 
+    function padTwo(num) {
+        return num < 10 ? '0' + num : String(num);
+    }
+
     function formatDuration(ms) {
-        var safeMs = Math.max(0, ms);
+        var safeMs = ms > 0 ? ms : 0;
         var totalSeconds = Math.floor(safeMs / 1000);
-        var h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-        var m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-        var s = String(totalSeconds % 60).padStart(2, '0');
+        var h = padTwo(Math.floor(totalSeconds / 3600));
+        var m = padTwo(Math.floor((totalSeconds % 3600) / 60));
+        var s = padTwo(totalSeconds % 60);
         return h + ':' + m + ':' + s;
     }
 
@@ -442,64 +450,55 @@
         var timerElement = document.getElementById('timer-display');
         if (!statusElement || !timerElement) return;
 
-        var openingToday = new Date(now);
-        openingToday.setHours(8, 0, 0, 0);
-
-        var closingToday = new Date(now);
+        var openingToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0);
         var closingHour = (dayOfWeek === 5) ? 13 : 22;
-        closingToday.setHours(closingHour, 0, 0, 0);
+        var closingToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), closingHour, 0, 0, 0);
 
         if (now >= openingToday && now < closingToday) {
             statusElement.textContent = "🟢 فروشگاه باز است";
             statusElement.className = "status-badge status-open";
-            var remainingOpen = formatDuration(closingToday - now);
+            var remainingOpen = formatDuration(closingToday.getTime() - now.getTime());
             timerElement.innerHTML = 'زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">' + remainingOpen + '</span>';
         } else {
             statusElement.textContent = "🔴 فروشگاه بسته است";
             statusElement.className = "status-badge status-closed";
 
-            var nextOpening = new Date(openingToday);
+            var nextOpening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0);
             if (now >= closingToday) {
                 nextOpening.setDate(nextOpening.getDate() + 1);
             }
-            var remainingClosed = formatDuration(nextOpening - now);
+            var remainingClosed = formatDuration(nextOpening.getTime() - now.getTime());
             timerElement.innerHTML = 'زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): <span class="timer-count">' + remainingClosed + '</span>';
         }
     }
 
-    async function sharePage() {
-        var shareData = {
-            title: 'کلبه چای و قهوه سیمرغ',
-            text: 'صفحه رسمی کلبه چای و قهوه سیمرغ (دانه قهوه تازه رست، چای اصیل و دمنوش‌ها در تهرانپارس):',
-            url: window.location.href
-        };
-        if (navigator.share) {
-            try {
-                await navigator.share(shareData);
-            } catch (e) {}
-        } else if (navigator.clipboard) {
-            try {
-                await navigator.clipboard.writeText(window.location.href);
-                alert('لینک صفحه در کلیپ‌بورد کپی شد!');
-            } catch (e) {}
+    function copyLinkFallback(url) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(function() {
+                alert('لینک صفحه کپی شد: ' + url);
+            }).catch(function() {
+                prompt('لینک صفحه را کپی کنید:', url);
+            });
+        } else {
+            prompt('لینک صفحه را کپی کنید:', url);
         }
     }
 
-    var deferredPrompt;
-    window.addEventListener('beforeinstallprompt', function(e) {
-        e.preventDefault();
-        deferredPrompt = e;
-        var banner = document.getElementById('installBanner');
-        if (banner) banner.style.display = 'flex';
-    });
+    function handleShareClick() {
+        var currentUrl = window.location.href;
+        var shareText = 'کلبه چای و قهوه سیمرغ (دانه قهوه تازه رست، چای اصیل و دمنوش‌ها در تهرانپارس): ' + currentUrl;
 
-    var installBtn = document.getElementById('installBtn');
-    if (installBtn) {
-        installBtn.addEventListener('click', async function() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                await deferredPrompt.userChoice;
-                deferredPrompt = null;
-                var banner = document.getElementById('installBanner');
-                if (banner) banner.style.display = 'none';
-            }
+        if (navigator.share) {
+            navigator.share({
+                title: 'کلبه چای و قهوه سیمرغ',
+                text: shareText,
+                url: currentUrl
+            }).catch(function() {
+                copyLinkFallback(currentUrl);
+            });
+        } else {
+            copyLinkFallback(currentUrl);
+        }
+    }
+
+    var deferred
