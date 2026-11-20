@@ -187,35 +187,64 @@
 
         .hours-container {
             background: #fcf8f3;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 10px;
             margin-bottom: 15px;
             border: 1px dashed #c86d12;
             color: #3d2314;
-            line-height: 1.6;
+            line-height: 1.7;
             text-align: right;
+        }
+        .hours-header {
+            font-weight: bold;
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+            color: #3d2314;
+        }
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #f0e4d6;
+            border-radius: 7px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+        }
+        .hours-row:last-of-type {
+            margin-bottom: 0;
+        }
+        .hours-time {
+            font-weight: bold;
+            color: #c86d12;
         }
         .status-badge {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 12px;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: bold;
-            margin: 6px 0;
+            margin: 10px 0 4px;
         }
         .status-open { background-color: #d1fae5; color: #065f46; }
         .status-closed { background-color: #fee2e2; color: #991b1b; }
         .timer-box {
-            font-size: 0.9rem;
+            font-size: 0.86rem;
             font-weight: bold;
-            margin-top: 4px;
+            margin-top: 6px;
             text-align: center;
+            background: #ffffff;
+            border: 1px solid #f0e4d6;
+            border-radius: 8px;
+            padding: 8px 10px;
         }
         .timer-count {
             color: #c86d12;
-            font-size: 1.05rem;
+            font-size: 1rem;
             direction: ltr;
             display: inline-block;
+            font-family: monospace, Tahoma, sans-serif;
         }
 
         .dropdown-container {
@@ -338,7 +367,15 @@
     </div>
 
     <div class="hours-container">
-        <div>🕒 <strong>ساعت کاری:</strong><br>شنبه تا پنجشنبه: ۰۸:۰۰ الی ۲۲:۰۰<br><strong>جمعه‌ها: ۰۸:۰۰ الی ۱۳:۰۰</strong></div>
+        <div class="hours-header">🕒 ساعت کاری فروشگاه</div>
+        <div class="hours-row">
+            <span>شنبه تا پنجشنبه</span>
+            <span class="hours-time">۰۸:۰۰ الی ۲۲:۰۰</span>
+        </div>
+        <div class="hours-row">
+            <span>جمعه‌ها</span>
+            <span class="hours-time">۰۸:۰۰ الی ۱۳:۰۰</span>
+        </div>
         <div style="text-align: center;"><span id="shop-status" class="status-badge">در حال بررسی...</span></div>
         <div id="timer-display" class="timer-box">---</div>
     </div>
@@ -388,40 +425,44 @@
         }
     }
 
+    function formatDuration(ms) {
+        const safeMs = Math.max(0, ms);
+        const totalSeconds = Math.floor(safeMs / 1000);
+        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const s = String(totalSeconds % 60).padStart(2, '0');
+        return `${h}:${m}:${s}`;
+    }
+
     function updateWorkingHoursTimer() {
         const now = new Date();
-        const dayOfWeek = now.getDay();
-        const currentHour = now.getHours();
+        const dayOfWeek = now.getDay(); // 5 = Friday
         const statusElement = document.getElementById('shop-status');
         const timerElement = document.getElementById('timer-display');
         if (!statusElement || !timerElement) return;
 
-        const isFriday = (dayOfWeek === 5);
-        const closingHour = isFriday ? 13 : 22;
+        const openingToday = new Date(now);
+        openingToday.setHours(8, 0, 0, 0);
 
-        if (currentHour >= 8 && currentHour < closingHour) {
+        const closingToday = new Date(now);
+        const closingHour = (dayOfWeek === 5) ? 13 : 22;
+        closingToday.setHours(closingHour, 0, 0, 0);
+
+        if (now >= openingToday && now < closingToday) {
             statusElement.textContent = "🟢 فروشگاه باز است";
             statusElement.className = "status-badge status-open";
-            const closingTime = new Date(now);
-            closingTime.setHours(closingHour, 0, 0, 0);
-            const diff = closingTime - now;
-            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">${h}:${m}:${s}</span>`;
+            const remaining = formatDuration(closingToday - now);
+            timerElement.innerHTML = `زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">${remaining}</span>`;
         } else {
             statusElement.textContent = "🔴 فروشگاه بسته است";
             statusElement.className = "status-badge status-closed";
-            const openingTime = new Date(now);
-            if (currentHour >= closingHour || (isFriday && currentHour >= 13)) {
-                openingTime.setDate(openingTime.getDate() + 1);
+
+            let nextOpening = new Date(openingToday);
+            if (now >= closingToday) {
+                nextOpening.setDate(nextOpening.getDate() + 1);
             }
-            openingTime.setHours(8, 0, 0, 0);
-            const diff = openingTime - now;
-            const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            timerElement.innerHTML = `تایمر معکوس تا بازگشایی مجدد (ساعت ۸ صبح): <span class="timer-count">${h}:${m}:${s}</span>`;
+            const remaining = formatDuration(nextOpening - now);
+            timerElement.innerHTML = `زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): <span class="timer-count">${remaining}</span>`;
         }
     }
 
