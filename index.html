@@ -434,71 +434,46 @@
         return num < 10 ? '0' + num : String(num);
     }
 
-    function formatDuration(ms) {
-        var safeMs = ms > 0 ? ms : 0;
-        var totalSeconds = Math.floor(safeMs / 1000);
-        var h = padTwo(Math.floor(totalSeconds / 3600));
-        var m = padTwo(Math.floor((totalSeconds % 3600) / 60));
-        var s = padTwo(totalSeconds % 60);
+    function formatSeconds(totalSec) {
+        var sec = totalSec > 0 ? Math.floor(totalSec) : 0;
+        var h = padTwo(Math.floor(sec / 3600));
+        var m = padTwo(Math.floor((sec % 3600) / 60));
+        var s = padTwo(sec % 60);
         return h + ':' + m + ':' + s;
     }
 
-    function updateWorkingHoursTimer() {
+    function getIranTimeParts() {
         var now = new Date();
-        var dayOfWeek = now.getDay();
-        var statusElement = document.getElementById('shop-status');
-        var timerElement = document.getElementById('timer-display');
-        if (!statusElement || !timerElement) return;
+        try {
+            var parts = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Tehran',
+                weekday: 'short',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).formatToParts(now);
 
-        var openingToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0);
-        var closingHour = (dayOfWeek === 5) ? 13 : 22;
-        var closingToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), closingHour, 0, 0, 0);
-
-        if (now >= openingToday && now < closingToday) {
-            statusElement.textContent = "🟢 فروشگاه باز است";
-            statusElement.className = "status-badge status-open";
-            var remainingOpen = formatDuration(closingToday.getTime() - now.getTime());
-            timerElement.innerHTML = 'زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">' + remainingOpen + '</span>';
-        } else {
-            statusElement.textContent = "🔴 فروشگاه بسته است";
-            statusElement.className = "status-badge status-closed";
-
-            var nextOpening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0);
-            if (now >= closingToday) {
-                nextOpening.setDate(nextOpening.getDate() + 1);
+            var map = {};
+            for (var i = 0; i < parts.length; i++) {
+                map[parts[i].type] = parts[i].value;
             }
-            var remainingClosed = formatDuration(nextOpening.getTime() - now.getTime());
-            timerElement.innerHTML = 'زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): <span class="timer-count">' + remainingClosed + '</span>';
+            var wdMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+            return {
+                day: wdMap[map.weekday] !== undefined ? wdMap[map.weekday] : now.getDay(),
+                hour: parseInt(map.hour, 10) || 0,
+                minute: parseInt(map.minute, 10) || 0,
+                second: parseInt(map.second, 10) || 0
+            };
+        } catch (e) {
+            return {
+                day: now.getDay(),
+                hour: now.getHours(),
+                minute: now.getMinutes(),
+                second: now.getSeconds()
+            };
         }
     }
 
-    function copyLinkFallback(url) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).then(function() {
-                alert('لینک صفحه کپی شد: ' + url);
-            }).catch(function() {
-                prompt('لینک صفحه را کپی کنید:', url);
-            });
-        } else {
-            prompt('لینک صفحه را کپی کنید:', url);
-        }
-    }
-
-    function handleShareClick() {
-        var currentUrl = window.location.href;
-        var shareText = 'کلبه چای و قهوه سیمرغ (دانه قهوه تازه رست، چای اصیل و دمنوش‌ها در تهرانپارس): ' + currentUrl;
-
-        if (navigator.share) {
-            navigator.share({
-                title: 'کلبه چای و قهوه سیمرغ',
-                text: shareText,
-                url: currentUrl
-            }).catch(function() {
-                copyLinkFallback(currentUrl);
-            });
-        } else {
-            copyLinkFallback(currentUrl);
-        }
-    }
-
-    var deferred
+    function updateWorkingHoursTimer() {
+        var status
