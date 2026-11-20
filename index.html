@@ -409,7 +409,8 @@
 </div>
 
 <script>
-    function toggleDropdown(menuId, button) {
+(function() {
+    window.toggleDropdown = function(menuId, button) {
         var menu = document.getElementById(menuId);
         if (!menu) return;
         var isOpen = menu.classList.contains('show');
@@ -428,52 +429,105 @@
                 if (span) span.textContent = '▲';
             }
         }
+    };
+
+    function twoDigits(n) {
+        return n < 10 ? '0' + n : String(n);
     }
 
-    function padTwo(num) {
-        return num < 10 ? '0' + num : String(num);
+    function formatTimeFromSeconds(totalSeconds) {
+        var s = totalSeconds > 0 ? Math.floor(totalSeconds) : 0;
+        var hours = twoDigits(Math.floor(s / 3600));
+        var minutes = twoDigits(Math.floor((s % 3600) / 60));
+        var seconds = twoDigits(s % 60);
+        return hours + ':' + minutes + ':' + seconds;
     }
 
-    function formatSeconds(totalSec) {
-        var sec = totalSec > 0 ? Math.floor(totalSec) : 0;
-        var h = padTwo(Math.floor(sec / 3600));
-        var m = padTwo(Math.floor((sec % 3600) / 60));
-        var s = padTwo(sec % 60);
-        return h + ':' + m + ':' + s;
-    }
+    function updateTimer() {
+        var statusEl = document.getElementById('shop-status');
+        var timerEl = document.getElementById('timer-display');
+        if (!statusEl || !timerEl) return;
 
-    function getIranTimeParts() {
         var now = new Date();
-        try {
-            var parts = new Intl.DateTimeFormat('en-US', {
-                timeZone: 'Asia/Tehran',
-                weekday: 'short',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).formatToParts(now);
+        var day = now.getDay();
+        var currentSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        var openSec = 8 * 3600;
+        var closeHour = (day === 5) ? 13 : 22;
+        var closeSec = closeHour * 3600;
 
-            var map = {};
-            for (var i = 0; i < parts.length; i++) {
-                map[parts[i].type] = parts[i].value;
-            }
-            var wdMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
-            return {
-                day: wdMap[map.weekday] !== undefined ? wdMap[map.weekday] : now.getDay(),
-                hour: parseInt(map.hour, 10) || 0,
-                minute: parseInt(map.minute, 10) || 0,
-                second: parseInt(map.second, 10) || 0
-            };
-        } catch (e) {
-            return {
-                day: now.getDay(),
-                hour: now.getHours(),
-                minute: now.getMinutes(),
-                second: now.getSeconds()
-            };
+        if (currentSec >= openSec && currentSec < closeSec) {
+            statusEl.textContent = '🟢 فروشگاه باز است';
+            statusEl.className = 'status-badge status-open';
+            timerEl.textContent = 'زمان باقی‌مانده تا تعطیلی امروز: ' + formatTimeFromSeconds(closeSec - currentSec);
+        } else {
+            statusEl.textContent = '🔴 فروشگاه بسته است';
+            statusEl.className = 'status-badge status-closed';
+            var diffSec = (currentSec < openSec) ? (openSec - currentSec) : ((86400 - currentSec) + openSec);
+            timerEl.textContent = 'زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): ' + formatTimeFromSeconds(diffSec);
         }
     }
 
-    function updateWorkingHoursTimer() {
-        var status
+    function fallbackCopy(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('لینک صفحه کپی شد.');
+            }, function() {
+                prompt('لینک صفحه را کپی کنید:', text);
+            });
+        } else {
+            prompt('لینک صفحه را کپی کنید:', text);
+        }
+    }
+
+    function onShareClick() {
+        var url = window.location.href;
+        var title = 'کلبه چای و قهوه سیمرغ';
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                text: title + ' - ' + url,
+                url: url
+            }).catch(function() {
+                fallbackCopy(url);
+            });
+        } else {
+            fallbackCopy(url);
+        }
+    }
+
+    var deferredPrompt = null;
+
+    function onInstallClick() {
+        if (deferredPrompt && typeof deferredPrompt.prompt === 'function') {
+            deferredPrompt.prompt();
+            deferredPrompt = null;
+            var banner = document.getElementById('installBanner');
+            if (banner) banner.style.display = 'none';
+        } else {
+            alert('برای افزودن به صفحه اصلی گوشی:\n• در اندروید / کروم / بریو: منوی مرورگر (⋮) > Add to Home screen\n• در آیفون / سافاری: دکمه اشتراک‌گذاری > Add to Home Screen');
+        }
+    }
+
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        var banner = document.getElementById('installBanner');
+        if (banner) banner.style.display = 'flex';
+    });
+
+    var shareBtn = document.getElementById('sharePageBtn');
+    if (shareBtn) shareBtn.addEventListener('click', onShareClick);
+
+    var addHomeBtn = document.getElementById('addHomeBtn');
+    if (addHomeBtn) addHomeBtn.addEventListener('click', onInstallClick);
+
+    var installBtn = document.getElementById('installBtn');
+    if (installBtn) installBtn.addEventListener('click', onInstallClick);
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+})();
+</script>
+
+</body>
+</html>
