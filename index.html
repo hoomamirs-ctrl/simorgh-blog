@@ -91,7 +91,6 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-
         .features {
             display: flex;
             gap: 5px;
@@ -107,7 +106,6 @@
             border: 1px solid #eedecc;
             color: #3d2314;
         }
-
         .categories-box {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -135,7 +133,6 @@
             background-color: #f2ede4;
             border-color: #c86d12;
         }
-
         .utility-bar {
             display: flex;
             gap: 8px;
@@ -184,7 +181,6 @@
             font-family: Tahoma, sans-serif;
             white-space: nowrap;
         }
-
         .hours-container {
             background: #fcf8f3;
             padding: 14px;
@@ -270,7 +266,6 @@
             border-radius: 8px;
             padding: 8px 10px;
         }
-
         .dropdown-container {
             margin-bottom: 10px;
             border-radius: 8px;
@@ -302,3 +297,271 @@
         }
         .dropdown-content.show { display: flex; }
         .sub-btn {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn-phone { background-color: #0284c7; }
+        .btn-map { background-color: #10b981; }
+        .btn-bale { background-color: #00779b; }
+        .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
+        .btn-blog { background-color: #6366f1; }
+
+        .floating-buttons {
+            position: fixed;
+            bottom: 12px;
+            left: 20px;
+            right: 20px;
+            max-width: 520px;
+            margin: 0 auto;
+            display: flex;
+            gap: 8px;
+            z-index: 999;
+        }
+        .fab-btn {
+            flex: 1;
+            padding: 9px 12px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.83rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+        .fab-call { background-color: #10b981; }
+        .fab-bale { background-color: #00779b; }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #555;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .address-text {
+            color: #3d2314;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="لوگو کلبه چای و قهوه سیمرغ" class="logo">
+    <h1>کلبه چای و قهوه سیمرغ</h1>
+    <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
+
+    <div class="features">
+        <div class="feature-box">🌱 دانه تازه رست</div>
+        <div class="feature-box">☕ خلوص بالا</div>
+        <div class="feature-box">🛵 ارسال سریع</div>
+    </div>
+
+    <nav class="categories-box" aria-label="دسته‌بندی محصولات">
+        <a href="./coffee.html" class="cat-item">☕ بار قهوه و دان تخصصی</a>
+        <a href="./tea.html" class="cat-item">🍵 چای اصیل و دمنوش‌ها</a>
+        <a href="./souvenirs.html" class="cat-item">🍯 سوغاتی‌ها و شیرین‌کام‌ها</a>
+    </nav>
+
+    <div id="installBanner" class="install-banner">
+        <span>📲 نصب اپلیکیشن سیمرغ روی گوشی</span>
+        <button type="button" class="install-btn" id="installBtn">نصب سریع</button>
+    </div>
+
+    <div class="utility-bar">
+        <button type="button" class="util-btn" id="sharePageBtn">📤 اشتراک‌گذاری صفحه</button>
+        <button type="button" class="util-btn" id="addHomeBtn">📱 افزودن به صفحه اصلی</button>
+    </div>
+
+    <div class="hours-container">
+        <div class="hours-top-bar">
+            <span class="hours-header">🕒 ساعت کاری فروشگاه</span>
+            <span id="shop-status" class="status-badge">
+                <span id="status-dot" class="pulse-dot"></span>
+                <span id="status-text">فروشگاه بسته است</span>
+            </span>
+        </div>
+        <div class="hours-row">
+            <span>شنبه تا پنجشنبه: <strong class="hours-time">۰۸:۰۰ الی ۲۲:۰۰</strong></span>
+            <span>|</span>
+            <span>جمعه‌ها: <strong class="hours-time">۰۸:۰۰ الی ۱۳:۰۰</strong></span>
+        </div>
+        <div id="timer-display" class="timer-box">در حال محاسبه...</div>
+    </div>
+
+    <div class="dropdown-container">
+        <button type="button" class="dropdown-toggle" onclick="toggleDropdown('contactMenu', this)">
+            📞 تماس با ما و مسیریابی <span>▼</span>
+        </button>
+        <div id="contactMenu" class="dropdown-content">
+            <a href="tel:02177341312" class="sub-btn btn-phone">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
+            <a href="tel:09125183142" class="sub-btn btn-phone">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
+            <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="sub-btn btn-map" target="_blank" rel="noopener noreferrer">📍 مسیریابی در گوگل مپ</a>
+        </div>
+    </div>
+
+    <div class="dropdown-container">
+        <button type="button" class="dropdown-toggle" onclick="toggleDropdown('socialMenu', this)">
+            🌐 شبکه‌های اجتماعی و وبلاگ <span>▼</span>
+        </button>
+        <div id="socialMenu" class="dropdown-content">
+            <a href="https://ble.ir/simorgh_coffee" class="sub-btn btn-bale" target="_blank" rel="noopener noreferrer">💬 ارتباط در پیام‌رسان بله</a>
+            <a href="https://instagram.com/simorgh_coffee" class="sub-btn btn-ig" target="_blank" rel="noopener noreferrer">📷 اینستاگرام سیمرغ</a>
+            <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="sub-btn btn-blog" target="_blank" rel="noopener noreferrer">🌐 وبلاگ سیمرغ (مقالات آموزشی)</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="address-text">📍 آدرس حضوری: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
+        <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
+    </footer>
+</div>
+
+<div class="floating-buttons">
+    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
+    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
+</div>
+
+<script>
+function toggleDropdown(menuId, button) {
+    try {
+        var menu = document.getElementById(menuId);
+        if (!menu) return;
+        var isOpen = menu.classList.contains('show');
+        var allMenus = document.querySelectorAll('.dropdown-content');
+        for (var i = 0; i < allMenus.length; i++) {
+            allMenus[i].classList.remove('show');
+        }
+        var allArrows = document.querySelectorAll('.dropdown-toggle span');
+        for (var j = 0; j < allArrows.length; j++) {
+            allArrows[j].textContent = '▼';
+        }
+        if (!isOpen) {
+            menu.classList.add('show');
+            if (button) {
+                var span = button.querySelector('span');
+                if (span) span.textContent = '▲';
+            }
+        }
+    } catch (e) {}
+}
+
+function pad2(n) {
+    return n < 10 ? '0' + n : '' + n;
+}
+
+function formatHMS(totalSec) {
+    if (!isFinite(totalSec) || totalSec < 0) totalSec = 0;
+    totalSec = Math.floor(totalSec);
+    var h = Math.floor(totalSec / 3600);
+    var m = Math.floor((totalSec % 3600) / 60);
+    var s = totalSec % 60;
+    return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+}
+
+function tickClock() {
+    try {
+        var statusEl = document.getElementById('shop-status');
+        var dotEl = document.getElementById('status-dot');
+        var textEl = document.getElementById('status-text');
+        var timerEl = document.getElementById('timer-display');
+        if (!statusEl || !dotEl || !textEl || !timerEl) return;
+
+        var now = new Date();
+        var day = now.getDay();
+        var secNow = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        var secOpen = 8 * 3600;
+        var closeHour = (day === 5) ? 13 : 22;
+        var secClose = closeHour * 3600;
+
+        if (secNow >= secOpen && secNow < secClose) {
+            statusEl.className = 'status-badge status-open';
+            dotEl.className = 'pulse-dot dot-open';
+            textEl.textContent = 'فروشگاه باز است';
+            timerEl.textContent = 'زمان باقی‌مانده تا تعطیلی امروز: ' + formatHMS(secClose - secNow);
+        } else {
+            statusEl.className = 'status-badge status-closed';
+            dotEl.className = 'pulse-dot';
+            textEl.textContent = 'فروشگاه بسته است';
+            var diff = (secNow < secOpen) ? (secOpen - secNow) : ((86400 - secNow) + secOpen);
+            timerEl.textContent = 'زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): ' + formatHMS(diff);
+        }
+    } catch (e) {}
+}
+
+function copyText(str) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(str).then(function() {
+            alert('لینک صفحه کپی شد.');
+        }, function() {
+            prompt('لینک را کپی کنید:', str);
+        });
+    } else {
+        prompt('لینک را کپی کنید:', str);
+    }
+}
+
+function onShare() {
+    var url = window.location.href;
+    if (navigator.share) {
+        navigator.share({
+            title: 'کلبه چای و قهوه سیمرغ',
+            text: 'کلبه چای و قهوه سیمرغ - ' + url,
+            url: url
+        }).catch(function() {
+            copyText(url);
+        });
+    } else {
+        copyText(url);
+    }
+}
+
+var deferredPrompt = null;
+
+function onInstall() {
+    if (deferredPrompt && typeof deferredPrompt.prompt === 'function') {
+        deferredPrompt.prompt();
+        deferredPrompt = null;
+        var banner = document.getElementById('installBanner');
+        if (banner) banner.style.display = 'none';
+    } else {
+        alert('برای افزودن به صفحه اصلی گوشی:\n• اندروید / کروم / بریو: منوی مرورگر (⋮) > Add to Home screen\n• آیفون / سافاری: دکمه اشتراک‌گذاری > Add to Home Screen');
+    }
+}
+
+window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    var banner = document.getElementById('installBanner');
+    if (banner) banner.style.display = 'flex';
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var shareBtn = document.getElementById('sharePageBtn');
+    if (shareBtn) shareBtn.addEventListener('click', onShare);
+
+    var addHomeBtn = document.getElementById('addHomeBtn');
+    if (addHomeBtn) addHomeBtn.addEventListener('click', onInstall);
+
+    var installBtn = document.getElementById('installBtn');
+    if (installBtn) installBtn.addEventListener('click', onInstall);
+
+    tickClock();
+    setInterval(tickClock, 1000);
+});
+</script>
+
+</body>
+</html>
