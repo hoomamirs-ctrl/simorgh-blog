@@ -4,72 +4,257 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سوغاتی‌ها و شیرین‌کام‌ها | کلبه چای و قهوه سیمرغ</title>
-    <meta name="description" content="خرید انواع ارده ۷۰۰ و ۴۰۰ گرمی ممتاز، حلواارده، شیره خرما و انگور، نبات دو آتیشه و تنقلات سنتی در تهرانپارس. سیمرغ.">
+    <meta name="description" content="خرید حلوا ارده، شیره، نبات و شیرین‌کام‌های سنتی و ممتاز در تهرانپارس. کلبه چای و قهوه سیمرغ.">
     <style>
         * { box-sizing: border-box; }
-        body { 
-            font-family: Tahoma, sans-serif; 
-            background-color: #f7f4ef; 
-            color: #2b2b2b; 
-            margin: 0; 
-            padding: 0; 
-            padding-top: 65px; 
-            padding-bottom: 90px; 
-            direction: rtl; 
-            text-align: right; 
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f7f4ef;
+            color: #2b2b2b;
+            margin: 0;
+            padding: 0;
+            padding-top: 65px;
+            padding-bottom: 90px;
+            direction: rtl;
+            text-align: right;
         }
-        
+
         .sticky-header {
-            position: fixed; top: 0; left: 0; right: 0; height: 55px;
-            background-color: #3d2314; color: #fff;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background-color: #3d2314;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
         }
-        .sticky-header h2 { font-size: 1rem; margin: 0; color: #fff; }
+        .sticky-header h2 {
+            font-size: 1rem;
+            margin: 0;
+            color: #fff;
+        }
         .back-home-btn {
-            color: #fff; text-decoration: none; background-color: #c86d12;
-            padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            background-color: #c86d12;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
-        .container { max-width: 650px; margin: 15px auto; padding: 0 15px; }
+        .container {
+            max-width: 650px;
+            margin: 15px auto;
+            padding: 0 15px;
+        }
 
-        /* باکس راهنمای مشاوره سریع */
-        .guide-box { background: #e6f4ea; border: 1px solid #ceead6; color: #137333; padding: 10px 12px; border-radius: 10px; font-size: 0.82rem; font-weight: bold; text-align: center; margin-bottom: 12px; line-height: 1.5; }
+        .guide-box {
+            background: #e6f4ea;
+            border: 1px solid #ceead6;
+            color: #137333;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
 
-        /* نوار جستجو */
-        .search-box { margin-bottom: 15px; }
+        .search-box {
+            margin-bottom: 10px;
+        }
         .search-input {
-            width: 100%; padding: 12px 15px; border-radius: 10px;
-            border: 1px solid #eedecc; background-color: #fff; font-family: Tahoma, sans-serif;
-            font-size: 0.9rem; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid #eedecc;
+            background-color: #fff;
+            font-family: Tahoma, sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-        .search-input:focus { border-color: #c86d12; }
+        .search-input:focus {
+            border-color: #c86d12;
+        }
 
-        .menu-section { background-color: #ffffff; border: 1px solid #eedecc; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .menu-title { color: #3d2314; font-size: 1.05rem; font-weight: bold; border-bottom: 1px dashed #c86d12; padding-bottom: 8px; margin-bottom: 12px; text-align: center; }
-        
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f2ede4; gap: 10px; }
-        .item-row:last-child { border-bottom: none; }
-        .item-detail { display: flex; align-items: center; gap: 12px; }
-        .product-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; border: 1px solid #eedecc; background-color: #fcf8f3; }
-        .item-name { font-weight: bold; color: #2b2b2b; font-size: 0.88rem; }
-        .item-desc { font-size: 0.75rem; color: #666; margin-top: 3px; line-height: 1.4; }
-        .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fcf8f3; padding: 5px 10px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.8rem; }
-        
-        /* دکمه‌های شناور پایین صفحه */
+        .quick-tags {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            scrollbar-width: none;
+        }
+        .quick-tags::-webkit-scrollbar {
+            display: none;
+        }
+        .tag-btn {
+            background-color: #ffffff;
+            border: 1px solid #eedecc;
+            color: #3d2314;
+            padding: 7px 13px;
+            border-radius: 18px;
+            font-size: 0.78rem;
+            font-weight: bold;
+            white-space: nowrap;
+            cursor: pointer;
+            font-family: Tahoma, sans-serif;
+        }
+        .tag-btn.active {
+            background-color: #c86d12;
+            color: #fff;
+            border-color: #c86d12;
+        }
+
+        .menu-section {
+            background-color: #ffffff;
+            border: 1px solid #eedecc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .menu-title {
+            color: #3d2314;
+            font-size: 1.05rem;
+            font-weight: bold;
+            border-bottom: 1px dashed #c86d12;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .sub-category {
+            font-weight: bold;
+            color: #c86d12;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            border-right: 3px solid #c86d12;
+            padding-right: 8px;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f2ede4;
+            gap: 10px;
+        }
+        .item-row:last-child {
+            border-bottom: none;
+        }
+        .item-detail {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+        .product-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #eedecc;
+            background-color: #fcf8f3;
+            flex-shrink: 0;
+        }
+        .item-name {
+            font-weight: bold;
+            color: #2b2b2b;
+            font-size: 0.88rem;
+        }
+        .item-desc {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 3px;
+            line-height: 1.4;
+        }
+
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .item-price {
+            color: #c86d12;
+            font-weight: bold;
+            white-space: nowrap;
+            background: #fcf8f3;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #eedecc;
+            font-size: 0.76rem;
+        }
+        .action-row {
+            display: flex;
+            gap: 5px;
+        }
+        .order-bale-btn {
+            background-color: #00779b;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        .share-item-btn {
+            background-color: #f7f4ef;
+            color: #3d2314;
+            border: 1px solid #eedecc;
+            font-size: 0.75rem;
+            padding: 3px 7px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
         .floating-buttons {
-            position: fixed; bottom: 15px; left: 15px; right: 15px;
-            max-width: 650px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            max-width: 650px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
         }
         .fab-btn {
-            flex: 1; padding: 12px; border-radius: 30px; text-decoration: none;
-            font-weight: bold; font-size: 0.9rem; color: #ffffff; display: flex;
-            align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex: 1;
+            padding: 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .fab-call { background-color: #10b981; }
         .fab-bale { background-color: #00779b; }
 
-        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 20px; }
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -82,176 +267,50 @@
 <div class="container">
 
     <div class="guide-box">
-        💬 برای استعلام قیمت روز محصولات سنتی و ثبت سفارش تلفنی یا پیامی با ما در ارتباط باشید.
+        💬 برای اطلاع از موجودی روز، وزن‌ها و ثبت سفارش سوغاتی و شیرین‌کام‌ها، در بله پیام دهید یا تماس بگیرید.
     </div>
 
-    <!-- نوار جستجو -->
     <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 جستجوی ارده، حلوا، شیره، نبات..." onkeyup="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 جستجوی محصول (مثلا: نبات، حلوا ارده، شیره...)" onkeyup="filterProducts()">
+    </div>
+
+    <div class="quick-tags">
+        <button type="button" class="tag-btn active" onclick="filterByTag('all', this)">همه</button>
+        <button type="button" class="tag-btn" onclick="filterByTag('halva', this)">🍯 حلوا ارده و شیره</button>
+        <button type="button" class="tag-btn" onclick="filterByTag('sweet', this)">🍬 نبات و شیرین‌کام</button>
     </div>
 
     <div class="menu-section">
-        <div class="menu-title">ارده، حلوا، شیره، نبات و تنقلات سنتی</div>
-        
-        <div class="item-row product-item">
+        <div class="menu-title">سوغاتی‌ها و شیرین‌کام‌های سنتی</div>
+
+        <div class="sub-category">حلوا ارده و شیره</div>
+
+        <div class="item-row product-item" data-tags="halva">
             <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=100&q=80" class="product-img" alt="ارده">
+                <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=100&q=80" class="product-img" alt="حلوا ارده ممتاز">
                 <div>
-                    <div class="item-name">ارده ۷۰۰ گرمی ممتاز اعلا</div>
-                    <div class="item-desc">تهیه شده از کنجد خالص و مرغوب، مقوی و پرانرژی</div>
+                    <div class="item-name">حلوا ارده ممتاز</div>
+                    <div class="item-desc">بافت نرم و اصیل، مناسب صبحانه و میان‌وعده مقوی</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=100&q=80" class="product-img" alt="ارده">
-                <div>
-                    <div class="item-name">ارده ۴۰۰ گرمی ممتاز اعلا</div>
-                    <div class="item-desc">بسته بندی استاندارد، کیفیت ارکانی و خالص</div>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="order-bale-btn" data-order="حلوا ارده ممتاز" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
+                    <button type="button" class="share-item-btn" onclick="shareProduct('حلوا ارده ممتاز')">📤</button>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
         </div>
 
-        <div class="item-row product-item">
+        <div class="item-row product-item" data-tags="halva sweet">
             <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&q=80" class="product-img" alt="حلوا">
+                <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=100&q=80" class="product-img" alt="شیره طبیعی">
                 <div>
-                    <div class="item-name">حلوارده ۷۰۰ گرمی ممتاز اعلا</div>
-                    <div class="item-desc">خوشمزه، سنتی و مقوی مناسب صبحانه و عصرانه</div>
+                    <div class="item-name">شیره طبیعی و سنتی</div>
+                    <div class="item-desc">خوش‌طعم و مقوی، همراه عالی برای ارده و صبحانه</div>
                 </div>
             </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&q=80" class="product-img" alt="حلوا">
-                <div>
-                    <div class="item-name">حلوارده ۵۰۰ گرمی ممتاز اعلا</div>
-                    <div class="item-desc">بافت نرم، طعم اصیل و باکیفیت بالا</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&q=80" class="product-img" alt="حلوا شکری">
-                <div>
-                    <div class="item-name">حلواشکری رولی ۴۰۰ گرمی</div>
-                    <div class="item-desc">برش آسان، مناسب پذیرایی و مصرف روزانه</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=100&q=80" class="product-img" alt="نان">
-                <div>
-                    <div class="item-name">نون خشک (۶.۸ کیلوگرم)</div>
-                    <div class="item-desc">سنتی، ترد و تازه، مناسب همراهی با غذا و لبنیات</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="نبات">
-                <div>
-                    <div class="item-name">نبات کاسه دو آتیشه (۲ کیلویی)</div>
-                    <div class="item-desc">خلوص بالا، خوش‌رنگ و معطر، مناسب انواع چای و دمنوش</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=100&q=80" class="product-img" alt="شیره">
-                <div>
-                    <div class="item-name">شیره زعفرانی ۵۰۰ گرمی</div>
-                    <div class="item-desc">ترکیب عطر زعفران اصیل با شیره طبیعی</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=100&q=80" class="product-img" alt="شیره">
-                <div>
-                    <div class="item-name">شیره خرما ۵۰۰ گرمی اعلا</div>
-                    <div class="item-desc">سرشار از ویتامین و آهن، کاملاً ارگانیک</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=100&q=80" class="product-img" alt="شیره">
-                <div>
-                    <div class="item-name">شیره انگور ۵۰۰ گرمی اعلا</div>
-                    <div class="item-desc">خالص، سنتی و تهیه شده از بهترین انگورها</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="قند">
-                <div>
-                    <div class="item-name">قند شکسته دو کیلویی - هلو گلاب</div>
-                    <div class="item-desc">شیرینی ملایم، باکیفیت و خوش‌دانه</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-
-        <div class="item-row product-item">
-            <div class="item-detail">
-                <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=100&q=80" class="product-img" alt="قند">
-                <div>
-                    <div class="item-name">قند شکسته دو کیلویی</div>
-                    <div class="item-desc">مفید، خوش‌ساخت و درجه یک</div>
-                </div>
-            </div>
-            <div class="item-price">تماس بگیرید</div>
-        </div>
-    </div>
-
-    <footer>
-        <p>تهران، تهرانپارس، خیابان جشنواره، پلاک ۴۸ | کلبه چای و قهوه سیمرغ</p>
-    </footer>
-</div>
-
-<!-- دکمه‌های شناور پایین صفحه -->
-<div class="floating-buttons">
-    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank">💬 پیام در بله</a>
-    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
-</div>
-
-<script>
-    function filterProducts() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let items = document.querySelectorAll('.product-item');
-
-        items.forEach(item => {
-            let text = item.innerText.toLowerCase();
-            if (text.includes(input)) {
-                item.style.display = "flex";
-            } else {
-                item.style.display = "none";
-            }
-        });
-    }
-</script>
-
-</body>
-</html>
+            <div class="item-actions">
+                <div class="item-price">تماس بگیرید</div>
+                <div class="action-row">
+                    <a class="
