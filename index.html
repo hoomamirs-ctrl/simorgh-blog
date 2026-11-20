@@ -12,7 +12,6 @@
     <meta name="geo.position" content="35.73;51.53">
     <meta name="ICBM" content="35.73, 51.53">
 
-    <!-- PWA & Mobile App Meta -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#3d2314">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,14 +204,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: #ffffff;
             border: 1px solid #f0e4d6;
             border-radius: 7px;
             padding: 7px 10px;
-            font-size: 0.78rem;
-            white-space: nowrap;
-            overflow-x: auto;
+            font-size: 0.76rem;
+            flex-wrap: wrap;
         }
         .hours-time {
             font-weight: bold;
@@ -322,4 +320,186 @@
 
         footer {
             margin-top: 20px;
-            font-size: 0.85rem
+            font-size: 0.85rem;
+            color: #555;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .address-text {
+            color: #3d2314;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="لوگو کلبه چای و قهوه سیمرغ" class="logo">
+    <h1>کلبه چای و قهوه سیمرغ</h1>
+    <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
+
+    <div class="features">
+        <div class="feature-box">🌱 دانه تازه رست</div>
+        <div class="feature-box">☕ خلوص بالا</div>
+        <div class="feature-box">🛵 ارسال سریع</div>
+    </div>
+
+    <nav class="categories-box" aria-label="دسته‌بندی محصولات">
+        <a href="./coffee.html" class="cat-item">☕ بار قهوه و دان تخصصی</a>
+        <a href="./tea.html" class="cat-item">🍵 چای اصیل و دمنوش‌ها</a>
+        <a href="./souvenirs.html" class="cat-item">🍯 سوغاتی‌ها و شیرین‌کام‌ها</a>
+    </nav>
+
+    <div id="installBanner" class="install-banner">
+        <span>📲 نصب اپلیکیشن سیمرغ روی گوشی</span>
+        <button type="button" class="install-btn" id="installBtn">نصب سریع</button>
+    </div>
+
+    <div class="utility-bar">
+        <button type="button" class="util-btn" onclick="sharePage()">📤 اشتراک‌گذاری صفحه</button>
+        <button type="button" class="util-btn" onclick="toggleInstallTip()">📱 افزودن به صفحه اصلی</button>
+    </div>
+
+    <div class="hours-container">
+        <div class="hours-header">🕒 ساعت کاری فروشگاه</div>
+        <div class="hours-row">
+            <span>شنبه تا پنجشنبه: <strong class="hours-time">۰۸:۰۰ الی ۲۲:۰۰</strong></span>
+            <span>|</span>
+            <span>جمعه‌ها: <strong class="hours-time">۰۸:۰۰ الی ۱۳:۰۰</strong></span>
+        </div>
+        <div style="text-align: center;"><span id="shop-status" class="status-badge">در حال بررسی...</span></div>
+        <div id="timer-display" class="timer-box">---</div>
+    </div>
+
+    <div class="dropdown-container">
+        <button type="button" class="dropdown-toggle" onclick="toggleDropdown('contactMenu', this)">
+            📞 تماس با ما و مسیریابی <span>▼</span>
+        </button>
+        <div id="contactMenu" class="dropdown-content">
+            <a href="tel:02177341312" class="sub-btn btn-phone">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
+            <a href="tel:09125183142" class="sub-btn btn-phone">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
+            <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="sub-btn btn-map" target="_blank" rel="noopener noreferrer">📍 مسیریابی در گوگل مپ</a>
+        </div>
+    </div>
+
+    <div class="dropdown-container">
+        <button type="button" class="dropdown-toggle" onclick="toggleDropdown('socialMenu', this)">
+            🌐 شبکه‌های اجتماعی و وبلاگ <span>▼</span>
+        </button>
+        <div id="socialMenu" class="dropdown-content">
+            <a href="https://ble.ir/simorgh_coffee" class="sub-btn btn-bale" target="_blank" rel="noopener noreferrer">💬 ارتباط در پیام‌رسان بله</a>
+            <a href="https://instagram.com/simorgh_coffee" class="sub-btn btn-ig" target="_blank" rel="noopener noreferrer">📷 اینستاگرام سیمرغ</a>
+            <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="sub-btn btn-blog" target="_blank" rel="noopener noreferrer">🌐 وبلاگ سیمرغ (مقالات آموزشی)</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="address-text">📍 آدرس حضوری: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
+        <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
+    </footer>
+</div>
+
+<div class="floating-buttons">
+    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
+    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
+</div>
+
+<script>
+    function toggleDropdown(menuId, button) {
+        var menu = document.getElementById(menuId);
+        if (!menu) return;
+        var isOpen = menu.classList.contains('show');
+        document.querySelectorAll('.dropdown-content').forEach(function(item) {
+            item.classList.remove('show');
+        });
+        document.querySelectorAll('.dropdown-toggle span').forEach(function(item) {
+            item.textContent = '▼';
+        });
+        if (!isOpen) {
+            menu.classList.add('show');
+            if (button && button.querySelector('span')) {
+                button.querySelector('span').textContent = '▲';
+            }
+        }
+    }
+
+    function formatDuration(ms) {
+        var safeMs = Math.max(0, ms);
+        var totalSeconds = Math.floor(safeMs / 1000);
+        var h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        var m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        var s = String(totalSeconds % 60).padStart(2, '0');
+        return h + ':' + m + ':' + s;
+    }
+
+    function updateWorkingHoursTimer() {
+        var now = new Date();
+        var dayOfWeek = now.getDay();
+        var statusElement = document.getElementById('shop-status');
+        var timerElement = document.getElementById('timer-display');
+        if (!statusElement || !timerElement) return;
+
+        var openingToday = new Date(now);
+        openingToday.setHours(8, 0, 0, 0);
+
+        var closingToday = new Date(now);
+        var closingHour = (dayOfWeek === 5) ? 13 : 22;
+        closingToday.setHours(closingHour, 0, 0, 0);
+
+        if (now >= openingToday && now < closingToday) {
+            statusElement.textContent = "🟢 فروشگاه باز است";
+            statusElement.className = "status-badge status-open";
+            var remainingOpen = formatDuration(closingToday - now);
+            timerElement.innerHTML = 'زمان باقی‌مانده تا تعطیلی امروز: <span class="timer-count">' + remainingOpen + '</span>';
+        } else {
+            statusElement.textContent = "🔴 فروشگاه بسته است";
+            statusElement.className = "status-badge status-closed";
+
+            var nextOpening = new Date(openingToday);
+            if (now >= closingToday) {
+                nextOpening.setDate(nextOpening.getDate() + 1);
+            }
+            var remainingClosed = formatDuration(nextOpening - now);
+            timerElement.innerHTML = 'زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): <span class="timer-count">' + remainingClosed + '</span>';
+        }
+    }
+
+    async function sharePage() {
+        var shareData = {
+            title: 'کلبه چای و قهوه سیمرغ',
+            text: 'صفحه رسمی کلبه چای و قهوه سیمرغ (دانه قهوه تازه رست، چای اصیل و دمنوش‌ها در تهرانپارس):',
+            url: window.location.href
+        };
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (e) {}
+        } else if (navigator.clipboard) {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                alert('لینک صفحه در کلیپ‌بورد کپی شد!');
+            } catch (e) {}
+        }
+    }
+
+    var deferredPrompt;
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        var banner = document.getElementById('installBanner');
+        if (banner) banner.style.display = 'flex';
+    });
+
+    var installBtn = document.getElementById('installBtn');
+    if (installBtn) {
+        installBtn.addEventListener('click', async function() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                var banner = document.getElementById('installBanner');
+                if (banner) banner.style.display = 'none';
+            }
