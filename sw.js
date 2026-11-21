@@ -1,4 +1,4 @@
-const CACHE_NAME = 'simorgh-home-v13';
+const CACHE_NAME = 'simorgh-home-v14';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
