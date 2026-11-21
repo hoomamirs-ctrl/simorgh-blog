@@ -1,215 +1,192 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
-<link rel="canonical" href="https://hoomamirs-ctrl.github.io/simorgh-blog/index.html">
-<meta name="description" content="فروش تخصصی دانه قهوه تازه رست، آسیاب دقیق، چای اصیل، دمنوش‌ها و سوغاتی‌های سنتی در تهرانپارس. آدرس: تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸.">
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#3d2314">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="سیمرغ">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
-<style>
-*{box-sizing:border-box}
-body{font-family:Tahoma,sans-serif;background:#f7f4ef;color:#26221e;margin:0;padding:15px 14px 124px;direction:rtl;text-align:center}
-.container{max-width:600px;margin:8px auto;background:#fff;padding:22px 18px;border-radius:16px;border:1px solid #efe5d8;box-shadow:0 10px 24px rgba(45,24,13,.06)}
-.logo{width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid #c86d12;margin-bottom:8px}
-h1{color:#2d180d;font-size:1.5rem;margin:4px 0}
-.tagline{color:#b45d0b;font-size:.9rem;font-weight:bold;margin-bottom:14px}
-.features{display:flex;gap:6px;margin-bottom:12px;font-size:.78rem;font-weight:bold}
-.feature-box{flex:1;background:#fcf7f0;padding:9px 5px;border-radius:10px;border:1px solid #e8d8c3;color:#3d2314}
-.categories-box{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
-.cat-item{background:#fcf7f0;border:1px solid #e8d8c3;border-radius:11px;padding:11px 6px;font-size:.78rem;color:#3d2314;font-weight:bold;line-height:1.45;text-decoration:none;display:flex;align-items:center;justify-content:center}
-.install-banner{display:none;background:#edf9f1;border:1px solid #c3e6cf;color:#12692f;padding:10px 12px;border-radius:10px;font-size:.78rem;font-weight:bold;margin-bottom:12px;align-items:center;justify-content:space-between;gap:8px;text-align:right}
-.install-btn{background:#147a37;color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:.76rem;font-weight:bold;cursor:pointer;font-family:Tahoma,sans-serif}
-.utility-bar{display:flex;gap:8px;margin-bottom:12px}
-.util-btn{flex:1;background:#fcf7f0;border:1px solid #e8d8c3;color:#3d2314;padding:10px;border-radius:10px;font-size:.79rem;font-weight:bold;cursor:pointer;font-family:Tahoma,sans-serif}
-.hours-container{background:#fcf7f0;padding:13px;border-radius:13px;margin-bottom:12px;border:1.5px dashed #b45d0b;color:#3d2314;text-align:right}
-.hours-top-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
-.hours-header{font-weight:bold;font-size:.88rem;color:#2d180d}
-.hours-row{display:flex;justify-content:space-between;align-items:center;gap:6px;background:#fff;border:1px solid #efe2d2;border-radius:8px;padding:8px 10px;font-size:.74rem;flex-wrap:wrap}
-.hours-time{font-weight:bold;color:#b45d0b}
-.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:14px;font-size:.75rem;font-weight:bold;background:#fee2e2;color:#991b1b}
-.status-open{background:#d1fae5;color:#065f46}
-.pulse-dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#dc2626}
-.dot-open{background:#059669}
-.timer-box{font-size:.84rem;font-weight:bold;margin-top:8px;text-align:center;background:#fff;border:1px solid #efe2d2;border-radius:9px;padding:9px;color:#26221e}
-.ltr-num{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;color:#2d180d;font-weight:bold}
-.dropdown-container{margin-bottom:10px;border-radius:11px;overflow:hidden;border:1px solid #e2d8cb;text-align:right}
-.dropdown-toggle{width:100%;background:#3d2314;color:#fff;padding:12px 15px;font-size:.9rem;font-weight:bold;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:Tahoma,sans-serif}
-.dropdown-content{display:none;background:#fcf7f0;padding:10px;flex-direction:column;gap:8px}
-.dropdown-content.show{display:flex}
-.sub-btn{display:block;color:#fff;text-decoration:none;padding:10px 12px;border-radius:8px;font-size:.84rem;font-weight:bold;text-align:center;border:none;cursor:pointer;font-family:Tahoma,sans-serif}
-.btn-phone{background:#0284c7}.btn-map{background:#059669}.btn-copy{background:#4b5563}.btn-bale{background:#00779b}.btn-ig{background:#c2410c}.btn-blog{background:#4f46e5}
-footer{margin-top:16px;font-size:.82rem;color:#575049;border-top:1px solid #eee4d8;padding-top:12px;line-height:1.7}
-.address-text{color:#2d180d;font-weight:bold;margin-bottom:4px}
-.copy-footer-btn{margin-top:8px;background:#fcf7f0;color:#3d2314;border:1px solid #e8d8c3;border-radius:9px;padding:8px 16px;font-size:.78rem;font-weight:bold;cursor:pointer;font-family:Tahoma,sans-serif}
-.floating-buttons{position:fixed;bottom:12px;left:16px;right:16px;max-width:520px;margin:0 auto;display:flex;gap:8px;z-index:999}
-.fab-btn{flex:1;padding:10px 12px;border-radius:24px;text-decoration:none;font-weight:bold;font-size:.82rem;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 5px 14px rgba(0,0,0,.14)}
-.fab-call{background:#059669}.fab-bale{background:#00779b}
-</style>
-</head>
-<body>
-<div class="container">
-  <img src="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg" alt="لوگو کلبه چای و قهوه سیمرغ" class="logo" decoding="async" fetchpriority="high">
-  <h1>کلبه چای و قهوه سیمرغ</h1>
-  <div class="tagline">عطر اصیل قهوه تازه رست در تهرانپارس</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس</title>
 
-  <div class="features">
-    <div class="feature-box">🌱 دانه تازه رست</div>
-    <div class="feature-box">☕ خلوص بالا</div>
-    <div class="feature-box">🛵 ارسال سریع</div>
-  </div>
+    <link rel="canonical" href="https://hoomamirs-ctrl.github.io/simorgh-blog/index.html">
+    <meta name="description" content="فروش تخصصی دانه قهوه تازه رست، آسیاب دقیق متناسب با روش دم‌آوری، چای اصیل، دمنوش‌ها و سوغاتی‌های سنتی در تهرانپارس. تحویل حضوری و ارسال سریع.">
+    <meta name="keywords" content="خرید قهوه تهرانپارس, دانه قهوه تازه رست, آسیاب قهوه تهرانپارس, قهوه عربیکا و روبوستا, چای و قهوه سیمرغ, دمنوش و سوغاتی تهرانپارس">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="IR-07">
+    <meta name="geo.placename" content="Tehranpars, Tehran">
+    <meta name="geo.position" content="35.73;51.53">
+    <meta name="ICBM" content="35.73, 51.53">
 
-  <nav class="categories-box" aria-label="دسته‌بندی محصولات">
-    <a href="./coffee.html" class="cat-item">☕ بار قهوه و دان تخصصی</a>
-    <a href="./tea.html" class="cat-item">🍵 چای اصیل و دمنوش‌ها</a>
-    <a href="./souvenirs.html" class="cat-item">🍯 سوغاتی‌ها و شیرین‌کام‌ها</a>
-  </nav>
+    <!-- Open Graph برای نمایش حرفه‌ای لینک در بله و شبکه‌های اجتماعی -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:site_name" content="کلبه چای و قهوه سیمرغ">
+    <meta property="og:title" content="کلبه چای و قهوه سیمرغ | دانه قهوه تازه رست در تهرانپارس">
+    <meta property="og:description" content="مرکز تخصصی دانه قهوه تازه رست، آسیاب دقیق، چای اصیل و سوغاتی‌های سنتی در تهرانپارس؛ تحویل حضوری و ارسال سریع.">
+    <meta property="og:url" content="https://hoomamirs-ctrl.github.io/simorgh-blog/index.html">
+    <meta property="og:image" content="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
+    <meta property="og:image:alt" content="لوگو کلبه چای و قهوه سیمرغ">
 
-  <div id="installBanner" class="install-banner">
-    <span>📲 نصب اپلیکیشن سیمرغ روی گوشی</span>
-    <button type="button" class="install-btn" id="installBtn">نصب سریع</button>
-  </div>
+    <!-- PWA و تنظیمات اپلیکیشن موبایل -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#2d180d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="سیمرغ">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
 
-  <div class="utility-bar">
-    <button type="button" class="util-btn" id="sharePageBtn">📤 اشتراک‌گذاری صفحه</button>
-    <button type="button" class="util-btn" id="addHomeBtn">📱 افزودن به صفحه اصلی</button>
-  </div>
+    <!-- داده‌های ساختاریافته سئوی محلی (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "کلبه چای و قهوه سیمرغ",
+      "description": "فروش تخصصی دانه قهوه تازه رست، آسیاب قهوه، چای اصیل، دمنوش‌ها و سوغاتی‌های سنتی در تهرانپارس",
+      "url": "https://hoomamirs-ctrl.github.io/simorgh-blog/index.html",
+      "image": "https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg",
+      "telephone": "+982177341312",
+      "priceRange": "$$",
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "تهرانپارس، تهران"
+        },
+        {
+          "@type": "City",
+          "name": "تهران"
+        }
+      ],
+      "sameAs": [
+        "https://ble.ir/simorgh_coffee",
+        "https://instagram.com/simorgh_coffee",
+        "https://hoomamirs-ctrl.github.io/simorgh-blog/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸",
+        "addressLocality": "تهران",
+        "addressRegion": "تهران",
+        "addressCountry": "IR"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "08:00",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ]
+    }
+    </script>
 
-  <div class="hours-container">
-    <div class="hours-top-bar">
-      <span class="hours-header">🕒 ساعت کاری فروشگاه</span>
-      <span id="shop-status" class="status-badge"><span id="status-dot" class="pulse-dot"></span><span id="status-text">فروشگاه بسته است</span></span>
-    </div>
-    <div class="hours-row">
-      <span>شنبه تا پنجشنبه: <strong class="hours-time">۰۸:۰۰ الی ۲۲:۰۰</strong></span>
-      <span>|</span>
-      <span>جمعه‌ها: <strong class="hours-time">۰۸:۰۰ الی ۱۳:۰۰</strong></span>
-    </div>
-    <div id="timer-display" class="timer-box">در حال محاسبه...</div>
-  </div>
-
-  <div class="dropdown-container">
-    <button type="button" class="dropdown-toggle" aria-expanded="false" onclick="toggleDropdown('contactMenu',this)">
-      📞 تماس با ما و مسیریابی <span>▼</span>
-    </button>
-    <div id="contactMenu" class="dropdown-content">
-      <a href="tel:02177341312" class="sub-btn btn-phone">📞 تلفن ثابت: ۷۷۳۴۱۳۱۲-۰۲۱</a>
-      <a href="tel:09125183142" class="sub-btn btn-phone">📱 همراه: ۵۱۸۳۱۴۲-۰۹۱۲</a>
-      <button type="button" class="sub-btn btn-copy" onclick="copyText('02177341312','شماره تلفن ثابت کپی شد.')">📋 کپی شماره تلفن ثابت</button>
-      <a href="https://maps.app.goo.gl/uBgpYNVvRv8ejmto6" class="sub-btn btn-map" target="_blank" rel="noopener noreferrer">📍 مسیریابی در گوگل مپ</a>
-    </div>
-  </div>
-
-  <div class="dropdown-container">
-    <button type="button" class="dropdown-toggle" aria-expanded="false" onclick="toggleDropdown('socialMenu',this)">
-      🌐 شبکه‌های اجتماعی و وبلاگ <span>▼</span>
-    </button>
-    <div id="socialMenu" class="dropdown-content">
-      <a href="https://ble.ir/simorgh_coffee" class="sub-btn btn-bale" target="_blank" rel="noopener noreferrer">💬 ارتباط در پیام‌رسان بله</a>
-      <a href="https://instagram.com/simorgh_coffee" class="sub-btn btn-ig" target="_blank" rel="noopener noreferrer">📷 اینستاگرام سیمرغ</a>
-      <a href="https://hoomamirs-ctrl.github.io/simorgh-blog/" class="sub-btn btn-blog" target="_blank" rel="noopener noreferrer">🌐 وبلاگ سیمرغ (مقالات آموزشی)</a>
-    </div>
-  </div>
-
-  <footer>
-    <div class="address-text">📍 آدرس حضوری: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
-    <div>امکان تحویل حضوری و ارسال پیکی به سراسر منطقه</div>
-    <button type="button" class="copy-footer-btn" onclick="copyText('تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸','آدرس فروشگاه کپی شد.')">📋 کپی آدرس فروشگاه</button>
-  </footer>
-</div>
-
-<div class="floating-buttons">
-  <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
-  <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
-</div>
-
-<script>
-var deferredPrompt = null;
-
-function toggleDropdown(id,btn){
-  var m=document.getElementById(id);
-  if(!m)return;
-  var open=m.classList.contains('show');
-  document.querySelectorAll('.dropdown-content').forEach(function(x){x.classList.remove('show');});
-  document.querySelectorAll('.dropdown-toggle').forEach(function(b){b.setAttribute('aria-expanded','false');var s=b.querySelector('span');if(s)s.textContent='▼';});
-  if(!open){m.classList.add('show');if(btn){btn.setAttribute('aria-expanded','true');var sp=btn.querySelector('span');if(sp)sp.textContent='▲';}}
-}
-function p2(n){return n<10?'0'+n:''+n;}
-function fmt(sec){sec=Math.max(0,Math.floor(sec));return '<span class="ltr-num">'+p2(Math.floor(sec/3600))+':'+p2(Math.floor((sec%3600)/60))+':'+p2(sec%60)+'</span>';}
-function getIranTime(){
-  var now=new Date();
-  try{
-    var dtf=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tehran',weekday:'short',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
-    var parts=dtf.formatToParts(now),map={};
-    for(var i=0;i<parts.length;i++)map[parts[i].type]=parts[i].value;
-    var h=parseInt(map.hour,10);if(h===24)h=0;
-    var m=parseInt(map.minute,10),s=parseInt(map.second,10);
-    var dayMap={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
-    var day=(dayMap[map.weekday]!==undefined)?dayMap[map.weekday]:now.getDay();
-    if(!isNaN(h)&&!isNaN(m)&&!isNaN(s))return{day:day,h:h,m:m,s:s};
-  }catch(e){}
-  var utcMs=now.getTime()+(now.getTimezoneOffset()*60000);
-  var ir=new Date(utcMs+(3.5*3600000));
-  return{day:ir.getUTCDay(),h:ir.getUTCHours(),m:ir.getUTCMinutes(),s:ir.getUTCSeconds()};
-}
-function tick(){
-  var t=getIranTime(),now=t.h*3600+t.m*60+t.s;
-  var openS=8*3600,closeS=((t.day===5)?13:22)*3600;
-  var st=document.getElementById('shop-status'),dot=document.getElementById('status-dot'),txt=document.getElementById('status-text'),tm=document.getElementById('timer-display');
-  if(!st||!dot||!txt||!tm)return;
-  if(now>=openS&&now<closeS){
-    st.className='status-badge status-open';dot.className='pulse-dot dot-open';txt.textContent='فروشگاه باز است';
-    tm.innerHTML='زمان باقی‌مانده تا تعطیلی امروز: '+fmt(closeS-now);
-  }else{
-    st.className='status-badge';dot.className='pulse-dot';txt.textContent='فروشگاه بسته است';
-    var diff=(now<openS)?(openS-now):((86400-now)+openS);
-    tm.innerHTML='زمان باقی‌مانده تا بازگشایی (۰۸:۰۰): '+fmt(diff);
-  }
-}
-function copyText(str,msg){
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(str).then(function(){alert(msg||'کپی شد.');},function(){prompt('کپی کنید:',str);});
-  }else{prompt('کپی کنید:',str);}
-}
-function onInstall(){
-  if(deferredPrompt&&typeof deferredPrompt.prompt==='function'){
-    deferredPrompt.prompt();
-    deferredPrompt=null;
-    var b=document.getElementById('installBanner');
-    if(b)b.style.display='none';
-  }else{
-    alert('برای نصب اپلیکیشن روی گوشی:\n• اندروید / کروم / بریو: منوی مرورگر (⋮) > Add to Home screen\n• آیفون / سافاری: دکمه اشتراک‌گذاری > Add to Home Screen');
-  }
-}
-window.addEventListener('beforeinstallprompt',function(e){
-  e.preventDefault();
-  deferredPrompt=e;
-  var b=document.getElementById('installBanner');
-  if(b)b.style.display='flex';
-});
-document.addEventListener('DOMContentLoaded',function(){
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('./sw.js').catch(function(){});
-  }
-  var sh=document.getElementById('sharePageBtn');
-  if(sh)sh.addEventListener('click',function(){
-    var u=window.location.href;
-    if(navigator.share){navigator.share({title:'کلبه چای و قهوه سیمرغ',url:u}).catch(function(){copyText(u,'لینک صفحه کپی شد.');});}
-    else copyText(u,'لینک صفحه کپی شد.');
-  });
-  var ah=document.getElementById('addHomeBtn');
-  if(ah)ah.addEventListener('click',onInstall);
-  var ib=document.getElementById('installBtn');
-  if(ib)ib.addEventListener('click',onInstall);
-  tick();
-  setInterval(tick,1000);
-});
-</script>
-</body>
-</html>
+    <style>
+        :root {
+            --bg-main: #f6f2ec;
+            --bg-top: #fbf8f3;
+            --card-bg: #ffffff;
+            --warm-surface: #fcf7f0;
+            --warm-hover: #f4ece0;
+            --warm-border: #e8d8c3;
+            --espresso: #28150b;
+            --roast: #3d2314;
+            --amber: #b45d0b;
+            --amber-light: #d47617;
+            --text-dark: #25201c;
+            --text-muted: #5c544c;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: Tahoma, sans-serif;
+            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-main) 100%);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 15px 14px 128px;
+            direction: rtl;
+            text-align: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 8px auto;
+            background: var(--card-bg);
+            padding: 24px 18px;
+            border-radius: 18px;
+            border: 1px solid #efe4d6;
+            box-shadow: 0 12px 28px rgba(40, 21, 11, 0.06);
+        }
+        .brand-badge {
+            display: inline-block;
+            background: #fdf3e7;
+            color: var(--amber);
+            border: 1px solid #f0d7b8;
+            font-size: 0.72rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+        img.logo {
+            width: 94px;
+            height: 94px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--amber-light);
+            box-shadow: 0 6px 16px rgba(180, 93, 11, 0.18);
+            margin-bottom: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            color: var(--espresso);
+            font-size: 1.52rem;
+            font-weight: bold;
+            margin: 4px 0;
+        }
+        .tagline {
+            color: var(--amber);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+        .features {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            font-size: 0.78rem;
+            font-weight: bold;
+        }
+        .feature-box {
+            flex: 1;
+            background: var(--warm-surface);
+            padding: 9px 5px;
+            border-radius: 11px;
+            border: 1px solid var(--warm-border);
+            color: var(--roast);
+            box-shadow: 0 2px 6px rgba(40, 21, 11, 0.03);
+        }
+        .categories-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+        .cat-item {
+            background: linear-gradient(180deg, #fffdf9 0%, var(--warm-surface) 100%);
+            border: 1px solid var(--warm-border);
+            border-radius: 12px;
+            padding: 12px 6px;
+            font-size: 0.78rem;
+            color: var(--roast);
+            font-weight: bold;
+            line-height: 1.45;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(40
