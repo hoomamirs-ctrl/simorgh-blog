@@ -14,7 +14,7 @@
     <meta name="geo.position" content="35.73;51.53">
     <meta name="ICBM" content="35.73, 51.53">
 
-    <!-- Open Graph برای نمایش حرفه‌ای لینک در بله و شبکه‌های اجتماعی -->
+    <!-- Open Graph -->
     <meta property="og:type" content="business.business">
     <meta property="og:locale" content="fa_IR">
     <meta property="og:site_name" content="کلبه چای و قهوه سیمرغ">
@@ -24,7 +24,7 @@
     <meta property="og:image" content="https://raw.githubusercontent.com/hoomamirs-ctrl/simorgh-blog/refs/heads/main/1760785858698.jpg">
     <meta property="og:image:alt" content="لوگو کلبه چای و قهوه سیمرغ">
 
-    <!-- PWA و تنظیمات اپلیکیشن موبایل -->
+    <!-- PWA و تنظیمات اپلیکیشن -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#2d180d">
     <meta name="mobile-web-app-capable" content="yes">
@@ -189,4 +189,88 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 3px 8px rgba(40
+            box-shadow: 0 3px 8px rgba(40, 21, 11, 0.03);
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+        }
+        .cat-item:hover {
+            background: var(--warm-hover);
+            border-color: var(--amber-light);
+        }
+        .cat-item:active {
+            transform: scale(0.98);
+        }
+        .quick-order-box {
+            background: #fdf8f1;
+            border: 1px solid #ead8c0;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            font-size: 0.78rem;
+            color: var(--roast);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            text-align: right;
+        }
+        .quick-bale-pill {
+            background: #00779b;
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 11px;
+            border-radius: 8px;
+            font-size: 0.74rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .install-banner {
+            display: none;
+            background: #edf9f1;
+            border: 1px solid #c3e6cf;
+            color: #12692f;
+            padding: 10px 12px;
+            border-radius: 11px;
+            font-size: 0.78rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            text-align: right;
+        }
+        .install-btn {
+            background: #147a37;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 0.76rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Tahoma, sans-serif;
+        }
+        .utility-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .util-btn {
+            flex: 1;
+            background: var(--warm-surface);
+            border: 1px solid var(--warm-border);
+            color: var(--roast);
+            padding: 10px;
+            border-radius: 11px;
+            font-size: 0.79rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Tahoma, sans-serif;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .util-btn:hover {
+            background: var(--warm-hover);
+            border-color: var(--amber);
+        }
+        .hours-container {
+            background: linear
