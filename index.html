@@ -219,19 +219,42 @@ function formatHMS(totalSec) {
 }
 
 function getIranTimeParts() {
-    var d = new Date();
+    var now = new Date();
     try {
-        var utcMs = d.getTime() + (d.getTimezoneOffset() * 60000);
-        var iranDate = new Date(utcMs + (3.5 * 3600000));
-        return {
-            day: iranDate.getUTCDay(),
-            h: iranDate.getUTCHours(),
-            m: iranDate.getUTCMinutes(),
-            s: iranDate.getUTCSeconds()
-        };
-    } catch (e) {
-        return { day: d.getDay(), h: d.getHours(), m: d.getMinutes(), s: d.getSeconds() };
-    }
+        var dtf = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Tehran',
+            weekday: 'short',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+        var parts = dtf.formatToParts(now);
+        var map = {};
+        for (var i = 0; i < parts.length; i++) {
+            map[parts[i].type] = parts[i].value;
+        }
+        var h = parseInt(map.hour, 10);
+        if (h === 24) h = 0;
+        var m = parseInt(map.minute, 10);
+        var s = parseInt(map.second, 10);
+        var dayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+        var day = (dayMap[map.weekday] !== undefined) ? dayMap[map.weekday] : now.getDay();
+
+        if (!isNaN(h) && !isNaN(m) && !isNaN(s)) {
+            return { day: day, h: h, m: m, s: s };
+        }
+    } catch (e) {}
+
+    // روش پشتیبان بر اساس UTC + 3.5 برای ایران
+    var utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
+    var iranDate = new Date(utcMs + (3.5 * 3600000));
+    return {
+        day: iranDate.getUTCDay(),
+        h: iranDate.getUTCHours(),
+        m: iranDate.getUTCMinutes(),
+        s: iranDate.getUTCSeconds()
+    };
 }
 
 function tickClock() {
