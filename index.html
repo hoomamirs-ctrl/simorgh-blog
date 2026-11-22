@@ -134,6 +134,81 @@
       font-size: 10px;
       color: #7a6858;
     }
+
+    /* منوهای آبشاری شبکه‌های اجتماعی و تماس با ما */
+    .accordion-box {
+      background: #fffdf9;
+      border: 1px solid #ead9c1;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .accordion-trigger {
+      width: 100%;
+      background: #fffdf9;
+      border: none;
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: Tahoma, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      color: #26130a;
+      cursor: pointer;
+      text-align: right;
+    }
+    .accordion-arrow {
+      font-size: 11px;
+      color: #7c3e08;
+      transition: transform 0.2s ease;
+    }
+    .accordion-box.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+    .accordion-panel {
+      display: none;
+      padding: 0 12px 12px;
+      border-top: 1px solid #f2e5d3;
+      background: #faf4eb;
+    }
+    .accordion-box.open .accordion-panel {
+      display: block;
+    }
+    .dropdown-links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .drop-item-link, .drop-item-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: #ffffff;
+      border: 1px solid #e2ceb3;
+      border-radius: 10px;
+      padding: 8px 8px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #26130a;
+      cursor: pointer;
+      font-family: Tahoma, sans-serif;
+      text-align: center;
+    }
+    .drop-item-link.primary-bale {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #ffffff;
+      grid-column: 1 / -1;
+    }
+    .drop-item-link.call-green {
+      background: #15803d;
+      border-color: #15803d;
+      color: #ffffff;
+    }
+
     .quick-order-box {
       background: #2b1409;
       color: #ffffff;
@@ -499,6 +574,39 @@
       </a>
     </section>
 
+    <!-- منوی آبشاری شبکه‌های اجتماعی -->
+    <section class="accordion-box" id="socialAccordion">
+      <button type="button" class="accordion-trigger" id="socialAccordionBtn" aria-expanded="false" aria-controls="socialAccordionPanel">
+        <span>شبکه‌های اجتماعی و پیام‌رسان</span>
+        <span class="accordion-arrow">▼</span>
+      </button>
+      <div class="accordion-panel" id="socialAccordionPanel">
+        <div class="dropdown-links-grid">
+          <a class="drop-item-link primary-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">
+            کانال و گفتگوی بله (@simorgh_coffee)
+          </a>
+          <a class="drop-item-link" href="./coffee.html">منوی بار قهوه و دان</a>
+          <a class="drop-item-link" href="./souvenirs.html">سوغاتی و شیرین‌کام</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- منوی آبشاری تماس با ما -->
+    <section class="accordion-box" id="contactAccordion">
+      <button type="button" class="accordion-trigger" id="contactAccordionBtn" aria-expanded="false" aria-controls="contactAccordionPanel">
+        <span>تماس با ما و راه‌های ارتباطی</span>
+        <span class="accordion-arrow">▼</span>
+      </button>
+      <div class="accordion-panel" id="contactAccordionPanel">
+        <div class="dropdown-links-grid">
+          <a class="drop-item-link call-green" href="tel:02177341312">تماس ثابت: ۰۲۱-۷۷۳۴۱۳۱۲</a>
+          <a class="drop-item-link call-green" href="tel:09125183142">موبایل: ۰۹۱۲۵۱۸۳۱۴۲</a>
+          <button type="button" class="drop-item-btn" id="dropCopyPhoneBtn">کپی شماره‌ها</button>
+          <button type="button" class="drop-item-btn" id="dropCopyAddrBtn">کپی آدرس تهرانپارس</button>
+        </div>
+      </div>
+    </section>
+
     <section class="quick-order-box">
       <div class="quick-text">
         <strong>سفارش سریع یا مشاوره انتخاب قهوه</strong>
@@ -580,6 +688,19 @@
 
   <script>
     (function () {
+      function setupAccordion(boxId, btnId) {
+        var box = document.getElementById(boxId);
+        var btn = document.getElementById(btnId);
+        if (!box || !btn) return;
+        btn.addEventListener('click', function () {
+          var isOpen = box.classList.toggle('open');
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      setupAccordion('socialAccordion', 'socialAccordionBtn');
+      setupAccordion('contactAccordion', 'contactAccordionBtn');
+
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
           navigator.serviceWorker.register('./sw.js').catch(function () {});
@@ -854,44 +975,4 @@
       if (grindSel) grindSel.addEventListener('change', updateBaleHref);
 
       if (modalEl) {
-        modalEl.addEventListener('click', function (e) {
-          if (e.target === modalEl) closeFallbackModal();
-        });
-      }
-
-      saveAndSync();
-
-      var shareBtn = document.getElementById('shareSiteBtn');
-      if (shareBtn) {
-        shareBtn.addEventListener('click', function () {
-          if (navigator.share) {
-            navigator.share({
-              title: 'کلبه چای و قهوه سیمرغ',
-              text: 'سفارش قهوه، چای و دمنوش از کلبه چای و قهوه سیمرغ (تهرانپارس)',
-              url: window.location.href
-            }).catch(function () {});
-          } else {
-            copyTextSafe(window.location.href, shareBtn, 'اشتراک‌گذاری');
-          }
-        });
-      }
-
-      var copyAddrBtn = document.getElementById('copyAddressBtn');
-      if (copyAddrBtn) {
-        copyAddrBtn.addEventListener('click', function () {
-          copyTextSafe('تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸', copyAddrBtn, 'کپی آدرس فروشگاه');
-        });
-      }
-
-      var copyPhoneBtn = document.getElementById('copyPhoneBtn');
-      if (copyPhoneBtn) {
-        copyPhoneBtn.addEventListener('click', function () {
-          copyTextSafe('021-77341312 | 09125183142', copyPhoneBtn, 'کپی شماره تماس');
-        });
-      }
-    })();
-  </script>
-
-  <script src="./simorgh-cart.js?v=51"></script>
-</body>
-</html>
+        modalEl.add
