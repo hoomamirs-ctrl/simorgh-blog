@@ -355,6 +355,16 @@
       cursor: pointer;
       font-family: Tahoma, sans-serif;
     }
+    .fallback-empty {
+      text-align: center;
+      color: #6b5848;
+      background: #faf4eb;
+      border: 1px dashed #e2ceb3;
+      border-radius: 12px;
+      padding: 16px 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
     .fallback-item-row {
       display: flex;
       justify-content: space-between;
@@ -470,10 +480,10 @@
     <section class="quick-order-box">
       <div class="quick-text">
         <strong>سفارش سریع یا مشاوره انتخاب قهوه</strong>
-        <p>اقلام را به فاکتور اضافه کنید یا برای مشاوره مستقیم به بله پیام دهید.</p>
+        <p>موارد دلخواه را از منو یا اینجا به فاکتور اضافه کنید.</p>
       </div>
       <div class="quick-actions">
-        <button type="button" id="quickAddInvoiceBtn" class="btn-add-inv" data-add-invoice data-item-id="quick-consult" data-item-name="سفارش سریع / مشاوره قهوه">+ به فاکتور</button>
+        <button type="button" id="quickAddInvoiceBtn" class="btn-add-inv" data-add-invoice data-item-id="quick-consult" data-item-name="درخواست مشاوره و سفارش قهوه">+ به فاکتور</button>
         <a class="btn-bale-consult" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
       </div>
     </section>
@@ -567,28 +577,24 @@
       updateWorkingHours();
       setInterval(updateWorkingHours, 1000);
 
-      var STORAGE_KEY = 'simorgh_fallback_invoice_v1';
-      var defaultCatalog = [
-        { id: 'quick-consult', name: 'سفارش سریع / مشاوره قهوه', qty: 0 },
-        { id: 'espresso-blend', name: 'دان / پودر قهوه ترکیبی (شکلاتی)', qty: 0 },
-        { id: 'single-origin', name: 'دان / پودر قهوه تک‌خاستگاه', qty: 0 },
-        { id: 'loose-tea', name: 'چای و دمنوش منتخب', qty: 0 }
-      ];
+      var STORAGE_KEY = 'simorgh_user_invoice_items_v2';
 
       function loadItems() {
         try {
           var raw = localStorage.getItem(STORAGE_KEY);
           if (raw) {
             var parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length) return parsed;
+            if (Array.isArray(parsed)) {
+              return parsed.filter(function (it) {
+                return it && it.name && (Number(it.qty) || 0) > 0;
+              });
+            }
           }
         } catch (e) {}
-        return defaultCatalog.map(function (item) {
-          return { id: item.id, name: item.name, qty: item.qty };
-        });
+        return [];
       }
 
-      var fallbackItems = loadItems();
+      var invoiceItems = loadItems();
       var countEl = document.getElementById('simorghCartCount');
       var quickAddBtn = document.getElementById('quickAddInvoiceBtn');
       var openInvBtn = document.getElementById('openInvoiceBarBtn');
@@ -600,53 +606,62 @@
       var baleLinkEl = document.getElementById('fallbackBaleLink');
 
       function saveAndSync() {
+        invoiceItems = invoiceItems.filter(function (it) {
+          return it && it.name && (Number(it.qty) || 0) > 0;
+        });
         try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(fallbackItems));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(invoiceItems));
         } catch (e) {}
         var totalQty = 0;
-        for (var i = 0; i < fallbackItems.length; i++) {
-          totalQty += (Number(fallbackItems[i].qty) || 0);
+        for (var i = 0; i < invoiceItems.length; i++) {
+          totalQty += (Number(invoiceItems[i].qty) || 0);
         }
         if (countEl) countEl.textContent = String(totalQty);
         updateBaleHref();
       }
 
-      function addByName(name, id) {
+      function addUserItem(name, id) {
+        var cleanName = String(name || '').trim();
+        if (!cleanName) return;
         var found = null;
-        for (var i = 0; i < fallbackItems.length; i++) {
-          if ((id && fallbackItems[i].id === id) || fallbackItems[i].name === name) {
-            found = fallbackItems[i];
+        for (var i = 0; i < invoiceItems.length; i++) {
+          if ((id && invoiceItems[i].id === id) || invoiceItems[i].name === cleanName) {
+            found = invoiceItems[i];
             break;
           }
         }
         if (found) {
           found.qty = (Number(found.qty) || 0) + 1;
         } else {
-          fallbackItems.push({ id: id || ('item-' + Date.now()), name: name, qty: 1 });
+          invoiceItems.push({
+            id: id || ('item-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)),
+            name: cleanName,
+            qty: 1
+          });
         }
         saveAndSync();
       }
 
       function changeQty(idx, delta) {
-        if (!fallbackItems[idx]) return;
-        var next = (Number(fallbackItems[idx].qty) || 0) + delta;
-        fallbackItems[idx].qty = next < 0 ? 0 : next;
+        if (!invoiceItems[idx]) return;
+        var next = (Number(invoiceItems[idx].qty) || 0) + delta;
+        if (next <= 0) {
+          invoiceItems.splice(idx, 1);
+        } else {
+          invoiceItems[idx].qty = next;
+        }
         saveAndSync();
-        renderFallbackList();
+        renderInvoiceList();
       }
 
       function buildInvoiceText() {
         var lines = ['سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):'];
-        var hasAny = false;
-        for (var i = 0; i < fallbackItems.length; i++) {
-          var q = Number(fallbackItems[i].qty) || 0;
-          if (q > 0) {
-            hasAny = true;
-            lines.push('• ' + fallbackItems[i].name + ' — تعداد: ' + q);
+        if (!invoiceItems.length) {
+          lines.push('• هنوز موردی از منو به فاکتور اضافه نشده است.');
+        } else {
+          for (var i = 0; i < invoiceItems.length; i++) {
+            lines.push('• ' + invoiceItems[i].name + ' — تعداد: ' + (Number(invoiceItems[i].qty) || 0));
           }
-        }
-        if (!hasAny) {
-          lines.push('• قلمی انتخاب نشده است (درخواست مشاوره / ثبت سفارش)');
         }
         var custName = (document.getElementById('invCustomerName') && document.getElementById('invCustomerName').value || '').trim();
         var custNote = (document.getElementById('invCustomerNote') && document.getElementById('invCustomerNote').value || '').trim();
@@ -661,11 +676,16 @@
         baleLinkEl.href = 'https://ble.ir/simorgh_coffee?text=' + text;
       }
 
-      function renderFallbackList() {
+      function renderInvoiceList() {
         if (!listEl) return;
+        if (!invoiceItems.length) {
+          listEl.innerHTML = '<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از منو یا دکمه «+ به فاکتور» اضافه کنید.</div>';
+          updateBaleHref();
+          return;
+        }
         var html = '';
-        for (var i = 0; i < fallbackItems.length; i++) {
-          var item = fallbackItems[i];
+        for (var i = 0; i < invoiceItems.length; i++) {
+          var item = invoiceItems[i];
           html += '<div class="fallback-item-row">' +
             '<span><strong>' + item.name + '</strong></span>' +
             '<div class="qty-controls">' +
@@ -689,7 +709,7 @@
       }
 
       function openFallbackModal() {
-        renderFallbackList();
+        renderInvoiceList();
         if (modalEl) modalEl.classList.add('open');
       }
 
@@ -697,17 +717,17 @@
         if (modalEl) modalEl.classList.remove('open');
       }
 
-      if (quickAddBtn) {
-        quickAddBtn.addEventListener('click', function () {
-          if (window.SimorghCart && typeof window.SimorghCart.addItem === 'function') {
-            return;
-          }
-          addByName(
-            quickAddBtn.getAttribute('data-item-name') || 'سفارش سریع / مشاوره قهوه',
-            quickAddBtn.getAttribute('data-item-id') || 'quick-consult'
-          );
-        });
-      }
+      // پشتیبانی از هر دکمه‌ای که data-add-invoice داشته باشد (در صفحه یا از منو)
+      document.addEventListener('click', function (e) {
+        var addEl = e.target && e.target.closest ? e.target.closest('[data-add-invoice]') : null;
+        if (!addEl) return;
+        if (window.SimorghCart && typeof window.SimorghCart.addItem === 'function') {
+          return;
+        }
+        var itemName = addEl.getAttribute('data-item-name') || addEl.getAttribute('data-name') || 'آیتم انتخاب‌شده';
+        var itemId = addEl.getAttribute('data-item-id') || addEl.getAttribute('data-id') || '';
+        addUserItem(itemName, itemId);
+      });
 
       if (openInvBtn) {
         openInvBtn.addEventListener('click', function () {
@@ -722,11 +742,9 @@
 
       if (clearBtn) {
         clearBtn.addEventListener('click', function () {
-          for (var i = 0; i < fallbackItems.length; i++) {
-            fallbackItems[i].qty = 0;
-          }
+          invoiceItems = [];
           saveAndSync();
-          renderFallbackList();
+          renderInvoiceList();
         });
       }
 
@@ -814,6 +832,6 @@
     })();
   </script>
 
-  <script src="./simorgh-cart.js?v=44"></script>
+  <script src="./simorgh-cart.js?v=45"></script>
 </body>
 </html>
