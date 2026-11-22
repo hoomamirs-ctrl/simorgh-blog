@@ -25,6 +25,11 @@
     body {
       padding-bottom: 96px;
     }
+    .ltr-pin {
+      direction: ltr;
+      unicode-bidi: isolate;
+      display: inline-block;
+    }
     .page-wrap {
       width: 100%;
       max-width: 560px;
@@ -80,17 +85,9 @@
       color: #26130a;
     }
     .hero-sub {
-      margin: 0 0 8px;
+      margin: 0;
       font-size: 12px;
       color: #6b5848;
-    }
-    .hero-meta-line {
-      font-size: 11px;
-      color: #5c4636;
-      background: #faf4eb;
-      border: 1px solid #ead9c1;
-      border-radius: 10px;
-      padding: 6px 8px;
     }
     .badges-row {
       display: grid;
@@ -146,11 +143,13 @@
     .accordion-trigger {
       width: 100%;
       background: #fffdf9;
-      border: none;
+      border: 0;
+      outline: none;
       padding: 11px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       font-family: Tahoma, sans-serif;
       font-size: 12px;
       font-weight: bold;
@@ -158,9 +157,17 @@
       cursor: pointer;
       text-align: right;
     }
+    .accordion-title-text {
+      flex: 1;
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .accordion-arrow {
       font-size: 11px;
       color: #7c3e08;
+      flex-shrink: 0;
       transition: transform 0.2s ease;
     }
     .accordion-box.open .accordion-arrow {
@@ -168,7 +175,7 @@
     }
     .accordion-panel {
       display: none;
-      padding: 0 12px 12px;
+      padding: 10px 12px 12px;
       border-top: 1px solid #f2e5d3;
       background: #faf4eb;
     }
@@ -179,12 +186,12 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 6px;
-      margin-top: 10px;
     }
     .drop-item-link, .drop-item-btn {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
       text-decoration: none;
       background: #ffffff;
       border: 1px solid #e2ceb3;
@@ -550,7 +557,6 @@
       </div>
       <h1 class="hero-title">کلبه چای و قهوه سیمرغ</h1>
       <p class="hero-sub">عطر اصیل قهوه تازه رست و چای منتخب در تهرانپارس</p>
-      <div class="hero-meta-line">تلفن: ۰۲۱-۷۷۳۴۱۳۱۲ • ۰۹۱۲۵۱۸۳۱۴۲ | پیام‌رسان بله: @simorgh_coffee</div>
     </header>
 
     <div class="badges-row">
@@ -577,16 +583,17 @@
     <!-- منوی آبشاری شبکه‌های اجتماعی -->
     <section class="accordion-box" id="socialAccordion">
       <button type="button" class="accordion-trigger" id="socialAccordionBtn" aria-expanded="false" aria-controls="socialAccordionPanel">
-        <span>شبکه‌های اجتماعی و پیام‌رسان</span>
+        <span class="accordion-title-text">شبکه‌های اجتماعی و پیام‌رسان</span>
         <span class="accordion-arrow">▼</span>
       </button>
       <div class="accordion-panel" id="socialAccordionPanel">
         <div class="dropdown-links-grid">
           <a class="drop-item-link primary-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">
-            کانال و گفتگوی بله (@simorgh_coffee)
+            <span>پیام‌رسان بله</span>
+            <span class="ltr-pin">@simorgh_coffee</span>
           </a>
-          <a class="drop-item-link" href="./coffee.html">منوی بار قهوه و دان</a>
-          <a class="drop-item-link" href="./souvenirs.html">سوغاتی و شیرین‌کام</a>
+          <a class="drop-item-link" href="./coffee.html">بار قهوه و دان</a>
+          <a class="drop-item-link" href="./tea.html">چای و دمنوش</a>
         </div>
       </div>
     </section>
@@ -594,13 +601,19 @@
     <!-- منوی آبشاری تماس با ما -->
     <section class="accordion-box" id="contactAccordion">
       <button type="button" class="accordion-trigger" id="contactAccordionBtn" aria-expanded="false" aria-controls="contactAccordionPanel">
-        <span>تماس با ما و راه‌های ارتباطی</span>
+        <span class="accordion-title-text">تماس با ما و راه‌های ارتباطی</span>
         <span class="accordion-arrow">▼</span>
       </button>
       <div class="accordion-panel" id="contactAccordionPanel">
         <div class="dropdown-links-grid">
-          <a class="drop-item-link call-green" href="tel:02177341312">تماس ثابت: ۰۲۱-۷۷۳۴۱۳۱۲</a>
-          <a class="drop-item-link call-green" href="tel:09125183142">موبایل: ۰۹۱۲۵۱۸۳۱۴۲</a>
+          <a class="drop-item-link call-green" href="tel:02177341312">
+            <span>تلفن:</span>
+            <span class="ltr-pin">021-77341312</span>
+          </a>
+          <a class="drop-item-link call-green" href="tel:09125183142">
+            <span>موبایل:</span>
+            <span class="ltr-pin">09125183142</span>
+          </a>
           <button type="button" class="drop-item-btn" id="dropCopyPhoneBtn">کپی شماره‌ها</button>
           <button type="button" class="drop-item-btn" id="dropCopyAddrBtn">کپی آدرس تهرانپارس</button>
         </div>
@@ -975,4 +988,61 @@
       if (grindSel) grindSel.addEventListener('change', updateBaleHref);
 
       if (modalEl) {
-        modalEl.add
+        modalEl.addEventListener('click', function (e) {
+          if (e.target === modalEl) closeFallbackModal();
+        });
+      }
+
+      saveAndSync();
+
+      var shareBtn = document.getElementById('shareSiteBtn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', function () {
+          if (navigator.share) {
+            navigator.share({
+              title: 'کلبه چای و قهوه سیمرغ',
+              text: 'سفارش قهوه، چای و دمنوش از کلبه چای و قهوه سیمرغ (تهرانپارس)',
+              url: window.location.href
+            }).catch(function () {});
+          } else {
+            copyTextSafe(window.location.href, shareBtn, 'اشتراک‌گذاری');
+          }
+        });
+      }
+
+      var fullAddress = 'تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸';
+      var fullPhones = '021-77341312 | 09125183142';
+
+      var copyAddrBtn = document.getElementById('copyAddressBtn');
+      if (copyAddrBtn) {
+        copyAddrBtn.addEventListener('click', function () {
+          copyTextSafe(fullAddress, copyAddrBtn, 'کپی آدرس فروشگاه');
+        });
+      }
+
+      var dropCopyAddrBtn = document.getElementById('dropCopyAddrBtn');
+      if (dropCopyAddrBtn) {
+        dropCopyAddrBtn.addEventListener('click', function () {
+          copyTextSafe(fullAddress, dropCopyAddrBtn, 'کپی آدرس تهرانپارس');
+        });
+      }
+
+      var copyPhoneBtn = document.getElementById('copyPhoneBtn');
+      if (copyPhoneBtn) {
+        copyPhoneBtn.addEventListener('click', function () {
+          copyTextSafe(fullPhones, copyPhoneBtn, 'کپی شماره تماس');
+        });
+      }
+
+      var dropCopyPhoneBtn = document.getElementById('dropCopyPhoneBtn');
+      if (dropCopyPhoneBtn) {
+        dropCopyPhoneBtn.addEventListener('click', function () {
+          copyTextSafe(fullPhones, dropCopyPhoneBtn, 'کپی شماره‌ها');
+        });
+      }
+    })();
+  </script>
+
+  <script src="./simorgh-cart.js?v=53"></script>
+</body>
+</html>
