@@ -2,180 +2,139 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
   <meta name="description" content="کلبه چای و قهوه سیمرغ در تهرانپارس، خیابان جشنواره، پلاک ۴۸ — رست تازه قهوه، آسیاب دقیق، چای و دمنوش و سفارش آنلاین در بله." />
   <style>
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
-    }
-    html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
     }
     body {
       margin: 0;
-      padding: 0 0 108px 0;
-      width: 100%;
-      min-height: 100vh;
-      overflow-x: hidden;
+      padding: 0 0 96px 0;
+      font-family: Tahoma, "IranSans", sans-serif;
       background: #f5efe6;
       color: #26130a;
-      font-family: Tahoma, "IranSans", sans-serif;
-      font-size: 13px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
     .page-wrap {
-      width: 100%;
-      max-width: 560px;
+      max-width: 540px;
       margin: 0 auto;
-      padding: 12px;
+      padding: 14px;
     }
     .top-pill {
       display: block;
       width: fit-content;
-      max-width: 100%;
-      margin: 0 auto 10px;
+      margin: 0 auto 12px;
       background: #fffaf2;
       border: 1px solid #e6d5bc;
       color: #6b4c35;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: bold;
-      text-align: center;
     }
     .hero-card {
       background: #fffdf9;
       border: 1px solid #ead9c1;
-      border-radius: 20px;
-      padding: 16px 14px;
+      border-radius: 22px;
+      padding: 20px 16px;
       text-align: center;
-      box-shadow: 0 6px 18px rgba(38, 19, 10, 0.05);
-      margin-bottom: 10px;
+      box-shadow: 0 8px 24px rgba(38, 19, 10, 0.06);
+      margin-bottom: 12px;
     }
     .logo-circle {
-      width: 78px;
-      height: 78px;
+      width: 84px;
+      height: 84px;
       margin: 0 auto 10px;
       border-radius: 50%;
       border: 2px solid #d7b285;
-      background: #ffffff;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      position: relative;
       font-weight: bold;
-      font-size: 11px;
+      font-size: 12px;
       color: #7c3e08;
     }
-    .logo-circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .logo-circle.no-img img {
-      display: none;
-    }
     .hero-title {
-      margin: 0 0 4px;
-      font-size: 19px;
+      margin: 0 0 6px;
+      font-size: 20px;
       font-weight: bold;
       color: #26130a;
     }
     .hero-sub {
       margin: 0;
-      font-size: 12px;
+      font-size: 12.5px;
       color: #6b5848;
     }
     .badges-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
     }
     .mini-badge {
       background: #fffdf9;
       border: 1px solid #ead9c1;
-      border-radius: 12px;
-      padding: 8px 4px;
+      border-radius: 14px;
+      padding: 9px 6px;
       text-align: center;
-      font-size: 10.5px;
+      font-size: 11px;
       font-weight: bold;
       color: #3d2314;
     }
     .cats-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
     }
     .cat-card {
       display: block;
       text-decoration: none;
       background: #fffdf9;
       border: 1px solid #ead9c1;
-      border-radius: 14px;
-      padding: 10px 6px;
+      border-radius: 16px;
+      padding: 12px 8px;
       text-align: center;
       color: #26130a;
     }
     .cat-card strong {
       display: block;
-      font-size: 11.5px;
-      margin-bottom: 2px;
+      font-size: 12px;
+      margin-bottom: 3px;
     }
     .cat-card span {
       display: block;
-      font-size: 10px;
+      font-size: 10.5px;
       color: #7a6858;
     }
     .quick-order-box {
       background: #2b1409;
-      color: #ffffff;
-      border-radius: 16px;
-      padding: 12px;
+      color: #fff;
+      border-radius: 20px;
+      padding: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .quick-text {
-      flex: 1;
-      min-width: 0;
-    }
-    .quick-text strong {
-      display: block;
-      font-size: 12.5px;
-      margin-bottom: 3px;
-    }
-    .quick-text p {
-      margin: 0;
-      font-size: 11px;
-      color: #e6d5c1;
+      gap: 12px;
+      margin-bottom: 12px;
     }
     .quick-actions {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      flex-shrink: 0;
-      min-width: 106px;
+      gap: 7px;
+      min-width: 112px;
     }
     .btn-add-inv {
       border: none;
       background: #d97706;
-      color: #ffffff;
-      padding: 8px 10px;
-      border-radius: 9px;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
       font-weight: bold;
-      font-size: 11.5px;
+      font-size: 12px;
       cursor: pointer;
       font-family: Tahoma, sans-serif;
     }
@@ -184,25 +143,35 @@
       text-align: center;
       text-decoration: none;
       background: #0284c7;
-      color: #ffffff;
-      padding: 8px 10px;
-      border-radius: 9px;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
       font-weight: bold;
-      font-size: 11px;
+      font-size: 11.5px;
+    }
+    .quick-text strong {
+      display: block;
+      font-size: 13.5px;
+      margin-bottom: 4px;
+    }
+    .quick-text p {
+      margin: 0;
+      font-size: 11.5px;
+      color: #e6d5c1;
     }
     .secondary-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 10px;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
     }
     .sec-btn {
       background: #fffdf9;
       border: 1px solid #ead9c1;
-      border-radius: 12px;
-      padding: 9px 8px;
+      border-radius: 14px;
+      padding: 10px;
       font-weight: bold;
-      font-size: 11.5px;
+      font-size: 12px;
       color: #26130a;
       cursor: pointer;
       font-family: Tahoma, sans-serif;
@@ -210,24 +179,24 @@
     .hours-card {
       background: #fffdf9;
       border: 1px dashed #d7b285;
-      border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 10px;
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
     }
     .hours-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
-      font-size: 12.5px;
+      margin-bottom: 10px;
+      font-size: 13px;
       font-weight: bold;
     }
     .status-pill {
       background: #dcfce7;
       color: #166534;
-      padding: 2px 9px;
+      padding: 3px 10px;
       border-radius: 999px;
-      font-size: 10.5px;
+      font-size: 11px;
     }
     .status-pill.closed {
       background: #fee2e2;
@@ -236,39 +205,39 @@
     .hours-line {
       display: flex;
       justify-content: space-between;
-      font-size: 11px;
+      font-size: 11.5px;
       color: #4d3a2c;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 6px;
     }
     .countdown-box {
       background: #faf4eb;
-      border-radius: 10px;
-      padding: 8px;
+      border-radius: 12px;
+      padding: 9px;
       text-align: center;
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: bold;
       color: #3d2314;
     }
     .address-card {
       background: #fffdf9;
       border: 1px solid #ead9c1;
-      border-radius: 16px;
-      padding: 12px;
+      border-radius: 18px;
+      padding: 14px;
       text-align: center;
       margin-bottom: 12px;
-      font-size: 11.5px;
+      font-size: 12px;
     }
     .copy-addr-btn {
       margin-top: 8px;
       border: 1px solid #d8c3a8;
       background: #faf4eb;
       color: #26130a;
-      padding: 7px 14px;
-      border-radius: 9px;
+      padding: 8px 14px;
+      border-radius: 10px;
       font-weight: bold;
-      font-size: 11px;
+      font-size: 11.5px;
       cursor: pointer;
       font-family: Tahoma, sans-serif;
     }
@@ -279,34 +248,52 @@
       right: 0;
       background: #fffdf9;
       border-top: 1px solid #e5d4bc;
-      padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
-      z-index: 4000;
+      padding: 8px 10px;
+      z-index: 5000;
       direction: rtl;
     }
     .bottom-bar-inner {
-      max-width: 560px;
+      max-width: 540px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr 1.3fr;
-      gap: 6px;
+      gap: 8px;
     }
-    .bar-call, .bar-bale, .bar-invoice {
+    .bar-call {
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 11px;
-      padding: 9px 6px;
-      font-weight: bold;
-      font-size: 11.5px;
       text-decoration: none;
-      border: none;
-      color: #ffffff;
-      font-family: Tahoma, sans-serif;
-      cursor: pointer;
+      background: #15803d;
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 6px;
+      font-weight: bold;
+      font-size: 12px;
     }
-    .bar-call { background: #15803d; }
-    .bar-bale { background: #0284c7; }
-    .bar-invoice { background: #b45d0b; }
+    .bar-bale {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 6px;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .bar-invoice {
+      border: none;
+      background: #b45d0b;
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 8px;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: Tahoma, sans-serif;
+    }
   </style>
 </head>
 <body>
@@ -314,16 +301,7 @@
     <div class="top-pill">تهرانپارس • خیابان جشنواره • پلاک ۴۸</div>
 
     <header class="hero-card">
-      <div class="logo-circle no-img" id="simorghLogoBox">
-        <img
-          id="simorghLogoImg"
-          src="./logo.png"
-          alt="لوگوی کلبه چای و قهوه سیمرغ"
-          onload="document.getElementById('simorghLogoBox').classList.remove('no-img'); document.getElementById('simorghLogoFallback').style.display='none';"
-          onerror="document.getElementById('simorghLogoBox').classList.add('no-img'); document.getElementById('simorghLogoFallback').style.display='block';"
-        />
-        <span id="simorghLogoFallback">SIMORGH</span>
-      </div>
+      <div class="logo-circle">SIMORGH</div>
       <h1 class="hero-title">کلبه چای و قهوه سیمرغ</h1>
       <p class="hero-sub">عطر اصیل قهوه تازه رست و چای منتخب در تهرانپارس</p>
     </header>
@@ -379,7 +357,7 @@
 
     <section class="address-card">
       <div><strong>تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</strong></div>
-      <div style="color:#6b5848;margin-top:3px;">امکان خرید حضوری و ارسال پیک در تهرانپارس و اطراف</div>
+      <div style="color:#6b5848;margin-top:4px;">امکان خرید حضوری و ارسال پیک در تهرانپارس و اطراف</div>
       <button type="button" id="copyAddressBtn" class="copy-addr-btn">کپی آدرس فروشگاه</button>
     </section>
   </div>
@@ -441,22 +419,8 @@
               text: 'سفارش قهوه، چای و دمنوش از کلبه چای و قهوه سیمرغ (تهرانپارس)',
               url: window.location.href
             }).catch(function () {});
-          } else {
-            var url = window.location.href;
-            try {
-              var ta = document.createElement('textarea');
-              ta.value = url;
-              ta.style.position = 'fixed';
-              ta.style.opacity = '0';
-              document.body.appendChild(ta);
-              ta.select();
-              document.execCommand('copy');
-              document.body.removeChild(ta);
-            } catch (e) {}
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(url).catch(function () {});
-            }
-            alert('لینک صفحه کپی شد.');
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href).catch(function () {});
           }
         });
       }
@@ -464,7 +428,7 @@
       var installBtn = document.getElementById('installHintBtn');
       if (installBtn) {
         installBtn.addEventListener('click', function () {
-          alert('برای نصب سریع روی گوشی: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را انتخاب کنید.');
+          alert('برای نصب سریع روی گوشی: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را بزنید.');
         });
       }
 
