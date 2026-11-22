@@ -59,8 +59,8 @@
       margin-bottom: 10px;
     }
     .logo-circle {
-      width: 82px;
-      height: 82px;
+      width: 86px;
+      height: 86px;
       margin: 0 auto 10px;
       border-radius: 50%;
       border: 2px solid #d7b285;
@@ -269,8 +269,6 @@
       cursor: pointer;
       font-family: Tahoma, sans-serif;
     }
-
-    /* نوار ثابت پایین با ترتیب دقیق RTL */
     .bottom-bar {
       position: fixed;
       bottom: 0;
@@ -311,7 +309,6 @@
     .bar-bale { background: #0284c7; }
     .bar-invoice { background: #b45d0b; }
 
-    /* مودال پشتیبان فاکتور در صورت عدم وجود یا خطای simorgh-cart.js */
     .fallback-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -407,7 +404,7 @@
       <div class="logo-circle" id="simorghLogoBox">
         <img
           id="simorghLogoImg"
-          src="./logo.png"
+          src="./1760785858698.jpg"
           alt="لوگوی کلبه چای و قهوه سیمرغ"
           onload="document.getElementById('simorghLogoFallback').style.display='none';"
           onerror="this.style.display='none'; document.getElementById('simorghLogoFallback').style.display='block';"
@@ -527,4 +524,152 @@
           var s = remSec % 60;
           timerEl.textContent = 'زمان باقی‌مانده تا تعطیلی امروز: ' + pad2(h) + ':' + pad2(m) + ':' + pad2(s);
         } else {
-          badge.textContent = 'فروشگاه بسته است
+          badge.textContent = 'فروشگاه بسته است';
+          badge.className = 'status-pill closed';
+          timerEl.textContent = 'ساعت کاری: شنبه تا پنجشنبه ۸ تا ۲۲ | جمعه ۸ تا ۱۳';
+        }
+      }
+
+      updateWorkingHours();
+      setInterval(updateWorkingHours, 1000);
+
+      var fallbackItems = [];
+      var countEl = document.getElementById('simorghCartCount');
+      var quickAddBtn = document.getElementById('quickAddInvoiceBtn');
+      var openInvBtn = document.getElementById('openInvoiceBarBtn');
+      var modalEl = document.getElementById('simorghFallbackModal');
+      var listEl = document.getElementById('fallbackItemsList');
+      var closeBtn = document.getElementById('fallbackCloseBtn');
+      var clearBtn = document.getElementById('fallbackClearBtn');
+
+      function syncFallbackCount() {
+        if (!countEl) return;
+        var totalQty = 0;
+        for (var i = 0; i < fallbackItems.length; i++) {
+          totalQty += fallbackItems[i].qty;
+        }
+        countEl.textContent = String(totalQty);
+      }
+
+      function renderFallbackList() {
+        if (!listEl) return;
+        if (!fallbackItems.length) {
+          listEl.innerHTML = '<div style="text-align:center;color:#6b5848;padding:12px;">فاکتور خالی است.</div>';
+          return;
+        }
+        var html = '';
+        for (var i = 0; i < fallbackItems.length; i++) {
+          html += '<div class="fallback-item-row">' +
+            '<span><strong>' + fallbackItems[i].name + '</strong></span>' +
+            '<span>تعداد: ' + fallbackItems[i].qty + '</span>' +
+            '</div>';
+        }
+        listEl.innerHTML = html;
+      }
+
+      function openFallbackModal() {
+        renderFallbackList();
+        if (modalEl) modalEl.classList.add('open');
+      }
+
+      function closeFallbackModal() {
+        if (modalEl) modalEl.classList.remove('open');
+      }
+
+      if (quickAddBtn) {
+        quickAddBtn.addEventListener('click', function () {
+          if (window.SimorghCart && typeof window.SimorghCart.addItem === 'function') {
+            return;
+          }
+          var itemName = quickAddBtn.getAttribute('data-item-name') || 'سفارش سریع / مشاوره قهوه';
+          var found = false;
+          for (var i = 0; i < fallbackItems.length; i++) {
+            if (fallbackItems[i].name === itemName) {
+              fallbackItems[i].qty += 1;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            fallbackItems.push({ name: itemName, qty: 1 });
+          }
+          syncFallbackCount();
+        });
+      }
+
+      if (openInvBtn) {
+        openInvBtn.addEventListener('click', function () {
+          if (window.SimorghCart && typeof window.SimorghCart.openModal === 'function') {
+            return;
+          }
+          openFallbackModal();
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeFallbackModal);
+      }
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          fallbackItems = [];
+          syncFallbackCount();
+          renderFallbackList();
+        });
+      }
+      if (modalEl) {
+        modalEl.addEventListener('click', function (e) {
+          if (e.target === modalEl) closeFallbackModal();
+        });
+      }
+
+      var shareBtn = document.getElementById('shareSiteBtn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', function () {
+          if (navigator.share) {
+            navigator.share({
+              title: 'کلبه چای و قهوه سیمرغ',
+              text: 'سفارش قهوه، چای و دمنوش از کلبه چای و قهوه سیمرغ (تهرانپارس)',
+              url: window.location.href
+            }).catch(function () {});
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href).catch(function () {});
+          }
+        });
+      }
+
+      var installBtn = document.getElementById('installHintBtn');
+      if (installBtn) {
+        installBtn.addEventListener('click', function () {
+          alert('برای نصب سریع روی گوشی: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را انتخاب کنید.');
+        });
+      }
+
+      var copyAddrBtn = document.getElementById('copyAddressBtn');
+      if (copyAddrBtn) {
+        copyAddrBtn.addEventListener('click', function () {
+          var addr = 'تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸ — تلفن: ۰۲۱-۷۷۳۴۱۳۱۲';
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = addr;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(addr).catch(function () {});
+          }
+          copyAddrBtn.textContent = 'آدرس کپی شد ✓';
+          setTimeout(function () {
+            copyAddrBtn.textContent = 'کپی آدرس فروشگاه';
+          }, 2000);
+        });
+      }
+    })();
+  </script>
+
+  <script src="./simorgh-cart.js?v=44"></script>
+</body>
+</html>
