@@ -9,13 +9,19 @@
     * {
       box-sizing: border-box;
     }
-    body {
+    html, body {
       margin: 0;
-      padding: 0 0 84px 0;
-      font-family: Tahoma, "IranSans", sans-serif;
+      padding: 0;
+      width: 100%;
+      min-height: 100dvh;
+      overflow-x: clip;
       background: #f5efe6;
       color: #26130a;
+      font-family: Tahoma, "IranSans", sans-serif;
       line-height: 1.7;
+    }
+    body {
+      padding-bottom: 96px;
     }
     .page-wrap {
       max-width: 540px;
@@ -380,7 +386,7 @@
 
       function updateWorkingHours() {
         var now = new Date();
-        var day = now.getDay(); // 0: Sun ... 5: Fri, 6: Sat
+        var day = now.getDay();
         var mins = now.getHours() * 60 + now.getMinutes();
         var secs = now.getSeconds();
 
@@ -419,8 +425,22 @@
               text: 'سفارش قهوه، چای و دمنوش از کلبه چای و قهوه سیمرغ (تهرانپارس)',
               url: window.location.href
             }).catch(function () {});
-          } else if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(window.location.href).catch(function () {});
+          } else {
+            var url = window.location.href;
+            try {
+              var ta = document.createElement('textarea');
+              ta.value = url;
+              ta.style.position = 'fixed';
+              ta.style.opacity = '0';
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand('copy');
+              document.body.removeChild(ta);
+            } catch (e) {}
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).catch(function () {});
+            }
+            alert('لینک صفحه کپی شد.');
           }
         });
       }
@@ -428,9 +448,7 @@
       var installBtn = document.getElementById('installHintBtn');
       if (installBtn) {
         installBtn.addEventListener('click', function () {
-          if (window.SimorghCart && typeof window.SimorghCart.openModal === 'function') {
-            alert('برای نصب سریع روی گوشی: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را بزنید.');
-          }
+          alert('برای نصب سریع روی گوشی: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را انتخاب کنید.');
         });
       }
 
@@ -460,6 +478,6 @@
     })();
   </script>
 
-  <script src="./simorgh-cart.js?v=40"></script>
+  <script src="./simorgh-cart.js?v=41"></script>
 </body>
 </html>
