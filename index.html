@@ -359,38 +359,69 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
       background: #faf4eb;
       border: 1px solid #ead9c1;
       border-radius: 10px;
       padding: 8px 10px;
       margin-bottom: 8px;
-      font-size: 12px;
+      font-size: 11.5px;
+    }
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .qty-btn {
+      width: 24px;
+      height: 24px;
+      border: 1px solid #d7b285;
+      background: #fff;
+      color: #26130a;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: Tahoma, sans-serif;
+    }
+    .fallback-field {
+      width: 100%;
+      border: 1px solid #e2ceb3;
+      background: #fff;
+      border-radius: 9px;
+      padding: 7px 10px;
+      margin-bottom: 8px;
+      font-size: 11.5px;
+      font-family: Tahoma, sans-serif;
+      color: #26130a;
     }
     .fallback-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 6px;
+      margin-top: 10px;
     }
     .fallback-send-bale {
-      flex: 1;
       text-align: center;
       text-decoration: none;
       background: #0284c7;
       color: #fff;
-      padding: 9px 12px;
+      padding: 9px 10px;
       border-radius: 10px;
       font-weight: bold;
-      font-size: 12px;
+      font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .fallback-clear-btn {
+    .fallback-copy-btn, .fallback-clear-btn {
       border: 1px solid #d8c3a8;
-      background: #fff;
+      background: #faf4eb;
       color: #26130a;
-      padding: 9px 12px;
+      padding: 9px 10px;
       border-radius: 10px;
       font-weight: bold;
-      font-size: 12px;
+      font-size: 11.5px;
       cursor: pointer;
       font-family: Tahoma, sans-serif;
     }
@@ -442,7 +473,7 @@
         <p>اقلام را به فاکتور اضافه کنید یا برای مشاوره مستقیم به بله پیام دهید.</p>
       </div>
       <div class="quick-actions">
-        <button type="button" id="quickAddInvoiceBtn" class="btn-add-inv" data-add-invoice data-item-name="سفارش سریع / مشاوره قهوه">+ به فاکتور</button>
+        <button type="button" id="quickAddInvoiceBtn" class="btn-add-inv" data-add-invoice data-item-id="quick-consult" data-item-name="سفارش سریع / مشاوره قهوه">+ به فاکتور</button>
         <a class="btn-bale-consult" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
       </div>
     </section>
@@ -488,8 +519,11 @@
         <button type="button" id="fallbackCloseBtn" class="fallback-close-btn">بستن</button>
       </div>
       <div id="fallbackItemsList"></div>
+      <input type="text" id="invCustomerName" class="fallback-field" placeholder="نام و نام خانوادگی (اختیاری)" />
+      <input type="text" id="invCustomerNote" class="fallback-field" placeholder="نوع آسیاب / تحویل حضوری یا پیک / توضیح" />
       <div class="fallback-actions">
         <a id="fallbackBaleLink" class="fallback-send-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">ارسال به بله</a>
+        <button type="button" id="fallbackCopyBtn" class="fallback-copy-btn">کپی متن</button>
         <button type="button" id="fallbackClearBtn" class="fallback-clear-btn">پاک کردن</button>
       </div>
     </div>
@@ -533,7 +567,28 @@
       updateWorkingHours();
       setInterval(updateWorkingHours, 1000);
 
-      var fallbackItems = [];
+      var STORAGE_KEY = 'simorgh_fallback_invoice_v1';
+      var defaultCatalog = [
+        { id: 'quick-consult', name: 'سفارش سریع / مشاوره قهوه', qty: 0 },
+        { id: 'espresso-blend', name: 'دان / پودر قهوه ترکیبی (شکلاتی)', qty: 0 },
+        { id: 'single-origin', name: 'دان / پودر قهوه تک‌خاستگاه', qty: 0 },
+        { id: 'loose-tea', name: 'چای و دمنوش منتخب', qty: 0 }
+      ];
+
+      function loadItems() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length) return parsed;
+          }
+        } catch (e) {}
+        return defaultCatalog.map(function (item) {
+          return { id: item.id, name: item.name, qty: item.qty };
+        });
+      }
+
+      var fallbackItems = loadItems();
       var countEl = document.getElementById('simorghCartCount');
       var quickAddBtn = document.getElementById('quickAddInvoiceBtn');
       var openInvBtn = document.getElementById('openInvoiceBarBtn');
@@ -541,30 +596,96 @@
       var listEl = document.getElementById('fallbackItemsList');
       var closeBtn = document.getElementById('fallbackCloseBtn');
       var clearBtn = document.getElementById('fallbackClearBtn');
+      var copyInvBtn = document.getElementById('fallbackCopyBtn');
+      var baleLinkEl = document.getElementById('fallbackBaleLink');
 
-      function syncFallbackCount() {
-        if (!countEl) return;
+      function saveAndSync() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(fallbackItems));
+        } catch (e) {}
         var totalQty = 0;
         for (var i = 0; i < fallbackItems.length; i++) {
-          totalQty += fallbackItems[i].qty;
+          totalQty += (Number(fallbackItems[i].qty) || 0);
         }
-        countEl.textContent = String(totalQty);
+        if (countEl) countEl.textContent = String(totalQty);
+        updateBaleHref();
+      }
+
+      function addByName(name, id) {
+        var found = null;
+        for (var i = 0; i < fallbackItems.length; i++) {
+          if ((id && fallbackItems[i].id === id) || fallbackItems[i].name === name) {
+            found = fallbackItems[i];
+            break;
+          }
+        }
+        if (found) {
+          found.qty = (Number(found.qty) || 0) + 1;
+        } else {
+          fallbackItems.push({ id: id || ('item-' + Date.now()), name: name, qty: 1 });
+        }
+        saveAndSync();
+      }
+
+      function changeQty(idx, delta) {
+        if (!fallbackItems[idx]) return;
+        var next = (Number(fallbackItems[idx].qty) || 0) + delta;
+        fallbackItems[idx].qty = next < 0 ? 0 : next;
+        saveAndSync();
+        renderFallbackList();
+      }
+
+      function buildInvoiceText() {
+        var lines = ['سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):'];
+        var hasAny = false;
+        for (var i = 0; i < fallbackItems.length; i++) {
+          var q = Number(fallbackItems[i].qty) || 0;
+          if (q > 0) {
+            hasAny = true;
+            lines.push('• ' + fallbackItems[i].name + ' — تعداد: ' + q);
+          }
+        }
+        if (!hasAny) {
+          lines.push('• قلمی انتخاب نشده است (درخواست مشاوره / ثبت سفارش)');
+        }
+        var custName = (document.getElementById('invCustomerName') && document.getElementById('invCustomerName').value || '').trim();
+        var custNote = (document.getElementById('invCustomerNote') && document.getElementById('invCustomerNote').value || '').trim();
+        if (custName) lines.push('نام: ' + custName);
+        if (custNote) lines.push('توضیحات/تحویل: ' + custNote);
+        return lines.join('\n');
+      }
+
+      function updateBaleHref() {
+        if (!baleLinkEl) return;
+        var text = encodeURIComponent(buildInvoiceText());
+        baleLinkEl.href = 'https://ble.ir/simorgh_coffee?text=' + text;
       }
 
       function renderFallbackList() {
         if (!listEl) return;
-        if (!fallbackItems.length) {
-          listEl.innerHTML = '<div style="text-align:center;color:#6b5848;padding:12px;">فاکتور خالی است.</div>';
-          return;
-        }
         var html = '';
         for (var i = 0; i < fallbackItems.length; i++) {
+          var item = fallbackItems[i];
           html += '<div class="fallback-item-row">' +
-            '<span><strong>' + fallbackItems[i].name + '</strong></span>' +
-            '<span>تعداد: ' + fallbackItems[i].qty + '</span>' +
-            '</div>';
+            '<span><strong>' + item.name + '</strong></span>' +
+            '<div class="qty-controls">' +
+              '<button type="button" class="qty-btn" data-qty-idx="' + i + '" data-delta="-1">-</button>' +
+              '<span>' + (Number(item.qty) || 0) + '</span>' +
+              '<button type="button" class="qty-btn" data-qty-idx="' + i + '" data-delta="1">+</button>' +
+            '</div>' +
+          '</div>';
         }
         listEl.innerHTML = html;
+
+        var btns = listEl.querySelectorAll('.qty-btn');
+        for (var b = 0; b < btns.length; b++) {
+          btns[b].addEventListener('click', function () {
+            var idx = Number(this.getAttribute('data-qty-idx'));
+            var delta = Number(this.getAttribute('data-delta'));
+            changeQty(idx, delta);
+          });
+        }
+        updateBaleHref();
       }
 
       function openFallbackModal() {
@@ -581,19 +702,10 @@
           if (window.SimorghCart && typeof window.SimorghCart.addItem === 'function') {
             return;
           }
-          var itemName = quickAddBtn.getAttribute('data-item-name') || 'سفارش سریع / مشاوره قهوه';
-          var found = false;
-          for (var i = 0; i < fallbackItems.length; i++) {
-            if (fallbackItems[i].name === itemName) {
-              fallbackItems[i].qty += 1;
-              found = true;
-              break;
-            }
-          }
-          if (!found) {
-            fallbackItems.push({ name: itemName, qty: 1 });
-          }
-          syncFallbackCount();
+          addByName(
+            quickAddBtn.getAttribute('data-item-name') || 'سفارش سریع / مشاوره قهوه',
+            quickAddBtn.getAttribute('data-item-id') || 'quick-consult'
+          );
         });
       }
 
@@ -606,21 +718,53 @@
         });
       }
 
-      if (closeBtn) {
-        closeBtn.addEventListener('click', closeFallbackModal);
-      }
+      if (closeBtn) closeBtn.addEventListener('click', closeFallbackModal);
+
       if (clearBtn) {
         clearBtn.addEventListener('click', function () {
-          fallbackItems = [];
-          syncFallbackCount();
+          for (var i = 0; i < fallbackItems.length; i++) {
+            fallbackItems[i].qty = 0;
+          }
+          saveAndSync();
           renderFallbackList();
         });
       }
+
+      if (copyInvBtn) {
+        copyInvBtn.addEventListener('click', function () {
+          var txt = buildInvoiceText();
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = txt;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(txt).catch(function () {});
+          }
+          copyInvBtn.textContent = 'کپی شد ✓';
+          setTimeout(function () {
+            copyInvBtn.textContent = 'کپی متن';
+          }, 1800);
+        });
+      }
+
+      var nameInp = document.getElementById('invCustomerName');
+      var noteInp = document.getElementById('invCustomerNote');
+      if (nameInp) nameInp.addEventListener('input', updateBaleHref);
+      if (noteInp) noteInp.addEventListener('input', updateBaleHref);
+
       if (modalEl) {
         modalEl.addEventListener('click', function (e) {
           if (e.target === modalEl) closeFallbackModal();
         });
       }
+
+      saveAndSync();
 
       var shareBtn = document.getElementById('shareSiteBtn');
       if (shareBtn) {
