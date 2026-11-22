@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2b1409" />
+  <link rel="manifest" href="./manifest.json" />
   <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
   <meta name="description" content="کلبه چای و قهوه سیمرغ در تهرانپارس، خیابان جشنواره، پلاک ۴۸ — رست تازه قهوه، آسیاب دقیق، چای و دمنوش و سفارش آنلاین در بله." />
   <style>
@@ -194,6 +196,11 @@
       color: #26130a;
       cursor: pointer;
       font-family: Tahoma, sans-serif;
+    }
+    .sec-btn.install-active {
+      background: #fff3e0;
+      border-color: #d97706;
+      color: #7c3e08;
     }
     .hours-card {
       background: #fffdf9;
@@ -490,7 +497,7 @@
 
     <div class="secondary-row">
       <button type="button" id="shareSiteBtn" class="sec-btn">اشتراک‌گذاری</button>
-      <button type="button" id="installHintBtn" class="sec-btn">نصب روی گوشی</button>
+      <button type="button" id="installAppBtn" class="sec-btn install-active">نصب اپلیکیشن</button>
     </div>
 
     <section class="hours-card">
@@ -555,6 +562,36 @@
 
   <script>
     (function () {
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('./sw.js').catch(function () {});
+        });
+      }
+
+      var deferredPrompt = null;
+      var installBtn = document.getElementById('installAppBtn');
+
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installBtn) {
+          installBtn.textContent = 'نصب اپلیکیشن';
+        }
+      });
+
+      if (installBtn) {
+        installBtn.addEventListener('click', function () {
+          if (deferredPrompt && typeof deferredPrompt.prompt === 'function') {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.finally(function () {
+              deferredPrompt = null;
+            });
+            return;
+          }
+          alert('برای نصب اپلیکیشن کلبه سیمرغ: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را بزنید.');
+        });
+      }
+
       function pad2(n) {
         return n < 10 ? '0' + n : String(n);
       }
@@ -816,13 +853,6 @@
         });
       }
 
-      var installBtn = document.getElementById('installHintBtn');
-      if (installBtn) {
-        installBtn.addEventListener('click', function () {
-          alert('برای نصب سریع روی گوشی: از منوی مرورگر گزینه Add to Home Screen یا «افزودن به صفحه اصلی» را انتخاب کنید.');
-        });
-      }
-
       var copyAddrBtn = document.getElementById('copyAddressBtn');
       if (copyAddrBtn) {
         copyAddrBtn.addEventListener('click', function () {
@@ -849,6 +879,6 @@
     })();
   </script>
 
-  <script src="./simorgh-cart.js?v=48"></script>
+  <script src="./simorgh-cart.js?v=49"></script>
 </body>
 </html>
