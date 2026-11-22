@@ -23,7 +23,7 @@
       line-height: 1.65;
     }
     body {
-      padding-bottom: 92px;
+      padding-bottom: 96px;
     }
     .page-wrap {
       width: 100%;
@@ -80,9 +80,17 @@
       color: #26130a;
     }
     .hero-sub {
-      margin: 0;
+      margin: 0 0 8px;
       font-size: 12px;
       color: #6b5848;
+    }
+    .hero-meta-line {
+      font-size: 11px;
+      color: #5c4636;
+      background: #faf4eb;
+      border: 1px solid #ead9c1;
+      border-radius: 10px;
+      padding: 6px 8px;
     }
     .badges-row {
       display: grid;
@@ -156,7 +164,7 @@
       flex-direction: column;
       gap: 6px;
       flex-shrink: 0;
-      min-width: 106px;
+      min-width: 108px;
     }
     .btn-add-inv {
       border: none;
@@ -255,12 +263,18 @@
       margin-bottom: 12px;
       font-size: 11.5px;
     }
-    .copy-addr-btn {
+    .address-btns {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
       margin-top: 8px;
+    }
+    .copy-addr-btn {
       border: 1px solid #d8c3a8;
       background: #faf4eb;
       color: #26130a;
-      padding: 7px 14px;
+      padding: 7px 12px;
       border-radius: 9px;
       font-weight: bold;
       font-size: 11px;
@@ -461,6 +475,7 @@
       </div>
       <h1 class="hero-title">کلبه چای و قهوه سیمرغ</h1>
       <p class="hero-sub">عطر اصیل قهوه تازه رست و چای منتخب در تهرانپارس</p>
+      <div class="hero-meta-line">تلفن: ۰۲۱-۷۷۳۴۱۳۱۲ • ۰۹۱۲۵۱۸۳۱۴۲ | پیام‌رسان بله: @simorgh_coffee</div>
     </header>
 
     <div class="badges-row">
@@ -515,7 +530,10 @@
     <section class="address-card">
       <div><strong>تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</strong></div>
       <div style="color:#6b5848;margin-top:3px;">امکان خرید حضوری و ارسال پیک در تهرانپارس و اطراف</div>
-      <button type="button" id="copyAddressBtn" class="copy-addr-btn">کپی آدرس فروشگاه</button>
+      <div class="address-btns">
+        <button type="button" id="copyAddressBtn" class="copy-addr-btn">کپی آدرس فروشگاه</button>
+        <button type="button" id="copyPhoneBtn" class="copy-addr-btn">کپی شماره تماس</button>
+      </div>
     </section>
   </div>
 
@@ -800,26 +818,31 @@
         });
       }
 
+      function copyTextSafe(txt, btnEl, defaultLabel) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = txt;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (e) {}
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).catch(function () {});
+        }
+        if (btnEl) {
+          btnEl.textContent = 'کپی شد ✓';
+          setTimeout(function () {
+            btnEl.textContent = defaultLabel;
+          }, 1800);
+        }
+      }
+
       if (copyInvBtn) {
         copyInvBtn.addEventListener('click', function () {
-          var txt = buildInvoiceText();
-          try {
-            var ta = document.createElement('textarea');
-            ta.value = txt;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-          } catch (e) {}
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(txt).catch(function () {});
-          }
-          copyInvBtn.textContent = 'کپی شد ✓';
-          setTimeout(function () {
-            copyInvBtn.textContent = 'کپی متن';
-          }, 1800);
+          copyTextSafe(buildInvoiceText(), copyInvBtn, 'کپی متن');
         });
       }
 
@@ -847,8 +870,8 @@
               text: 'سفارش قهوه، چای و دمنوش از کلبه چای و قهوه سیمرغ (تهرانپارس)',
               url: window.location.href
             }).catch(function () {});
-          } else if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(window.location.href).catch(function () {});
+          } else {
+            copyTextSafe(window.location.href, shareBtn, 'اشتراک‌گذاری');
           }
         });
       }
@@ -856,29 +879,19 @@
       var copyAddrBtn = document.getElementById('copyAddressBtn');
       if (copyAddrBtn) {
         copyAddrBtn.addEventListener('click', function () {
-          var addr = 'تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸ — تلفن: ۰۲۱-۷۷۳۴۱۳۱۲';
-          try {
-            var ta = document.createElement('textarea');
-            ta.value = addr;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-          } catch (e) {}
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(addr).catch(function () {});
-          }
-          copyAddrBtn.textContent = 'آدرس کپی شد ✓';
-          setTimeout(function () {
-            copyAddrBtn.textContent = 'کپی آدرس فروشگاه';
-          }, 2000);
+          copyTextSafe('تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸', copyAddrBtn, 'کپی آدرس فروشگاه');
+        });
+      }
+
+      var copyPhoneBtn = document.getElementById('copyPhoneBtn');
+      if (copyPhoneBtn) {
+        copyPhoneBtn.addEventListener('click', function () {
+          copyTextSafe('021-77341312 | 09125183142', copyPhoneBtn, 'کپی شماره تماس');
         });
       }
     })();
   </script>
 
-  <script src="./simorgh-cart.js?v=50"></script>
+  <script src="./simorgh-cart.js?v=51"></script>
 </body>
 </html>
