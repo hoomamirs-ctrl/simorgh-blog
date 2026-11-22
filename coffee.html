@@ -1,637 +1,85 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بار قهوه و دان تخصصی تازه رست | سیمرغ تهرانپارس</title>
-    <meta name="description" content="خرید انواع دانه قهوه عربیکا و روبوستا، میکس‌های اختصاصی فول کافئین و پودریجات گرم در تهرانپارس. مشاوره رایگان انتخاب قهوه.">
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: Tahoma, sans-serif;
-            background-color: #f7f4ef;
-            color: #2b2b2b;
-            margin: 0;
-            padding: 0;
-            padding-top: 65px;
-            padding-bottom: 90px;
-            direction: rtl;
-            text-align: right;
-        }
-
-        .sticky-header {
-            position: fixed; top: 0; left: 0; right: 0; height: 55px;
-            background-color: #3d2314; color: #fff;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 1000;
-        }
-        .sticky-header h2 { font-size: 1rem; margin: 0; color: #fff; }
-        .back-home-btn {
-            color: #fff; text-decoration: none; background-color: #c86d12;
-            padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
-        }
-
-        .container { max-width: 650px; margin: 15px auto; padding: 0 15px; }
-
-        .guide-box {
-            background: #e6f4ea; border: 1px solid #ceead6; color: #137333;
-            padding: 10px 12px; border-radius: 10px; font-size: 0.82rem;
-            font-weight: bold; text-align: center; margin-bottom: 12px; line-height: 1.5;
-        }
-
-        .grind-box {
-            background: #fcf8f3; border: 1px solid #eedecc; border-radius: 10px;
-            margin-bottom: 12px; overflow: hidden;
-        }
-        .grind-toggle {
-            width: 100%; background: none; border: none; padding: 10px 12px;
-            font-family: Tahoma, sans-serif; font-size: 0.84rem; font-weight: bold;
-            color: #3d2314; display: flex; justify-content: space-between;
-            align-items: center; cursor: pointer;
-        }
-        .grind-content {
-            display: none; padding: 0 12px 12px; font-size: 0.78rem;
-            color: #444; line-height: 1.6; border-top: 1px dashed #eedecc;
-        }
-        .grind-content.open { display: block; padding-top: 10px; }
-
-        .search-box { margin-bottom: 10px; }
-        .search-input {
-            width: 100%; padding: 12px 15px; border-radius: 10px;
-            border: 1px solid #eedecc; background-color: #fff; font-family: Tahoma, sans-serif;
-            font-size: 0.9rem; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .search-input:focus { border-color: #c86d12; }
-
-        .quick-tags {
-            display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px;
-            margin-bottom: 10px; scrollbar-width: none;
-        }
-        .quick-tags::-webkit-scrollbar { display: none; }
-        .tag-btn {
-            background-color: #fcf8f3; border: 1px solid #eedecc; color: #3d2314;
-            padding: 6px 12px; border-radius: 16px; font-size: 0.76rem; font-weight: bold;
-            white-space: nowrap; cursor: pointer; font-family: Tahoma, sans-serif;
-        }
-        .tag-btn.active {
-            background-color: #3d2314; color: #fff; border-color: #3d2314;
-        }
-
-        .tabs-container { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
-        .tabs-container::-webkit-scrollbar { display: none; }
-        .tab-btn {
-            background-color: #ffffff; border: 1px solid #eedecc; color: #3d2314;
-            padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: bold;
-            white-space: nowrap; cursor: pointer; font-family: Tahoma, sans-serif;
-        }
-        .tab-btn.active { background-color: #c86d12; color: #ffffff; border-color: #c86d12; }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        .menu-section { background-color: #ffffff; border: 1px solid #eedecc; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .sub-category { font-weight: bold; color: #c86d12; margin-top: 15px; margin-bottom: 10px; font-size: 0.95rem; border-right: 3px solid #c86d12; padding-right: 8px; }
-
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f2ede4; gap: 10px; }
-        .item-row:last-child { border-bottom: none; }
-        .item-detail { display: flex; align-items: center; gap: 12px; flex: 1; }
-        .product-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; border: 1px solid #eedecc; background-color: #fcf8f3; flex-shrink: 0; }
-        .item-name { font-weight: bold; color: #2b2b2b; font-size: 0.88rem; }
-        .item-desc { font-size: 0.75rem; color: #666; margin-top: 3px; line-height: 1.4; }
-
-        .item-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
-        .item-price { color: #c86d12; font-weight: bold; white-space: nowrap; background: #fcf8f3; padding: 4px 8px; border-radius: 6px; border: 1px solid #eedecc; font-size: 0.76rem; }
-        .action-row { display: flex; gap: 5px; }
-        .order-bale-btn {
-            background-color: #00779b; color: #fff; text-decoration: none;
-            font-size: 0.72rem; font-weight: bold; padding: 4px 8px; border-radius: 6px;
-            white-space: nowrap;
-        }
-        .share-item-btn {
-            background-color: #f7f4ef; color: #3d2314; border: 1px solid #eedecc;
-            font-size: 0.75rem; padding: 3px 7px; border-radius: 6px; cursor: pointer;
-        }
-
-        .floating-buttons {
-            position: fixed; bottom: 15px; left: 15px; right: 15px;
-            max-width: 650px; margin: 0 auto; display: flex; gap: 10px; z-index: 999;
-        }
-        .fab-btn {
-            flex: 1; padding: 12px; border-radius: 30px; text-decoration: none;
-            font-weight: bold; font-size: 0.9rem; color: #ffffff; display: flex;
-            align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .fab-call { background-color: #10b981; }
-        .fab-bale { background-color: #00779b; }
-
-        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بار قهوه و دان تخصصی | کلبه چای و قهوه سیمرغ</title>
+<meta name="description" content="خرید دانه قهوه تازه رست، ترکیبات پرکافئین و تخصصی، آسیاب دقیق متناسب با دستگاه دم‌آوری و پودرهای فوری فله در کلبه چای و قهوه سیمرغ تهرانپارس.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg-main:#f5f0e8;--card-bg:#fff;--warm-surface:#fcf7f0;--warm-border:#e7d6c0;--espresso:#26130a;--roast:#3d2314;--amber:#b45d0b;--text-muted:#5c534b}
+*{box-sizing:border-box}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg-main);color:#231e1a;margin:0;padding:14px 13px 128px;direction:rtl}
+.wrap{max-width:600px;margin:0 auto;background:var(--card-bg);border-radius:20px;padding:20px 16px;border:1px solid #eee2d3;box-shadow:0 12px 28px rgba(38,19,10,.06)}
+.top-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
+.back-btn{text-decoration:none;background:var(--warm-surface);color:var(--roast);border:1px solid var(--warm-border);padding:8px 12px;border-radius:10px;font-size:.78rem;font-weight:800}
+h1{font-size:1.3rem;color:var(--espresso);margin:0 0 4px;font-weight:800;text-align:center}
+.sub{font-size:.82rem;color:var(--amber);font-weight:700;text-align:center;margin-bottom:16px}
+.prod-card{background:var(--warm-surface);border:1px solid var(--warm-border);border-radius:14px;padding:13px;margin-bottom:10px;text-align:right}
+.prod-title{font-size:.9rem;font-weight:800;color:var(--espresso);margin-bottom:4px}
+.prod-desc{font-size:.76rem;color:var(--text-muted);line-height:1.55;margin-bottom:10px}
+.actions{display:flex;gap:7px}
+.btn-add{flex:1;background:linear-gradient(135deg,#3d2314,#26130a);color:#fff;border:none;border-radius:9px;padding:9px 10px;font-size:.78rem;font-weight:800;cursor:pointer;font-family:inherit}
+.btn-consult{background:#00779b;color:#fff;text-decoration:none;border-radius:9px;padding:9px 12px;font-size:.77rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.floating-buttons{position:fixed;bottom:12px;left:14px;right:14px;max-width:560px;margin:0 auto;display:flex;gap:7px;z-index:999}
+.fab-btn{flex:1;padding:10px 8px;border-radius:24px;text-decoration:none;font-weight:800;font-size:.76rem;color:#fff;display:flex;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 16px rgba(0,0,0,.18);border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
+.fab-call{background:linear-gradient(135deg,#059669,#047857)}.fab-bale{background:linear-gradient(135deg,#00779b,#005b77)}.fab-cart{background:linear-gradient(135deg,#b45d0b,#874305)}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <div class="top-bar">
+    <a href="./index.html" class="back-btn">→ بازگشت به خانه</a>
+    <a href="./tea.html" class="back-btn">چای و دمنوش ←</a>
+  </div>
+  <h1>☕ بار قهوه و دان تخصصی</h1>
+  <div class="sub">رست تازه، آسیاب متناسب با دستگاه و امکان ثبت در فاکتور</div>
 
-<header class="sticky-header">
-    <h2>☕ بار قهوه و دان تخصصی</h2>
-    <a href="index.html" class="back-home-btn">🏠 صفحه اصلی</a>
-</header>
-
-<div class="container">
-
-    <div class="guide-box">
-        💬 نیاز به راهنمایی دارید؟ برای انتخاب دانه مناسبِ دستگاه اسپرسوساز خانگی یا کافه خود با ما تماس بگیرید.
+  <div class="prod-card">
+    <div class="prod-title">دانه قهوه تک‌خاستگاه و ترکیبی رست شکلاتی</div>
+    <div class="prod-desc">مناسب برای اسپرسو، موکاپات، فرنچ‌پرس و دم‌آوری روزانه با امکان آسیاب دقیق در لحظه.</div>
+    <div class="actions">
+      <button type="button" class="btn-add" onclick="SimorghCart.add('دانه قهوه رست شکلاتی')">+ افزودن به فاکتور</button>
+      <a href="https://ble.ir/simorgh_coffee" class="btn-consult" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
     </div>
+  </div>
 
-    <!-- برگه راهنمای انتخاب درجه آسیاب -->
-    <div class="grind-box">
-        <button type="button" class="grind-toggle" onclick="toggleGrindGuide()">
-            <span>⚙️ راهنمای انتخاب درجه آسیاب (Grind Guide)</span>
-            <span id="grindArrow">▼</span>
-        </button>
-        <div id="grindContent" class="grind-content">
-            • <strong>اسپرسوساز:</strong> ریز و یکدست (عصاره‌گیری تحت فشار).<br>
-            • <strong>موکاپات:</strong> متوسط رو به ریز (کمی درشت‌تر از اسپرسو).<br>
-            • <strong>فرنچ‌پرس / وی‌سیکس / دمی:</strong> درشت‌تر و یکنواخت برای جلوگیری از تلخی بیش از حد.<br>
-            • <strong>دانه کامل:</strong> حفظ حداکثری عطر و تازگی تا زمان دم‌آوری.
-        </div>
+  <div class="prod-card">
+    <div class="prod-title">ترکیب‌های پرکافئین ویژه (بلک بمب و زوبین)</div>
+    <div class="prod-desc">فرمولاسیون تخصصی برای علاقه‌مندان به کافئین بالا و طعم قوی؛ قابل سفارش به صورت دانه یا آسیاب‌شده.</div>
+    <div class="actions">
+      <button type="button" class="btn-add" onclick="SimorghCart.add('ترکیب پرکافئین ویژه')">+ افزودن به فاکتور</button>
+      <a href="https://ble.ir/simorgh_coffee" class="btn-consult" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
     </div>
+  </div>
 
-    <!-- نوار جستجو -->
-    <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 جستجوی نام قهوه (مثلا: ویتنام، کلمبیا، فوری...)" onkeyup="filterProducts()">
+  <div class="prod-card">
+    <div class="prod-title">قهوه یزدی سنتی با هل، گلاب و نبات</div>
+    <div class="prod-desc">تهیه‌شده با عطر اصیل ادویه و نبات برای پذیرایی گرم و مجالس.</div>
+    <div class="actions">
+      <button type="button" class="btn-add" onclick="SimorghCart.add('قهوه یزدی سنتی')">+ افزودن به فاکتور</button>
+      <a href="https://ble.ir/simorgh_coffee" class="btn-consult" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
     </div>
+  </div>
 
-    <!-- تگ‌های فیلتر سریع -->
-    <div class="quick-tags" id="quickTags">
-        <button type="button" class="tag-btn active" onclick="filterByTag('all', this)">همه محصولات</button>
-        <button type="button" class="tag-btn" onclick="filterByTag('caffeine', this)">⚡ فول کافئین</button>
-        <button type="button" class="tag-btn" onclick="filterByTag('chocolate', this)">🍫 شکلاتی و کرمادار</button>
-        <button type="button" class="tag-btn" onclick="filterByTag('arabica', this)">🌸 عربیکا خوش‌عطر</button>
-        <button type="button" class="tag-btn" onclick="filterByTag('powder', this)">🥤 فوری و پودریجات</button>
+  <div class="prod-card">
+    <div class="prod-title">پودرهای قهوه فوری، کاکائو و کافی‌میت (فله / گرمی)</div>
+    <div class="prod-desc">امکان تهیه به صورت گرمی و فله برای مصرف خانگی، باریستاها و خرید عمده.</div>
+    <div class="actions">
+      <button type="button" class="btn-add" onclick="SimorghCart.add('محصولات فله قهوه/کاکائو/کافی‌میت')">+ افزودن به فاکتور</button>
+      <a href="https://ble.ir/simorgh_coffee" class="btn-consult" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
     </div>
-
-    <!-- تب‌های اصلی -->
-    <div class="tabs-container" id="tabsList">
-        <button type="button" class="tab-btn active" onclick="switchTab('single', this)">🟣 تک‌دان</button>
-        <button type="button" class="tab-btn" onclick="switchTab('mixes', this)">🟤 میکس‌ها</button>
-        <button type="button" class="tab-btn" onclick="switchTab('powders', this)">🟠 قهوه فوری</button>
-        <button type="button" class="tab-btn" onclick="switchTab('warm', this)">🟡 پودریجات</button>
-    </div>
-
-    <!-- تب ۱: تک دان -->
-    <div id="single" class="tab-content active">
-        <div class="menu-section">
-            <div class="sub-category">روبوستا</div>
-
-            <div class="item-row product-item" data-tags="caffeine chocolate" data-name="ویتنام اسکرین ۱۸ تاپ گرید ۱ وت پالیش">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">ویتنام اسکرین ۱۸ تاپ گرید ۱ وت پالیش</div>
-                        <div class="item-desc">طعم‌یاد شکلاتی، بادی خوب و کرمای غلیظ</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="ویتنام اسکرین ۱۸ تاپ گرید ۱ وت پالیش" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('ویتنام اسکرین ۱۸ تاپ گرید ۱ وت پالیش')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine chocolate" data-name="پی بی (PB)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">پی بی (PB)</div>
-                        <div class="item-desc">دانه‌های گرد، کافئین بالا و طعم شکلاتی غنی</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="پی بی (PB)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('پی بی (PB)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine chocolate" data-name="چری AA گرید ۱ گرین پرو">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">چری AA گرید ۱ گرین پرو</div>
-                        <div class="item-desc">مرغوب‌ترین روبوستای هند با کرمای عالی</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="چری AA گرید ۱ گرین پرو" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('چری AA گرید ۱ گرین پرو')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine" data-name="اوگاندا اسکرین ۱۸ گرید ۱">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">اوگاندا اسکرین ۱۸ گرید ۱</div>
-                        <div class="item-desc">تلخی استاندارد، بادی پر و کافئین مناسب</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="اوگاندا اسکرین ۱۸ گرید ۱" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('اوگاندا اسکرین ۱۸ گرید ۱')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine chocolate" data-name="اندونزی جاوه AP1">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">اندونزی جاوه AP1</div>
-                        <div class="item-desc">طعم خاص شکلاتی، کرمای عالی برای اسپرسو</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="اندونزی جاوه AP1" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('اندونزی جاوه AP1')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sub-category">عربیکا</div>
-
-            <div class="item-row product-item" data-tags="arabica" data-name="کلمبیا کافه صوفیا اسکرین ۱۹ گرید ۱">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">کلمبیا کافه صوفیا اسکرین ۱۹ گرید ۱</div>
-                        <div class="item-desc">عطر دلنشین، اسیدیته ملایم و طعم لطیف</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="کلمبیا کافه صوفیا اسکرین ۱۹ گرید ۱" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('کلمبیا کافه صوفیا اسکرین ۱۹ گرید ۱')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="arabica chocolate" data-name="برزیل ریو اسکرین ۱۸">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">برزیل ریو اسکرین ۱۸</div>
-                        <div class="item-desc">عطر مطبوع، تن‌وای شکلاتی و متعادل</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="برزیل ریو اسکرین ۱۸" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('برزیل ریو اسکرین ۱۸')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="arabica chocolate" data-name="برزیل سانتوس">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">برزیل سانتوس</div>
-                        <div class="item-desc">ملایم، شیرینی طبیعی و طعم‌یاد شکلاتی</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="برزیل سانتوس" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('برزیل سانتوس')">📤</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- تب ۲: میکس ها -->
-    <div id="mixes" class="tab-content">
-        <div class="menu-section">
-            <div class="item-row product-item" data-tags="caffeine chocolate" data-name="میکس فول کافئین (۴ دانه پایه ویتنام)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس فول کافئین (۴ دانه پایه ویتنام)</div>
-                        <div class="item-desc">کرمای بالا، انرژی زیاد و طعم شکلاتی</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="میکس فول کافئین (۴ دانه پایه ویتنام)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('میکس فول کافئین (۴ دانه پایه ویتنام)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine chocolate" data-name="میکس فول کافئین (۴ دانه پایه اندونزی)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس فول کافئین (۴ دانه پایه اندونزی)</div>
-                        <div class="item-desc">بادی قوی و کرمای فوق‌العاده اسپرسو</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="میکس فول کافئین (۴ دانه پایه اندونزی)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('میکس فول کافئین (۴ دانه پایه اندونزی)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine arabica" data-name="میکس ۹۰-۱۰ (سانتوس)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس ۹۰-۱۰ (سانتوس)</div>
-                        <div class="item-desc">روبوستای غالب با لطافت عربیکا سانتوس</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="میکس ۹۰-۱۰ (سانتوس)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('میکس ۹۰-۱۰ (سانتوس)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="arabica" data-name="میکس ۸۰-۲۰ (کلمبیا)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس ۸۰-۲۰ (کلمبیا)</div>
-                        <div class="item-desc">تعادل عالی کافئین و عطر دلنشین کلمبیا</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="میکس ۸۰-۲۰ (کلمبیا)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('میکس ۸۰-۲۰ (کلمبیا)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="arabica" data-name="میکس ۷۰-۳۰ (کلمبیا / سانتوس)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس ۷۰-۳۰ (کلمبیا / سانتوس)</div>
-                        <div class="item-desc">مناسب برای اسپرسوهای خوش‌عطر روزانه</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="میکس ۷۰-۳۰ (کلمبیا / سانتوس)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('میکس ۷۰-۳۰ (کلمبیا / سانتوس)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="caffeine" data-name="میکس سوپر پاور (سوپر کافئین)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">میکس سوپر پاور (سوپر کافئین)</div>
-                        <div class="item-desc">مخصوص بیداری کامل و انرژی فوق‌العاده</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="میکس سوپر پاور (سوپر کافئین)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('میکس سوپر پاور (سوپر کافئین)')">📤</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- تب ۳: قهوه فوری -->
-    <div id="powders" class="tab-content">
-        <div class="menu-section">
-            <div class="item-row product-item" data-tags="powder" data-name="کلاسیک خلوص ۱۰۰٪">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">کلاسیک خلوص ۱۰۰٪</div>
-                        <div class="item-desc">عطر و طعم اصیل و تلخ کلاسیک فوری</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="کلاسیک خلوص ۱۰۰٪" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('کلاسیک خلوص ۱۰۰٪')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="powder arabica" data-name="گلد برزیل خلوص ۱۰۰٪">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=100&q=80" class="product-img" alt="قهوه">
-                    <div>
-                        <div class="item-name">گلد برزیل خلوص ۱۰۰٪</div>
-                        <div class="item-desc">کیفیت ممتاز، خوش‌عطر و طعم ملایم</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="گلد برزیل خلوص ۱۰۰٪" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('گلد برزیل خلوص ۱۰۰٪')">📤</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- تب ۴: پودری گرم -->
-    <div id="warm" class="tab-content">
-        <div class="menu-section">
-            <div class="item-row product-item" data-tags="powder chocolate" data-name="کاپوچینو و کافی میکس">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=100&q=80" class="product-img" alt="پودریجات">
-                    <div>
-                        <div class="item-name">کاپوچینو و کافی میکس</div>
-                        <div class="item-desc">کف غنی، طعم خوشمزه و آماده‌سازی سریع</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="کاپوچینو و کافی میکس" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('کاپوچینو و کافی میکس')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="powder" data-name="چای ماسالا (اسپایسی / رژیمی)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=100&q=80" class="product-img" alt="ماسالا">
-                    <div>
-                        <div class="item-name">چای ماسالا (اسپایسی / رژیمی)</div>
-                        <div class="item-desc">ترکیب ادویه‌های گرم و معطر هند</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="چای ماسالا (اسپایسی / رژیمی)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('چای ماسالا (اسپایسی / رژیمی)')">📤</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-row product-item" data-tags="powder" data-name="چای کرک (هل / زعفران)">
-                <div class="item-detail">
-                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=100&q=80" class="product-img" alt="کرک">
-                    <div>
-                        <div class="item-name">چای کرک (هل / زعفران)</div>
-                        <div class="item-desc">عطر بی‌نظیر هل و زعفران اصیل</div>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-price">تماس بگیرید</div>
-                    <div class="action-row">
-                        <a class="order-bale-btn" data-order="چای کرک (هل / زعفران)" target="_blank" rel="noopener noreferrer">سفارش در بله</a>
-                        <button type="button" class="share-item-btn" onclick="shareProduct('چای کرک (هل / زعفران)')">📤</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>تهران، تهرانپارس، خیابان جشنواره، پلاک ۴۸ | کلبه چای و قهوه سیمرغ</p>
-    </footer>
+  </div>
 </div>
 
 <div class="floating-buttons">
-    <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
-    <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
+  <button type="button" onclick="SimorghCart.openModal()" class="fab-btn fab-cart">🧾 فاکتور (<span id="simorghCartCount">0</span>)</button>
+  <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
+  <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
 </div>
 
-<script>
-    function initBaleOrderLinks() {
-        document.querySelectorAll('.order-bale-btn').forEach(btn => {
-            const name = btn.getAttribute('data-order');
-            const text = encodeURIComponent(`سلام، درباره «${name}» و نحوه سفارش/آسیاب راهنمایی می‌خواستم.`);
-            btn.href = `https://ble.ir/simorgh_coffee?text=${text}`;
-        });
-    }
-
-    function toggleGrindGuide() {
-        const content = document.getElementById('grindContent');
-        const arrow = document.getElementById('grindArrow');
-        const isOpen = content.classList.toggle('open');
-        arrow.textContent = isOpen ? '▲' : '▼';
-    }
-
-    function switchTab(tabId, btnElement) {
-        document.getElementById('searchInput').value = '';
-        document.getElementById('tabsList').style.display = 'flex';
-        document.getElementById('quickTags').style.display = 'flex';
-
-        document.querySelectorAll('.tag-btn').forEach((b, idx) => {
-            b.classList.toggle('active', idx === 0);
-        });
-
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
-        document.getElementById(tabId).classList.add('active');
-        if (btnElement) btnElement.classList.add('active');
-
-        document.querySelectorAll('#' + tabId + ' .product-item').forEach(item => {
-            item.style.display = 'flex';
-        });
-    }
-
-    function filterByTag(tag, btnElement) {
-        document.getElementById('searchInput').value = '';
-        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-        if (btnElement) btnElement.classList.add('active');
-
-        const tabsList = document.getElementById('tabsList');
-        const allItems = document.querySelectorAll('.product-item');
-
-        if (tag === 'all') {
-            tabsList.style.display = 'flex';
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('single').classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach((b, idx) => b.classList.toggle('active', idx === 0));
-            allItems.forEach(item => item.style.display = 'flex');
-            return;
-        }
-
-        tabsList.style.display = 'none';
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('active'));
-        allItems.forEach(item => {
-            const tags = (item.getAttribute('data-tags') || '').split(' ');
-            item.style.display = tags.includes(tag) ? 'flex' : 'none';
-        });
-    }
-
-    function filterProducts() {
-        const input = document.getElementById('searchInput').value.toLowerCase().trim();
-        const tabsList = document.getElementById('tabsList');
-        const allItems = document.querySelectorAll('.product-item');
-
-        if (input !== "") {
-            tabsList.style.display = "none";
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('active'));
-            allItems.forEach(item => {
-                const text = item.innerText.toLowerCase();
-                item.style.display = text.includes(input) ? "flex" : "none";
-            });
-        } else {
-            tabsList.style.display = "flex";
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('single').classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach((btn, index) => btn.classList.toggle('active', index === 0));
-            document.querySelectorAll('.tag-btn').forEach((btn, index) => btn.classList.toggle('active', index === 0));
-            allItems.forEach(item => item.style.display = "flex");
-        }
-    }
-
-    async function shareProduct(productName) {
-        const shareData = {
-            title: productName,
-            text: `«${productName}» در کلبه چای و قهوه سیمرغ:`,
-            url: window.location.href
-        };
-        if (navigator.share) {
-            try { await navigator.share(shareData); } catch (e) {}
-        } else if (navigator.clipboard) {
-            await navigator.clipboard.writeText(`${productName} - ${window.location.href}`);
-            alert('نام و لینک محصول کپی شد!');
-        }
-    }
-
-    initBaleOrderLinks();
-</script>
-
+<script src="./simorgh-cart.js"></script>
 </body>
 </html>
