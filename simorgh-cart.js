@@ -18,6 +18,14 @@
     } catch (e) {}
   }
 
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   function notify(msg) {
     try {
       if (typeof window.showToast === 'function') {
@@ -30,7 +38,7 @@
       if (!box) {
         box = document.createElement('div');
         box.id = 'simorghCartToast';
-        box.style.cssText = 'position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#26130a;color:#fff;padding:10px 18px;border-radius:24px;font-size:13px;font-weight:700;z-index:2000;box-shadow:0 8px 20px rgba(0,0,0,.22);font-family:Vazirmatn,Tahoma,sans-serif;white-space:nowrap;';
+        box.style.cssText = 'position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#26130a;color:#fff;padding:10px 18px;border-radius:24px;font-size:12px;font-weight:bold;z-index:2000;box-shadow:0 8px 20px rgba(0,0,0,.22);font-family:Tahoma,sans-serif;max-width:92vw;text-align:center;';
         document.body.appendChild(box);
       }
       box.textContent = msg;
@@ -38,7 +46,7 @@
       clearTimeout(window.__simorghCartToastTimer);
       window.__simorghCartToastTimer = setTimeout(function () {
         if (box) box.style.display = 'none';
-      }, 2200);
+      }, 2600);
     } catch (e) {}
   }
 
@@ -52,47 +60,15 @@
     if (badge) badge.textContent = String(totalQty);
   }
 
-  function renderModalContent() {
-    var listEl = document.getElementById('simorghCartItems');
-    if (!listEl) return;
-    var items = safeGetCart();
-    if (!items.length) {
-      listEl.innerHTML = '<div style="text-align:center;color:#6b625a;font-size:13px;padding:18px 8px;">هنوز موردی به فاکتور اضافه نشده است.</div>';
-      return;
-    }
-    var html = '';
-    for (var i = 0; i < items.length; i++) {
-      var it = items[i];
-      html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fcf7f0;border:1px solid #e7d6c0;border-radius:10px;padding:9px 10px;margin-bottom:8px;">' +
-        '<div style="font-size:13px;font-weight:700;color:#26130a;flex:1;text-align:right;">' + escapeHtml(it.name) + '</div>' +
-        '<div style="display:flex;align-items:center;gap:6px;">' +
-          '<button type="button" onclick="SimorghCart.changeQty(' + i + ',-1)" style="width:26px;height:26px;border-radius:7px;border:1px solid #d8c3a8;background:#fff;font-weight:800;cursor:pointer;">-</button>' +
-          '<span style="min-width:20px;text-align:center;font-weight:800;font-size:13px;">' + (it.qty || 1) + '</span>' +
-          '<button type="button" onclick="SimorghCart.changeQty(' + i + ',1)" style="width:26px;height:26px;border-radius:7px;border:1px solid #d8c3a8;background:#fff;font-weight:800;cursor:pointer;">+</button>' +
-          '<button type="button" onclick="SimorghCart.removeItem(' + i + ')" style="border:none;background:#fee2e2;color:#991b1b;border-radius:7px;padding:4px 8px;font-size:11px;font-weight:700;cursor:pointer;">حذف</button>' +
-        '</div>' +
-      '</div>';
-    }
-    listEl.innerHTML = html;
-  }
-
-  function escapeHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
   function buildInvoiceText() {
     var items = safeGetCart();
     var deliveryEl = document.getElementById('simorghDeliveryType');
     var noteEl = document.getElementById('simorghOrderNote');
-    var delivery = deliveryEl ? deliveryEl.value : 'حضوری در فروشگاه';
+    var delivery = deliveryEl ? deliveryEl.value : 'تحویل حضوری در فروشگاه (تهرانپارس)';
     var note = noteEl ? noteEl.value.trim() : '';
 
     var lines = [
-      'سلام، سفارش / پیش‌فاکتور از کلبه چای و قهوه سیمرغ:',
+      'سلام، سفارش / فاکتور از کلبه چای و قهوه سیمرغ:',
       '--------------------------------'
     ];
     for (var i = 0; i < items.length; i++) {
@@ -103,8 +79,92 @@
     if (note) {
       lines.push('توضیحات (آسیاب / وزن / هماهنگی): ' + note);
     }
-    lines.push('آدرس فروشگاه: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸');
+    lines.push('آدرس: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸');
     return lines.join('\n');
+  }
+
+  function refreshPreviewText() {
+    var preview = document.getElementById('simorghInvoicePreview');
+    if (!preview) return;
+    var items = safeGetCart();
+    preview.value = items.length ? buildInvoiceText() : '';
+  }
+
+  function renderModalContent() {
+    var listEl = document.getElementById('simorghCartItems');
+    if (!listEl) return;
+    var items = safeGetCart();
+    if (!items.length) {
+      listEl.innerHTML = '<div style="text-align:center;color:#6b625a;font-size:13px;padding:16px 8px;">هنوز موردی به فاکتور اضافه نشده است.</div>';
+      refreshPreviewText();
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fcf7f0;border:1px solid #e7d6c0;border-radius:10px;padding:9px 10px;margin-bottom:8px;">' +
+        '<div style="font-size:12.5px;font-weight:bold;color:#26130a;flex:1;text-align:right;">' + escapeHtml(it.name) + '</div>' +
+        '<div style="display:flex;align-items:center;gap:6px;">' +
+          '<button type="button" onclick="SimorghCart.changeQty(' + i + ',-1)" style="width:26px;height:26px;border-radius:7px;border:1px solid #d8c3a8;background:#fff;font-weight:bold;cursor:pointer;">-</button>' +
+          '<span style="min-width:20px;text-align:center;font-weight:bold;font-size:13px;">' + (it.qty || 1) + '</span>' +
+          '<button type="button" onclick="SimorghCart.changeQty(' + i + ',1)" style="width:26px;height:26px;border-radius:7px;border:1px solid #d8c3a8;background:#fff;font-weight:bold;cursor:pointer;">+</button>' +
+          '<button type="button" onclick="SimorghCart.removeItem(' + i + ')" style="border:none;background:#fee2e2;color:#991b1b;border-radius:7px;padding:4px 8px;font-size:11px;font-weight:bold;cursor:pointer;">حذف</button>' +
+        '</div>' +
+      '</div>';
+    }
+    listEl.innerHTML = html;
+    refreshPreviewText();
+  }
+
+  function copyTextNow(text) {
+    var ok = false;
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    return ok;
+  }
+
+  function openBaleDirect() {
+    try {
+      var a = document.createElement('a');
+      a.href = BALE_URL;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (e) {
+      try {
+        window.location.href = BALE_URL;
+      } catch (err) {}
+    }
+  }
+
+  function copyOnly() {
+    var items = safeGetCart();
+    if (!items.length) {
+      notify('ابتدا حداقل یک مورد به فاکتور اضافه کنید');
+      return;
+    }
+    var text = buildInvoiceText();
+    var preview = document.getElementById('simorghInvoicePreview');
+    if (preview) preview.value = text;
+    copyTextNow(text);
+    notify('متن فاکتور کپی شد؛ در بله پیست کنید');
   }
 
   function copyAndOpenBale() {
@@ -114,25 +174,11 @@
       return;
     }
     var text = buildInvoiceText();
-
-    function goBale() {
-      notify('متن فاکتور کپی شد؛ در پیام‌رسان بله پیست و ارسال کنید');
-      try {
-        window.open(BALE_URL, '_blank', 'noopener,noreferrer');
-      } catch (e) {
-        window.location.href = BALE_URL;
-      }
-    }
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(goBale, function () {
-        prompt('متن فاکتور را کپی کنید و در بله بفرستید:', text);
-        goBale();
-      });
-    } else {
-      prompt('متن فاکتور را کپی کنید و در بله بفرستید:', text);
-      goBale();
-    }
+    var preview = document.getElementById('simorghInvoicePreview');
+    if (preview) preview.value = text;
+    copyTextNow(text);
+    notify('کپی شد! در بله وارد کادر پیام شوید و پیست کنید');
+    setTimeout(openBaleDirect, 250);
   }
 
   function injectUI() {
@@ -140,28 +186,33 @@
 
     var modal = document.createElement('div');
     modal.id = 'simorghInvoiceModal';
-    modal.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(20,10,5,.55);z-index:1500;padding:16px;align-items:center;justify-content:center;direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(20,10,5,.55);z-index:1500;padding:14px;align-items:center;justify-content:center;direction:rtl;font-family:Tahoma,sans-serif;';
     modal.innerHTML =
-      '<div style="background:#fff;max-width:460px;width:100%;border-radius:18px;padding:18px 16px;box-shadow:0 16px 36px rgba(0,0,0,.25);border:1px solid #ead8c0;max-height:88vh;overflow-y:auto;text-align:right;">' +
+      '<div style="background:#fff;max-width:470px;width:100%;border-radius:18px;padding:16px;box-shadow:0 16px 36px rgba(0,0,0,.25);border:1px solid #ead8c0;max-height:90vh;overflow-y:auto;text-align:right;">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">' +
-          '<strong style="font-size:15px;color:#26130a;">🧾 فاکتور انتخابی شما</strong>' +
-          '<button type="button" onclick="SimorghCart.closeModal()" style="border:none;background:#f4ece0;color:#3d2314;border-radius:8px;padding:4px 10px;font-weight:800;cursor:pointer;">بستن</button>' +
+          '<strong style="font-size:14px;color:#26130a;">🧾 فاکتور انتخابی شما</strong>' +
+          '<button type="button" onclick="SimorghCart.closeModal()" style="border:none;background:#f4ece0;color:#3d2314;border-radius:8px;padding:4px 10px;font-weight:bold;cursor:pointer;font-family:Tahoma,sans-serif;">بستن</button>' +
         '</div>' +
         '<div id="simorghCartItems"></div>' +
-        '<div style="margin-top:10px;">' +
-          '<label style="display:block;font-size:12px;font-weight:700;color:#3d2314;margin-bottom:4px;">نحوه دریافت سفارش:</label>' +
-          '<select id="simorghDeliveryType" style="width:100%;padding:9px 10px;border-radius:9px;border:1px solid #dfcbb0;background:#fcf7f0;font-family:inherit;font-size:12px;font-weight:700;">' +
+        '<div style="margin-top:8px;">' +
+          '<label style="display:block;font-size:12px;font-weight:bold;color:#3d2314;margin-bottom:4px;">نحوه دریافت سفارش:</label>' +
+          '<select id="simorghDeliveryType" onchange="SimorghCart.refreshPreview()" style="width:100%;padding:8px 10px;border-radius:9px;border:1px solid #dfcbb0;background:#fcf7f0;font-family:Tahoma,sans-serif;font-size:12px;font-weight:bold;">' +
             '<option value="تحویل حضوری در فروشگاه (تهرانپارس)">تحویل حضوری در فروشگاه (تهرانپارس)</option>' +
             '<option value="ارسال پیکی در تهرانپارس و اطراف">ارسال پیکی در تهرانپارس و اطراف</option>' +
           '</select>' +
         '</div>' +
-        '<div style="margin-top:10px;">' +
-          '<label style="display:block;font-size:12px;font-weight:700;color:#3d2314;margin-bottom:4px;">توضیحات (مثلاً درجه آسیاب اسپرسو/ترک یا وزن):</label>' +
-          '<input id="simorghOrderNote" type="text" placeholder="مثال: آسیاب اسپرسو، ترکیب پرکافئین..." style="width:100%;padding:9px 10px;border-radius:9px;border:1px solid #dfcbb0;font-family:inherit;font-size:12px;">' +
+        '<div style="margin-top:8px;">' +
+          '<label style="display:block;font-size:12px;font-weight:bold;color:#3d2314;margin-bottom:4px;">توضیحات (درجه آسیاب، وزن یا هماهنگی):</label>' +
+          '<input id="simorghOrderNote" oninput="SimorghCart.refreshPreview()" type="text" placeholder="مثال: آسیاب اسپرسو، ۲۵۰ گرم..." style="width:100%;padding:8px 10px;border-radius:9px;border:1px solid #dfcbb0;font-family:Tahoma,sans-serif;font-size:12px;">' +
         '</div>' +
-        '<div style="display:flex;gap:8px;margin-top:14px;">' +
-          '<button type="button" onclick="SimorghCart.sendToBale()" style="flex:2;border:none;background:linear-gradient(135deg,#00779b,#005b77);color:#fff;padding:11px;border-radius:11px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;">📤 کپی و ارسال به بله</button>' +
-          '<button type="button" onclick="SimorghCart.clearCart()" style="flex:1;border:1px solid #e5c9c9;background:#fff5f5;color:#991b1b;padding:11px;border-radius:11px;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">خالی کردن</button>' +
+        '<div style="margin-top:10px;">' +
+          '<label style="display:block;font-size:11.5px;font-weight:bold;color:#5c534b;margin-bottom:4px;">پیش‌نمایش متن فاکتور (در بله پیست و ارسال کنید):</label>' +
+          '<textarea id="simorghInvoicePreview" readonly rows="5" style="width:100%;padding:8px;border-radius:9px;border:1px solid #e7d6c0;background:#fcf7f0;font-family:Tahoma,sans-serif;font-size:11.5px;line-height:1.55;color:#231e1a;resize:vertical;"></textarea>' +
+        '</div>' +
+        '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;">' +
+          '<button type="button" onclick="SimorghCart.sendToBale()" style="flex:1.5;min-width:140px;border:none;background:#00779b;color:#fff;padding:10px;border-radius:10px;font-weight:bold;font-size:12.5px;cursor:pointer;font-family:Tahoma,sans-serif;">کپی و باز کردن بله</button>' +
+          '<button type="button" onclick="SimorghCart.copyOnly()" style="flex:1;min-width:90px;border:1px solid #d8c3a8;background:#fcf7f0;color:#26130a;padding:10px;border-radius:10px;font-weight:bold;font-size:12px;cursor:pointer;font-family:Tahoma,sans-serif;">فقط کپی متن</button>' +
+          '<button type="button" onclick="SimorghCart.clearCart()" style="border:1px solid #e5c9c9;background:#fff5f5;color:#991b1b;padding:10px;border-radius:10px;font-weight:bold;font-size:11.5px;cursor:pointer;font-family:Tahoma,sans-serif;">خالی کردن</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(modal);
@@ -213,6 +264,12 @@
       renderBadge();
       renderModalContent();
       notify('فاکتور خالی شد');
+    },
+    refreshPreview: function () {
+      refreshPreviewText();
+    },
+    copyOnly: function () {
+      copyOnly();
     },
     openModal: function () {
       injectUI();
