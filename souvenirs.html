@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#2b1409" />
   <link rel="manifest" href="./manifest.json" />
   <title>سوغاتی و شیرین‌کام | کلبه چای و قهوه سیمرغ</title>
-  <meta name="description" content="سوغاتی و شیرین‌کام‌های کلبه چای و قهوه سیمرغ در تهرانپارس — نبات و قند یزد، حلوا ارده و شیرین‌کام‌های همراه چای و قهوه." />
+  <meta name="description" content="سوغاتی و شیرین‌کام‌های کلبه چای و قهوه سیمرغ در تهرانپارس — انواع نبات و قند یزد، حلوا ارده و شیرین‌کام‌های همراه چای و قهوه." />
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -55,6 +55,10 @@
     }
     .nav-pill.active {
       background: #2b1409; border-color: #2b1409; color: #ffffff;
+    }
+    .section-label {
+      font-size: 12px; font-weight: bold; color: #6b4c35;
+      margin: 10px 4px 6px;
     }
     .items-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
     .product-card {
@@ -178,32 +182,66 @@
       <a class="nav-pill" href="./tea.html">چای و دمنوش</a>
       <a class="nav-pill active" href="./souvenirs.html">سوغاتی و شیرین‌کام</a>
     </nav>
+    <div class="section-label">انواع نبات یزد</div>
     <section class="items-list">
       <article class="product-card">
         <div class="product-info">
-          <strong>نبات یزد (ساده، زعفرانی و طعم‌دار)</strong>
+          <strong>نبات ساده یزد</strong>
           <p>مناسب سرو کنار چای، دمنوش و قهوه‌های سنتی و یزدی.</p>
-          <span class="product-tag">سوغاتی یزد</span>
+          <span class="product-tag">سوغاتی یزد • ساده</span>
         </div>
-        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-nabat-yazd" data-item-name="نبات یزد">+ به فاکتور</button>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-nabat-sadeh" data-item-name="نبات ساده یزد">+ به فاکتور</button>
       </article>
 
       <article class="product-card">
         <div class="product-info">
-          <strong>قند یزد و قندهای طعم‌دار</strong>
-          <p>انتخاب خوش‌عطر و مناسب مصرف روزانه و پذیرایی.</p>
-          <span class="product-tag">شیرین‌کام اصیل</span>
+          <strong>نبات زعفرانی یزد</strong>
+          <p>تهیه شده با زعفران خوش‌عطر و خوش‌رنگ، مناسب پذیرایی و دمنوش.</p>
+          <span class="product-tag">سوغاتی یزد • زعفرانی</span>
         </div>
-        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-ghand-yazd" data-item-name="قند یزد">+ به فاکتور</button>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-nabat-zaferani" data-item-name="نبات زعفرانی یزد">+ به فاکتور</button>
       </article>
 
+      <article class="product-card">
+        <div class="product-info">
+          <strong>نبات طعم‌دار یزد</strong>
+          <p>در طعم‌های گیاهی و معطر (هل، دارچین، گل‌محمدی و...).</p>
+          <span class="product-tag">سوغاتی یزد • طعم‌دار</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-nabat-tamdar" data-item-name="نبات طعم‌دار یزد">+ به فاکتور</button>
+      </article>
+    </section>
+
+    <div class="section-label">انواع قند یزد</div>
+    <section class="items-list">
+      <article class="product-card">
+        <div class="product-info">
+          <strong>قند ساده یزد</strong>
+          <p>ترد و باکیفیت، مناسب مصرف روزانه کنار چای اصیل.</p>
+          <span class="product-tag">شیرین‌کام • ساده</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-ghand-sadeh" data-item-name="قند ساده یزد">+ به فاکتور</button>
+      </article>
+
+      <article class="product-card">
+        <div class="product-info">
+          <strong>قندهای طعم‌دار یزد</strong>
+          <p>معطر با هل، دارچین، گل‌محمدی و طعم‌های سنتی ویژه پذیرایی.</p>
+          <span class="product-tag">شیرین‌کام • طعم‌دار</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-ghand-tamdar" data-item-name="قندهای طعم‌دار یزد">+ به فاکتور</button>
+      </article>
+    </section>
+
+    <div class="section-label">سایر سوغاتی‌ها و چاشنی‌ها</div>
+    <section class="items-list">
       <article class="product-card">
         <div class="product-info">
           <strong>حلوا ارده سنتی</strong>
           <p>مقوی و خوش‌طعم، مناسب صبحانه و عصرانه در کنار چای.</p>
           <span class="product-tag">سوغاتی سنتی</span>
         </div>
-        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-halva-ardeh" data-item-name="حلوا ارده">+ به فاکتور</button>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-halva-ardeh" data-item-name="حلوا ارده سنتی">+ به فاکتور</button>
       </article>
 
       <article class="product-card">
@@ -221,7 +259,7 @@
           <p>خوشبوکننده طبیعی برای چای، دمنوش و دستورهای سنتی قهوه.</p>
           <span class="product-tag">طبیعی و معطر</span>
         </div>
-        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-rose-golab" data-item-name="گل محمدی و گلاب">+ به فاکتور</button>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-rose-golab" data-item-name="گل محمدی خشک و گلاب ناب">+ به فاکتور</button>
       </article>
 
       <article class="product-card">
@@ -301,6 +339,6 @@
       sync();
     }catch(err){}})();
   </script>
-  <script src="./simorgh-cart.js?v=57" onerror="void(0)"></script>
+  <script src="./simorgh-cart.js?v=58" onerror="void(0)"></script>
 </body>
 </html>
