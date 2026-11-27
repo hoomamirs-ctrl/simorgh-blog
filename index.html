@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2b1409" />
-  <link rel="manifest" href="./manifest.json" />
+  <link rel="manifest" href="./manifest.json?v=20261127" />
   <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
   <style>
     * { box-sizing: border-box; }
@@ -96,36 +96,47 @@
     }
     .cat-card strong { display: block; font-size: 12.5px; margin-bottom: 2px; color: #26130a; }
     .cat-card span { display: block; font-size: 10.5px; color: #6b5848; }
-    details.acc-box {
+    .acc-box {
       background: #fffdf9;
       border: 1px solid #ead9c1;
       border-radius: 16px;
       padding: 10px 12px;
       margin-bottom: 10px;
     }
-    details.acc-box summary {
+    .acc-trigger {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      padding: 2px 0;
       cursor: pointer;
       font-weight: bold;
       font-size: 12px;
       color: #26130a;
-      list-style: none;
+      font-family: Tahoma, sans-serif;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
+      text-align: right;
     }
-    details.acc-box summary::-webkit-details-marker { display: none; }
-    .acc-chevron {
-      font-size: 12px;
+    .acc-arrow {
+      font-size: 13px;
       color: #7c3e08;
-      transition: transform 0.2s ease;
       display: inline-block;
-      line-height: 1;
+      transition: transform 0.2s ease;
     }
-    details.acc-box[open] .acc-chevron {
+    .acc-box.is-open .acc-arrow {
       transform: rotate(180deg);
     }
-    .acc-body { padding-top: 8px; font-size: 11.5px; color: #5c4636; }
+    .acc-panel {
+      display: none;
+      padding-top: 8px;
+      font-size: 11.5px;
+      color: #5c4636;
+    }
+    .acc-box.is-open .acc-panel {
+      display: block;
+    }
     .acc-link {
       display: block;
       text-decoration: none;
@@ -432,29 +443,29 @@
       </a>
     </nav>
 
-    <details class="acc-box">
-      <summary>
+    <div class="acc-box" id="accSocial">
+      <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="panelSocial">
         <span>شبکه‌های اجتماعی و پیام‌رسان</span>
-        <span class="acc-chevron" aria-hidden="true">▾</span>
-      </summary>
-      <div class="acc-body">
+        <span class="acc-arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="acc-panel" id="panelSocial">
         <a class="acc-link" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">پیام‌رسان بله: <span class="ltr-pin">@simorgh_coffee</span></a>
         <a class="acc-link" href="https://instagram.com/simorgh_coffee" target="_blank" rel="noopener noreferrer">اینستاگرام: <span class="ltr-pin">@simorgh_coffee</span></a>
         <a class="acc-link" href="https://www.aparat.com/simorgh_coffee" target="_blank" rel="noopener noreferrer">آپارات: <span class="ltr-pin">@simorgh_coffee</span></a>
       </div>
-    </details>
+    </div>
 
-    <details class="acc-box">
-      <summary>
+    <div class="acc-box" id="accContact">
+      <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="panelContact">
         <span>تماس با ما و راه‌های ارتباطی</span>
-        <span class="acc-chevron" aria-hidden="true">▾</span>
-      </summary>
-      <div class="acc-body">
+        <span class="acc-arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="acc-panel" id="panelContact">
         <div>تلفن ثابت: <a href="tel:02177341312"><span class="ltr-pin">021-77341312</span></a></div>
         <div>همراه و سفارش: <a href="tel:09125183142"><span class="ltr-pin">09125183142</span></a></div>
         <div>نشانی: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
       </div>
-    </details>
+    </div>
 
     <section class="quick-order-box">
       <div class="quick-info">
@@ -529,7 +540,18 @@
 
   <script>
     (function () {
-      function applyStoreStatus() {
+      var triggers = document.querySelectorAll(".acc-trigger");
+      for (var i = 0; i < triggers.length; i++) {
+        triggers[i].addEventListener("click", function () {
+          var box = this.closest ? this.closest(".acc-box") : this.parentElement;
+          if (!box) return;
+          var willOpen = !box.classList.contains("is-open");
+          box.classList.toggle("is-open", willOpen);
+          this.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        });
+      }
+
+      function renderStoreStatus() {
         var badge = document.getElementById("storeStatusBadge");
         if (!badge) return;
         var now = new Date();
@@ -541,8 +563,10 @@
         badge.textContent = isOpen ? "فروشگاه باز است" : "فروشگاه بسته است";
         badge.classList.toggle("open", isOpen);
       }
-      applyStoreStatus();
-      document.addEventListener("DOMContentLoaded", applyStoreStatus);
+
+      renderStoreStatus();
+      window.addEventListener("load", renderStoreStatus);
+      setInterval(renderStoreStatus, 30000);
     })();
   </script>
 
@@ -634,3 +658,172 @@
           items.push({ id: cleanId || ("item-" + Date.now()), name: cleanName, qty: 1 });
         }
         syncState();
+        if (modalEl && modalEl.classList.contains("open")) {
+          renderList();
+        }
+      }
+
+      function changeQty(index, delta) {
+        if (!items[index]) return;
+        var nextQty = (Number(items[index].qty) || 0) + delta;
+        if (nextQty <= 0) {
+          items.splice(index, 1);
+        } else {
+          items[index].qty = nextQty;
+        }
+        syncState();
+        renderList();
+      }
+
+      function renderList() {
+        if (!listEl) return;
+        if (!items.length) {
+          listEl.innerHTML = '<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از دسته‌بندی‌ها یا دکمه «+ به فاکتور» اضافه کنید.</div>';
+          updateBaleHref();
+          return;
+        }
+        var html = "";
+        for (var i = 0; i < items.length; i++) {
+          html += '<div class="fallback-item-row">' +
+            '<span><strong>' + items[i].name + '</strong></span>' +
+            '<div class="qty-controls">' +
+            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="-1">-</button>' +
+            '<span>' + (Number(items[i].qty) || 0) + '</span>' +
+            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="1">+</button>' +
+            '</div></div>';
+        }
+        listEl.innerHTML = html;
+
+        var qtyButtons = listEl.querySelectorAll(".qty-btn");
+        for (var k = 0; k < qtyButtons.length; k++) {
+          qtyButtons[k].addEventListener("click", function() {
+            var idx = Number(this.getAttribute("data-idx"));
+            var delta = Number(this.getAttribute("data-delta"));
+            changeQty(idx, delta);
+          });
+        }
+        updateBaleHref();
+      }
+
+      var addButtons = document.querySelectorAll("[data-add-invoice], .q-add-btn");
+      for (var b = 0; b < addButtons.length; b++) {
+        addButtons[b].addEventListener("click", function(ev) {
+          ev.preventDefault();
+          var btn = this;
+          var itemName = btn.getAttribute("data-item-name") || btn.getAttribute("data-name") || "مشاوره و انتخاب قهوه سیمرغ";
+          var itemId = btn.getAttribute("data-item-id") || btn.getAttribute("data-id") || "";
+          addToCart(itemName, itemId);
+
+          var prevText = btn.textContent;
+          btn.textContent = "اضافه شد ✓";
+          btn.classList.add("added");
+          setTimeout(function() {
+            btn.textContent = prevText || "+ به فاکتور";
+            btn.classList.remove("added");
+          }, 900);
+        });
+      }
+
+      if (quickBaleLink) {
+        var consultMsg = "سلام، برای انتخاب قهوه مناسب (نوع دان، میکس یا آسیاب) در کلبه چای و قهوه سیمرغ نیاز به مشاوره دارم.";
+        quickBaleLink.href = "https://ble.ir/simorgh_coffee?text=" + encodeURIComponent(consultMsg);
+      }
+
+      if (openBtn) {
+        openBtn.addEventListener("click", function() {
+          renderList();
+          if (modalEl) modalEl.classList.add("open");
+        });
+      }
+
+      if (closeBtn && modalEl) {
+        closeBtn.addEventListener("click", function() {
+          modalEl.classList.remove("open");
+        });
+      }
+
+      if (modalEl) {
+        modalEl.addEventListener("click", function(ev) {
+          if (ev.target === modalEl) modalEl.classList.remove("open");
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", function() {
+          items = [];
+          syncState();
+          renderList();
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function() {
+          var text = buildOrderText();
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).catch(function(){});
+          }
+          copyBtn.textContent = "کپی شد ✓";
+          setTimeout(function() { copyBtn.textContent = "کپی متن"; }, 1800);
+        });
+      }
+
+      ["invCustomerName", "invDeliveryType", "invGrindType"].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", updateBaleHref);
+          el.addEventListener("change", updateBaleHref);
+        }
+      });
+
+      var shareBtn = document.getElementById("shareSiteBtn");
+      if (shareBtn) {
+        shareBtn.addEventListener("click", function() {
+          var shareData = {
+            title: "کلبه چای و قهوه سیمرغ",
+            text: "منو و سفارش آنلاین کلبه چای و قهوه سیمرغ (تهرانپارس)",
+            url: window.location.href
+          };
+          if (navigator.share) {
+            navigator.share(shareData).catch(function(){});
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href).catch(function(){});
+            shareBtn.textContent = "لینک کپی شد ✓";
+            setTimeout(function() { shareBtn.textContent = "اشتراک‌گذاری"; }, 1600);
+          }
+        });
+      }
+
+      var deferredPrompt = null;
+      window.addEventListener("beforeinstallprompt", function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      var installBtn = document.getElementById("installPwaBtn");
+      if (installBtn) {
+        installBtn.addEventListener("click", function() {
+          if (deferredPrompt && deferredPrompt.prompt) {
+            deferredPrompt.prompt();
+            deferredPrompt = null;
+          } else {
+            installBtn.textContent = "از منوی مرورگر نصب کنید";
+            setTimeout(function() { installBtn.textContent = "نصب اپلیکیشن"; }, 1800);
+          }
+        });
+      }
+
+      syncState();
+    })();
+  </script>
+</body>
+</html>
