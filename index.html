@@ -105,8 +105,10 @@
     }
     .acc-trigger {
       width: 100%;
+      min-width: 0;
       background: transparent;
       border: 0;
+      outline: none;
       padding: 2px 0;
       cursor: pointer;
       font-weight: bold;
@@ -118,8 +120,21 @@
       justify-content: space-between;
       gap: 8px;
       text-align: right;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .acc-trigger:focus,
+    .acc-trigger:focus-visible,
+    .acc-trigger:active {
+      outline: none;
+      box-shadow: none;
+    }
+    .acc-trigger > span:first-child {
+      flex: 1;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
     .acc-arrow {
+      flex-shrink: 0;
       font-size: 13px;
       color: #7c3e08;
       display: inline-block;
@@ -233,6 +248,7 @@
       text-align: center;
       color: #5c4636;
       margin-top: 6px;
+      font-weight: bold;
     }
     .footer-addr {
       background: #fffdf9;
@@ -490,7 +506,7 @@
       </div>
       <div>شنبه تا پنجشنبه: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">22:00</span></div>
       <div>جمعه‌ها: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">13:00</span></div>
-      <div class="hours-note">ساعت کاری: شنبه تا پنجشنبه ۸ تا ۲۲ | جمعه ۸ تا ۱۳</div>
+      <div id="storeCountdown" class="hours-note">در حال محاسبه زمان...</div>
     </section>
 
     <footer class="footer-addr">
@@ -548,20 +564,45 @@
           var willOpen = !box.classList.contains("is-open");
           box.classList.toggle("is-open", willOpen);
           this.setAttribute("aria-expanded", willOpen ? "true" : "false");
+          if (this.blur) this.blur();
         });
+      }
+
+      function formatCountdown(diffMins) {
+        if (diffMins < 0) diffMins = 0;
+        var h = Math.floor(diffMins / 60);
+        var m = diffMins % 60;
+        if (h > 0 && m > 0) return h + " ساعت و " + m + " دقیقه";
+        if (h > 0) return h + " ساعت";
+        return m + " دقیقه";
       }
 
       function renderStoreStatus() {
         var badge = document.getElementById("storeStatusBadge");
+        var countdownEl = document.getElementById("storeCountdown");
         if (!badge) return;
+
         var now = new Date();
         var day = now.getDay();
         var mins = now.getHours() * 60 + now.getMinutes();
-        var isOpen = (day === 5)
-          ? (mins >= 8 * 60 && mins <= 13 * 60)
-          : (mins >= 8 * 60 && mins <= 22 * 60);
+
+        var openMin = 8 * 60;
+        var closeMin = (day === 5) ? (13 * 60) : (22 * 60);
+        var isOpen = mins >= openMin && mins <= closeMin;
+
         badge.textContent = isOpen ? "فروشگاه باز است" : "فروشگاه بسته است";
         badge.classList.toggle("open", isOpen);
+
+        if (!countdownEl) return;
+
+        if (isOpen) {
+          countdownEl.textContent = "تا پایان ساعت کاری امروز: " + formatCountdown(closeMin - mins);
+        } else if (mins < openMin) {
+          countdownEl.textContent = "تا شروع به کار امروز (08:00): " + formatCountdown(openMin - mins);
+        } else {
+          var remToday = (24 * 60) - mins;
+          countdownEl.textContent = "تا شروع به کار فردا (08:00): " + formatCountdown(remToday + openMin);
+        }
       }
 
       renderStoreStatus();
