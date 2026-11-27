@@ -146,7 +146,10 @@
       font-family: Tahoma, sans-serif;
       flex-shrink: 0;
       white-space: nowrap;
+      transition: background 0.18s ease, transform 0.12s ease;
     }
+    .add-btn:active { transform: scale(0.97); }
+    .add-btn.added { background: #15803d; }
     .note-box {
       background: #fffdf9;
       border: 1px dashed #d7b285;
@@ -592,59 +595,215 @@
 
   <script>
     (function(){
-      var K = 'simorgh_user_invoice_items_v2';
-      function load(){
+      var K = "simorgh_user_invoice_items_v2";
+      var items = [];
+
+      function loadItems() {
         try {
-          var r = localStorage.getItem(K);
-          if (r) {
-            var a = JSON.parse(r);
-            if (Array.isArray(a)) return a.filter(function(x){ return x && x.name && (Number(x.qty) || 0) > 0; });
+          var raw = localStorage.getItem(K);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) {
+              return parsed.filter(function(x){
+                return x && x.name && (Number(x.qty) || 0) > 0;
+              }).map(function(x){
+                return { id: x.id || "", name: String(x.name), qty: Number(x.qty) || 1 };
+              });
+            }
           }
         } catch (e) {}
         return [];
       }
-      var items = load();
-      var cnt = document.getElementById('simorghCartCount');
-      var opn = document.getElementById('openInvoiceBarBtn');
-      var mdl = document.getElementById('simorghFallbackModal');
-      var lst = document.getElementById('fallbackItemsList');
-      var cls = document.getElementById('fallbackCloseBtn');
-      var clr = document.getElementById('fallbackClearBtn');
-      var cpb = document.getElementById('fallbackCopyBtn');
-      var blk = document.getElementById('fallbackBaleLink');
 
-      function bText(){
-        var l = ['سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):'];
+      items = loadItems();
+
+      var cntEl = document.getElementById("simorghCartCount");
+      var openBtn = document.getElementById("openInvoiceBarBtn");
+      var modalEl = document.getElementById("simorghFallbackModal");
+      var listEl = document.getElementById("fallbackItemsList");
+      var closeBtn = document.getElementById("fallbackCloseBtn");
+      var clearBtn = document.getElementById("fallbackClearBtn");
+      var copyBtn = document.getElementById("fallbackCopyBtn");
+      var baleLink = document.getElementById("fallbackBaleLink");
+
+      function buildOrderText() {
+        var lines = ["سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):"];
         if (!items.length) {
-          l.push('• هنوز موردی از منو به فاکتور اضافه نشده است.');
+          lines.push("• هنوز موردی از منو به فاکتور اضافه نشده است.");
         } else {
-          for (var i = 0; i < items.length; i++) l.push('• ' + items[i].name + ' — تعداد: ' + (Number(items[i].qty) || 0));
+          for (var i = 0; i < items.length; i++) {
+            lines.push("• " + items[i].name + " — تعداد: " + (Number(items[i].qty) || 0));
+          }
         }
-        var cn = (document.getElementById('invCustomerName') && document.getElementById('invCustomerName').value || '').trim();
-        var dt = (document.getElementById('invDeliveryType') && document.getElementById('invDeliveryType').value || '').trim();
-        var gt = (document.getElementById('invGrindType') && document.getElementById('invGrindType').value || '').trim();
-        if (cn) l.push('نام: ' + cn);
-        if (dt) l.push('نوع تحویل: ' + dt);
-        if (gt) l.push('نوع آسیاب: ' + gt);
-        return l.join('\n');
+        var cn = (document.getElementById("invCustomerName") && document.getElementById("invCustomerName").value || "").trim();
+        var dt = (document.getElementById("invDeliveryType") && document.getElementById("invDeliveryType").value || "").trim();
+        var gt = (document.getElementById("invGrindType") && document.getElementById("invGrindType").value || "").trim();
+        if (cn) lines.push("نام: " + cn);
+        if (dt) lines.push("نوع تحویل: " + dt);
+        if (gt) lines.push("نوع آسیاب: " + gt);
+        return lines.join("\n");
       }
 
-      function upBale(){
-        if (blk) blk.href = 'https://ble.ir/simorgh_coffee?text=' + encodeURIComponent(bText());
+      function updateBaleHref() {
+        if (baleLink) {
+          baleLink.href = "https://ble.ir/simorgh_coffee?text=" + encodeURIComponent(buildOrderText());
+        }
       }
 
-      function sync(){
+      function syncState() {
         items = items.filter(function(x){ return x && x.name && (Number(x.qty) || 0) > 0; });
-        try { localStorage.setItem(K, JSON.stringify(items)); } catch (e) {}
-        var t = 0;
-        for (var i = 0; i < items.length; i++) t += (Number(items[i].qty) || 0);
-        if (cnt) cnt.textContent = String(t);
-        upBale();
+        try {
+          localStorage.setItem(K, JSON.stringify(items));
+        } catch (e) {}
+        var total = 0;
+        for (var i = 0; i < items.length; i++) {
+          total += (Number(items[i].qty) || 0);
+        }
+        if (cntEl) cntEl.textContent = String(total);
+        updateBaleHref();
       }
 
-      function addIt(nm, id){
-        var s = String(nm || '').trim();
-        if (!s) return;
-        var f = null;
+      function addToCart(name, id) {
+        var cleanName = String(name || "").trim();
+        if (!cleanName) return;
+        var cleanId = String(id || "").trim();
+        var found = null;
         for (var i = 0; i < items.length; i++) {
-          if ((id && items[i].id === id) || items
+          if ((cleanId && items[i].id === cleanId) || items[i].name === cleanName) {
+            found = items[i];
+            break;
+          }
+        }
+        if (found) {
+          found.qty = (Number(found.qty) || 0) + 1;
+        } else {
+          items.push({ id: cleanId || ("item-" + Date.now()), name: cleanName, qty: 1 });
+        }
+        syncState();
+        if (modalEl && modalEl.classList.contains("open")) {
+          renderList();
+        }
+      }
+
+      function changeQty(index, delta) {
+        if (!items[index]) return;
+        var nextQty = (Number(items[index].qty) || 0) + delta;
+        if (nextQty <= 0) {
+          items.splice(index, 1);
+        } else {
+          items[index].qty = nextQty;
+        }
+        syncState();
+        renderList();
+      }
+
+      function renderList() {
+        if (!listEl) return;
+        if (!items.length) {
+          listEl.innerHTML = '<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از منو یا دکمه «+ به فاکتور» اضافه کنید.</div>';
+          updateBaleHref();
+          return;
+        }
+        var html = "";
+        for (var i = 0; i < items.length; i++) {
+          html += '<div class="fallback-item-row">' +
+            '<span><strong>' + items[i].name + '</strong></span>' +
+            '<div class="qty-controls">' +
+            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="-1">-</button>' +
+            '<span>' + (Number(items[i].qty) || 0) + '</span>' +
+            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="1">+</button>' +
+            '</div></div>';
+        }
+        listEl.innerHTML = html;
+
+        var qtyButtons = listEl.querySelectorAll(".qty-btn");
+        for (var k = 0; k < qtyButtons.length; k++) {
+          qtyButtons[k].addEventListener("click", function() {
+            var idx = Number(this.getAttribute("data-idx"));
+            var delta = Number(this.getAttribute("data-delta"));
+            changeQty(idx, delta);
+          });
+        }
+        updateBaleHref();
+      }
+
+      var addButtons = document.querySelectorAll("[data-add-invoice], .add-btn");
+      for (var b = 0; b < addButtons.length; b++) {
+        addButtons[b].addEventListener("click", function(ev) {
+          ev.preventDefault();
+          var btn = this;
+          var itemName = btn.getAttribute("data-item-name") || btn.getAttribute("data-name") || "آیتم انتخاب‌شده";
+          var itemId = btn.getAttribute("data-item-id") || btn.getAttribute("data-id") || "";
+          addToCart(itemName, itemId);
+
+          var prevText = btn.textContent;
+          btn.textContent = "اضافه شد ✓";
+          btn.classList.add("added");
+          setTimeout(function() {
+            btn.textContent = prevText || "+ به فاکتور";
+            btn.classList.remove("added");
+          }, 900);
+        });
+      }
+
+      if (openBtn) {
+        openBtn.addEventListener("click", function() {
+          renderList();
+          if (modalEl) modalEl.classList.add("open");
+        });
+      }
+
+      if (closeBtn && modalEl) {
+        closeBtn.addEventListener("click", function() {
+          modalEl.classList.remove("open");
+        });
+      }
+
+      if (modalEl) {
+        modalEl.addEventListener("click", function(ev) {
+          if (ev.target === modalEl) modalEl.classList.remove("open");
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", function() {
+          items = [];
+          syncState();
+          renderList();
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function() {
+          var text = buildOrderText();
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).catch(function(){});
+          }
+          copyBtn.textContent = "کپی شد ✓";
+          setTimeout(function() { copyBtn.textContent = "کپی متن"; }, 1800);
+        });
+      }
+
+      ["invCustomerName", "invDeliveryType", "invGrindType"].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", updateBaleHref);
+          el.addEventListener("change", updateBaleHref);
+        }
+      });
+
+      syncState();
+    })();
+  </script>
+</body>
+</html>
