@@ -6,163 +6,324 @@
   <meta name="theme-color" content="#2b1409" />
   <link rel="manifest" href="./manifest.json" />
   <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
-  <meta name="description" content="کلبه چای و قهوه سیمرغ در تهرانپارس، خیابان جشنواره، پلاک ۴۸ — رست تازه قهوه، آسیاب دقیق، چای و دمنوش و سفارش آنلاین در بله." />
+  <meta name="description" content="کلبه چای و قهوه سیمرغ در تهرانپارس، خیابان جشنواره، پلاک ۴۸ — رست تازه قهوه، آسیاب دقیق، چای و دمنوش، سوغاتی و چاشنی و سفارش آنلاین در بله." />
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box !important; }
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      overflow-x: hidden;
-      background: #f5efe6;
-      color: #26130a;
-      font-family: Tahoma, "IranSans", sans-serif;
-      font-size: 13px;
-      line-height: 1.65;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      background: #f5efe6 !important;
+      color: #26130a !important;
+      font-family: Tahoma, "IranSans", sans-serif !important;
+      font-size: 13px !important;
+      line-height: 1.65 !important;
     }
-    body { padding-bottom: 96px; }
-    .ltr-pin { direction: ltr; unicode-bidi: isolate; display: inline-block; }
-    .page-wrap { width: 100%; max-width: 560px; margin: 0 auto; padding: 12px; }
+    body { padding-bottom: 96px !important; }
+    .ltr-pin { direction: ltr !important; unicode-bidi: isolate !important; display: inline-block !important; }
+    .page-wrap {
+      width: 100% !important;
+      max-width: 560px !important;
+      margin: 0 auto !important;
+      padding: 12px !important;
+      display: block !important;
+    }
     .top-pill {
-      display: table; margin: 0 auto 10px; background: #fffaf2;
-      border: 1px solid #e6d5bc; color: #6b4c35; padding: 5px 12px;
-      border-radius: 999px; font-size: 11px; font-weight: bold; text-align: center;
+      display: table !important;
+      margin: 0 auto 10px !important;
+      background: #fffaf2 !important;
+      border: 1px solid #e6d5bc !important;
+      color: #6b4c35 !important;
+      padding: 5px 12px !important;
+      border-radius: 999px !important;
+      font-size: 11px !important;
+      font-weight: bold !important;
+      text-align: center !important;
     }
     .hero-card {
-      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 20px;
-      padding: 16px 14px; text-align: center;
-      box-shadow: 0 6px 18px rgba(38, 19, 10, 0.05); margin-bottom: 10px;
+      width: 100% !important;
+      background: #fffdf9 !important;
+      border: 1px solid #ead9c1 !important;
+      border-radius: 20px !important;
+      padding: 16px 14px !important;
+      text-align: center !important;
+      box-shadow: 0 6px 18px rgba(38, 19, 10, 0.05) !important;
+      margin-bottom: 10px !important;
+      display: block !important;
     }
     .logo-circle {
-      width: 86px; height: 86px; margin: 0 auto 10px; border-radius: 50%;
-      border: 2px solid #d7b285; background: #ffffff; display: flex;
-      align-items: center; justify-content: center; overflow: hidden;
-      font-weight: bold; font-size: 11px; color: #7c3e08;
+      width: 86px !important;
+      height: 86px !important;
+      margin: 0 auto 10px !important;
+      border-radius: 50% !important;
+      border: 2px solid #d7b285 !important;
+      background: #ffffff !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+      font-weight: bold !important;
+      font-size: 11px !important;
+      color: #7c3e08 !important;
     }
-    .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-title { margin: 0 0 4px; font-size: 19px; font-weight: bold; color: #26130a; }
-    .hero-sub { margin: 0; font-size: 12px; color: #6b5848; }
-    .badges-row, .cats-grid {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px; margin-bottom: 10px;
+    .logo-circle img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; }
+    .hero-title { margin: 0 0 4px !important; font-size: 19px !important; font-weight: bold !important; color: #26130a !important; }
+    .hero-sub { margin: 0 !important; font-size: 12px !important; color: #6b5848 !important; }
+    .badges-row {
+      width: 100% !important;
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 6px !important;
+      margin-bottom: 10px !important;
     }
     .mini-badge {
-      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 12px;
-      padding: 8px 4px; text-align: center; font-size: 10.5px; font-weight: bold; color: #3d2314;
+      background: #fffdf9 !important;
+      border: 1px solid #ead9c1 !important;
+      border-radius: 12px !important;
+      padding: 8px 4px !important;
+      text-align: center !important;
+      font-size: 10.5px !important;
+      font-weight: bold !important;
+      color: #3d2314 !important;
+    }
+    .cats-grid {
+      width: 100% !important;
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 6px !important;
+      margin-bottom: 10px !important;
     }
     .cat-card {
-      display: block; text-decoration: none; background: #fffdf9;
-      border: 1px solid #ead9c1; border-radius: 14px; padding: 10px 6px;
-      text-align: center; color: #26130a;
+      display: block !important;
+      width: 100% !important;
+      text-decoration: none !important;
+      background: #fffdf9 !important;
+      border: 1px solid #ead9c1 !important;
+      border-radius: 14px !important;
+      padding: 10px 8px !important;
+      text-align: center !important;
+      color: #26130a !important;
     }
-    .cat-card strong { display: block; font-size: 11.5px; margin-bottom: 2px; }
-    .cat-card span { display: block; font-size: 10px; color: #7a6858; }
+    .cat-card strong { display: block !important; font-size: 11.5px !important; margin-bottom: 2px !important; }
+    .cat-card span { display: block !important; font-size: 10px !important; color: #7a6858 !important; }
     .accordion-box {
-      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 16px;
-      margin-bottom: 10px; overflow: hidden;
+      width: 100% !important;
+      background: #fffdf9 !important;
+      border: 1px solid #ead9c1 !important;
+      border-radius: 16px !important;
+      margin-bottom: 10px !important;
+      overflow: hidden !important;
     }
     .accordion-trigger {
-      width: 100%; background: #fffdf9; border: 0; outline: none; padding: 11px 14px;
-      display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      font-family: Tahoma, sans-serif; font-size: 12px; font-weight: bold;
-      color: #26130a; cursor: pointer; text-align: right;
+      width: 100% !important;
+      background: #fffdf9 !important;
+      border: 0 !important;
+      outline: none !important;
+      padding: 11px 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      font-family: Tahoma, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: bold !important;
+      color: #26130a !important;
+      cursor: pointer !important;
+      text-align: right !important;
     }
-    .accordion-title-text { flex: 1; text-align: right; }
-    .accordion-arrow { font-size: 11px; color: #7c3e08; transition: transform 0.2s ease; }
-    .accordion-box.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-title-text { flex: 1 !important; text-align: right !important; }
+    .accordion-arrow { font-size: 11px !important; color: #7c3e08 !important; transition: transform 0.2s ease !important; }
+    .accordion-box.open .accordion-arrow { transform: rotate(180deg) !important; }
     .accordion-panel {
-      display: none; padding: 10px 12px 12px;
-      border-top: 1px solid #f2e5d3; background: #faf4eb;
+      display: none !important;
+      padding: 10px 12px 12px !important;
+      border-top: 1px solid #f2e5d3 !important;
+      background: #faf4eb !important;
     }
-    .accordion-box.open .accordion-panel { display: block; }
+    .accordion-box.open .accordion-panel { display: block !important; }
     .dropdown-links-grid {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px;
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 6px !important;
     }
     .drop-item-link, .drop-item-btn {
-      display: flex; align-items: center; justify-content: center; gap: 4px;
-      text-decoration: none; background: #ffffff; border: 1px solid #e2ceb3;
-      border-radius: 10px; padding: 8px; font-size: 11px; font-weight: bold;
-      color: #26130a; cursor: pointer; font-family: Tahoma, sans-serif; text-align: center;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 4px !important;
+      text-decoration: none !important;
+      background: #ffffff !important;
+      border: 1px solid #e2ceb3 !important;
+      border-radius: 10px !important;
+      padding: 8px !important;
+      font-size: 11px !important;
+      font-weight: bold !important;
+      color: #26130a !important;
+      cursor: pointer !important;
+      font-family: Tahoma, sans-serif !important;
+      text-align: center !important;
     }
     .drop-item-link.primary-bale {
-      background: #0284c7; border-color: #0284c7; color: #ffffff; grid-column: 1 / -1;
+      background: #0284c7 !important;
+      border-color: #0284c7 !important;
+      color: #ffffff !important;
+      grid-column: 1 / -1 !important;
     }
-    .drop-item-link.call-green { background: #15803d; border-color: #15803d; color: #ffffff; }
+    .drop-item-link.call-green { background: #15803d !important; border-color: #15803d !important; color: #ffffff !important; }
     .quick-order-box {
-      background: #2b1409; color: #ffffff; border-radius: 16px; padding: 12px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; margin-bottom: 10px;
+      width: 100% !important;
+      background: #2b1409 !important;
+      color: #ffffff !important;
+      border-radius: 16px !important;
+      padding: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      margin-bottom: 10px !important;
     }
-    .quick-text { flex: 1; min-width: 0; }
-    .quick-text strong { display: block; font-size: 12.5px; margin-bottom: 3px; }
-    .quick-text p { margin: 0; font-size: 11px; color: #e6d5c1; }
-    .quick-actions { display: flex; flex-direction: column; gap: 6px; min-width: 108px; }
+    .quick-text { flex: 1 1 auto !important; min-width: 0 !important; text-align: right !important; }
+    .quick-text strong { display: block !important; font-size: 12.5px !important; margin-bottom: 3px !important; }
+    .quick-text p { margin: 0 !important; font-size: 11px !important; color: #e6d5c1 !important; }
+    .quick-actions { display: flex !important; flex-direction: column !important; gap: 6px !important; min-width: 108px !important; flex-shrink: 0 !important; }
     .btn-add-inv {
-      border: 0; background: #d97706; color: #ffffff; padding: 8px 10px;
-      border-radius: 9px; font-weight: bold; font-size: 11.5px; cursor: pointer;
-      font-family: Tahoma, sans-serif;
+      border: 0 !important;
+      background: #d97706 !important;
+      color: #ffffff !important;
+      padding: 8px 10px !important;
+      border-radius: 9px !important;
+      font-weight: bold !important;
+      font-size: 11.5px !important;
+      cursor: pointer !important;
+      font-family: Tahoma, sans-serif !important;
     }
     .btn-bale-consult {
-      display: block; text-align: center; text-decoration: none;
-      background: #0284c7; color: #ffffff; padding: 8px 10px;
-      border-radius: 9px; font-weight: bold; font-size: 11px;
+      display: block !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      background: #0284c7 !important;
+      color: #ffffff !important;
+      padding: 8px 10px !important;
+      border-radius: 9px !important;
+      font-weight: bold !important;
+      font-size: 11px !important;
     }
     .secondary-row {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px; margin-bottom: 10px;
+      width: 100% !important;
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 6px !important;
+      margin-bottom: 10px !important;
     }
     .sec-btn {
-      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 12px;
-      padding: 9px 8px; font-weight: bold; font-size: 11.5px; color: #26130a;
-      cursor: pointer; font-family: Tahoma, sans-serif;
+      background: #fffdf9 !important;
+      border: 1px solid #ead9c1 !important;
+      border-radius: 12px !important;
+      padding: 9px 8px !important;
+      font-weight: bold !important;
+      font-size: 11.5px !important;
+      color: #26130a !important;
+      cursor: pointer !important;
+      font-family: Tahoma, sans-serif !important;
     }
-    .sec-btn.install-active { background: #fff3e0; border-color: #d97706; color: #7c3e08; }
+    .sec-btn.install-active { background: #fff3e0 !important; border-color: #d97706 !important; color: #7c3e08 !important; }
     .hours-card, .address-card {
-      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 16px;
-      padding: 12px; margin-bottom: 10px;
+      width: 100% !important;
+      display: block !important;
+      background: #fffdf9 !important;
+      border: 1px solid #ead9c1 !important;
+      border-radius: 16px !important;
+      padding: 12px !important;
+      margin-bottom: 10px !important;
     }
-    .hours-card { border-style: dashed; border-color: #d7b285; }
+    .hours-card { border-style: dashed !important; border-color: #d7b285 !important; }
     .hours-head {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 6px; font-size: 12.5px; font-weight: bold;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      margin-bottom: 6px !important;
+      font-size: 12.5px !important;
+      font-weight: bold !important;
     }
     .status-pill {
-      background: #dcfce7; color: #166534; padding: 2px 9px;
-      border-radius: 999px; font-size: 10.5px;
+      background: #dcfce7 !important;
+      color: #166534 !important;
+      padding: 2px 9px !important;
+      border-radius: 999px !important;
+      font-size: 10.5px !important;
     }
-    .status-pill.closed { background: #fee2e2; color: #991b1b; }
+    .status-pill.closed { background: #fee2e2 !important; color: #991b1b !important; }
     .hours-line {
-      display: flex; justify-content: space-between; font-size: 11px;
-      color: #4d3a2c; margin-bottom: 6px; flex-wrap: wrap; gap: 4px;
+      display: flex !important;
+      justify-content: space-between !important;
+      font-size: 11px !important;
+      color: #4d3a2c !important;
+      margin-bottom: 6px !important;
+      flex-wrap: wrap !important;
+      gap: 4px !important;
     }
     .countdown-box {
-      background: #faf4eb; border-radius: 10px; padding: 8px;
-      text-align: center; font-size: 11.5px; font-weight: bold; color: #3d2314;
+      background: #faf4eb !important;
+      border-radius: 10px !important;
+      padding: 8px !important;
+      text-align: center !important;
+      font-size: 11.5px !important;
+      font-weight: bold !important;
+      color: #3d2314 !important;
     }
-    .address-card { text-align: center; margin-bottom: 12px; font-size: 11.5px; }
-    .address-btns { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .address-card { text-align: center !important; margin-bottom: 12px !important; font-size: 11.5px !important; }
+    .address-btns { display: flex !important; justify-content: center !important; gap: 8px !important; flex-wrap: wrap !important; margin-top: 8px !important; }
     .copy-addr-btn {
-      border: 1px solid #d8c3a8; background: #faf4eb; color: #26130a;
-      padding: 7px 12px; border-radius: 9px; font-weight: bold; font-size: 11px;
-      cursor: pointer; font-family: Tahoma, sans-serif;
+      border: 1px solid #d8c3a8 !important;
+      background: #faf4eb !important;
+      color: #26130a !important;
+      padding: 7px 12px !important;
+      border-radius: 9px !important;
+      font-weight: bold !important;
+      font-size: 11px !important;
+      cursor: pointer !important;
+      font-family: Tahoma, sans-serif !important;
     }
     .bottom-bar {
-      position: fixed; bottom: 0; left: 0; right: 0; background: #fffdf9;
-      border-top: 1px solid #e5d4bc; padding: 8px; z-index: 4000; direction: rtl;
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: #fffdf9 !important;
+      border-top: 1px solid #e5d4bc !important;
+      padding: 8px !important;
+      z-index: 4000 !important;
+      direction: rtl !important;
     }
     .bottom-bar-inner {
-      max-width: 560px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr 1.35fr; gap: 6px;
+      max-width: 560px !important;
+      margin: 0 auto !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1.35fr !important;
+      gap: 6px !important;
     }
     .bar-call, .bar-bale, .bar-invoice {
-      display: flex; align-items: center; justify-content: center; width: 100%;
-      min-height: 38px; border-radius: 11px; padding: 8px 6px; font-weight: bold;
-      font-size: 11.5px; text-decoration: none; border: 0; color: #ffffff;
-      font-family: Tahoma, sans-serif; cursor: pointer; white-space: nowrap;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-height: 38px !important;
+      border-radius: 11px !important;
+      padding: 8px 6px !important;
+      font-weight: bold !important;
+      font-size: 11.5px !important;
+      text-decoration: none !important;
+      border: 0 !important;
+      color: #ffffff !important;
+      font-family: Tahoma, sans-serif !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
     }
-    .bar-call { background: #15803d; }
-    .bar-bale { background: #0284c7; }
-    .bar-invoice { background: #b45d0b; }
+    .bar-call { background: #15803d !important; }
+    .bar-bale { background: #0284c7 !important; }
+    .bar-invoice { background: #b45d0b !important; }
     .fallback-modal-backdrop {
       position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 9999;
       display: none; align-items: center; justify-content: center; padding: 14px;
@@ -170,8 +331,7 @@
     .fallback-modal-backdrop.open { display: flex; }
     .fallback-modal-card {
       width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto;
-      background: #fffdf9; color: #26130a; border-radius: 18px; padding: 16px;
-      direction: rtl;
+      background: #fffdf9; color: #26130a; border-radius: 18px; padding: 16px; direction: rtl;
     }
     .fallback-modal-head {
       display: flex; justify-content: space-between; align-items: center;
@@ -244,11 +404,12 @@
       <div class="mini-badge">تحویل حضوری و پیک</div>
     </div>
     <section class="cats-grid">
-      <a class="cat-card" href="./coffee.html"><strong>بار قهوه و دان</strong><span>تک‌خاستگاه و ترکیبی</span></a>
+      <a class="cat-card" href="./coffee.html"><strong>بار قهوه و دان</strong><span>تک‌خاستگاه، ترکیبی و کاکائو فله</span></a>
       <a class="cat-card" href="./tea.html"><strong>چای و دمنوش</strong><span>اصیل و معطر</span></a>
-      <a class="cat-card" href="./souvenirs.html"><strong>سوغاتی و شیرین‌کام</strong><span>نبات، هل و خوراکی</span></a>
+      <a class="cat-card" href="./souvenirs.html"><strong>سوغاتی و شیرین‌کام</strong><span>نبات، قند، حلوا ارده و ارده</span></a>
+      <a class="cat-card" href="./spices.html"><strong>چاشنی و معطرکننده</strong><span>هل سبز، ادویه قهوه و گل محمدی</span></a>
     </section>
-        <section class="accordion-box" id="socialAccordion">
+    <section class="accordion-box" id="socialAccordion">
       <button type="button" class="accordion-trigger" id="socialAccordionBtn" aria-expanded="false">
         <span class="accordion-title-text">شبکه‌های اجتماعی و پیام‌رسان</span>
         <span class="accordion-arrow">▼</span>
@@ -382,7 +543,6 @@
       [['copyAddressBtn',addr,'کپی آدرس فروشگاه'],['dropCopyAddrBtn',addr,'کپی آدرس تهرانپارس'],['copyPhoneBtn',ph,'کپی شماره تماس'],['dropCopyPhoneBtn',ph,'کپی شماره‌ها']].forEach(function(row){var b=document.getElementById(row[0]);if(b)b.addEventListener('click',function(){cp(row[1],b,row[2]);});});
     }catch(err){}})();
   </script>
-  <script src="./simorgh-cart.js?v=56" onerror="void(0)"></script>
+  <script src="./simorgh-cart.js?v=64" onerror="void(0)"></script>
 </body>
 </html>
-
