@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2b1409" />
-  <link rel="manifest" href="./manifest.json?v=20261127" />
+  <link rel="manifest" href="./manifest.json?v=20261128" />
   <title>کلبه چای و قهوه سیمرغ | تهرانپارس</title>
   <style>
     * { box-sizing: border-box; }
@@ -96,6 +96,118 @@
     }
     .cat-card strong { display: block; font-size: 12.5px; margin-bottom: 2px; color: #26130a; }
     .cat-card span { display: block; font-size: 10.5px; color: #6b5848; }
+    .quick-order-box {
+      background: #2b1409;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .quick-btns { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+    .q-add-btn {
+      border: 0;
+      background: #d97706;
+      color: #fff;
+      border-radius: 10px;
+      padding: 7px 11px;
+      font-weight: bold;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: Tahoma, sans-serif;
+      white-space: nowrap;
+      transition: background 0.18s ease;
+    }
+    .q-add-btn.added { background: #15803d; }
+    .q-bale-btn {
+      text-decoration: none;
+      text-align: center;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 10px;
+      padding: 7px 11px;
+      font-weight: bold;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .quick-info { flex: 1; min-width: 0; text-align: right; }
+    .quick-info strong { display: block; font-size: 12.5px; margin-bottom: 3px; }
+    .quick-info p { margin: 0; font-size: 11px; color: #f3e4d0; }
+    .util-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .util-btn {
+      width: 100%;
+      background: #fffdf9;
+      border: 1px solid #ead9c1;
+      border-radius: 14px;
+      padding: 10px 8px;
+      font-size: 11.5px;
+      font-weight: bold;
+      color: #26130a;
+      cursor: pointer;
+      font-family: Tahoma, sans-serif;
+    }
+    .hours-box {
+      background: #fffdf9;
+      border: 1px solid #ead9c1;
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .hours-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .status-pill {
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: bold;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .status-pill.open { background: #dcfce7; color: #166534; }
+    .hours-lines {
+      font-size: 11.5px;
+      color: #4a3728;
+      text-align: right;
+    }
+    .hours-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      width: 100%;
+      background: #faf4eb;
+      border: 1px solid #ead9c1;
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 11.5px;
+      text-align: center;
+      color: #5c4636;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .timer-digits {
+      direction: ltr;
+      unicode-bidi: isolate;
+      display: inline-block;
+      font-family: Tahoma, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      color: #26130a;
+    }
     .acc-box {
       background: #fffdf9;
       border: 1px solid #ead9c1;
@@ -204,119 +316,38 @@
       padding: 7px 10px;
       margin-bottom: 6px;
       font-size: 11px;
-    }
-    .quick-order-box {
-      background: #2b1409;
-      color: #ffffff;
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .quick-btns { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
-    .q-add-btn {
-      border: 0;
-      background: #d97706;
-      color: #fff;
-      border-radius: 10px;
-      padding: 7px 11px;
-      font-weight: bold;
-      font-size: 11px;
-      cursor: pointer;
-      font-family: Tahoma, sans-serif;
-      white-space: nowrap;
-      transition: background 0.18s ease;
-    }
-    .q-add-btn.added { background: #15803d; }
-    .q-bale-btn {
-      text-decoration: none;
-      text-align: center;
-      background: #0284c7;
-      color: #fff;
-      border-radius: 10px;
-      padding: 7px 11px;
-      font-weight: bold;
-      font-size: 11px;
-      white-space: nowrap;
-    }
-    .quick-info { flex: 1; min-width: 0; text-align: right; }
-    .quick-info strong { display: block; font-size: 12.5px; margin-bottom: 3px; }
-    .quick-info p { margin: 0; font-size: 11px; color: #f3e4d0; }
-    .util-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .util-btn {
-      width: 100%;
-      background: #fffdf9;
-      border: 1px solid #ead9c1;
-      border-radius: 14px;
-      padding: 10px 8px;
-      font-size: 11.5px;
-      font-weight: bold;
-      color: #26130a;
-      cursor: pointer;
-      font-family: Tahoma, sans-serif;
-    }
-    .hours-box {
-      background: #fffdf9;
-      border: 1px solid #ead9c1;
-      border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 10px;
-    }
-    .hours-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .status-pill {
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: bold;
-      background: #fee2e2;
-      color: #991b1b;
-    }
-    .status-pill.open { background: #dcfce7; color: #166534; }
-    .hours-note {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      background: #faf4eb;
-      border: 1px solid #ead9c1;
-      border-radius: 12px;
-      padding: 9px 10px;
-      font-size: 11px;
-      text-align: center;
-      color: #5c4636;
-      margin-top: 8px;
-      font-weight: bold;
-    }
-    .timer-digits {
-      direction: ltr;
-      unicode-bidi: isolate;
-      display: inline-block;
-      font-family: Tahoma, monospace;
-      font-size: 13px;
-      font-weight: bold;
-      color: #7c3e08;
-      background: #fffdf9;
-      border: 1px solid #e5d1b5;
-      border-radius: 8px;
-      padding: 2px 8px;
+      text-align: right;
     }
     .footer-addr {
       background: #fffdf9;
-      border: 1px dashed #d7b285;
+      border: 1px solid #ead9c1;
       border-radius: 16px;
-      padding: 12px;
+      padding: 14px 12px;
       text-align: center;
+      font-size: 11.5px;
+      color: #4a3728;
+    }
+    .footer-addr strong {
+      display: block;
+      color: #26130a;
+      margin-bottom: 4px;
+    }
+    .footer-sub {
       font-size: 11px;
-      color: #5c4636;
+      color: #6b5848;
+      margin-bottom: 10px;
+    }
+    .copy-addr-btn {
+      display: inline-block;
+      background: #fffdf9;
+      border: 1px solid #dfc8a8;
+      color: #26130a;
+      border-radius: 10px;
+      padding: 7px 18px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: Tahoma, sans-serif;
     }
     .bottom-bar {
       position: fixed;
@@ -518,6 +549,34 @@
       </a>
     </nav>
 
+    <section class="quick-order-box">
+      <div class="quick-info">
+        <strong>سفارش سریع یا مشاوره انتخاب قهوه</strong>
+        <p>مورد «مشاوره و انتخاب قهوه سیمرغ» را به فاکتور اضافه کنید یا در بله راهنمایی بگیرید.</p>
+      </div>
+      <div class="quick-btns">
+        <button type="button" class="q-add-btn" id="quickAddConsultBtn" data-add-invoice data-item-id="quick-consult-coffee" data-item-name="مشاوره و انتخاب قهوه سیمرغ">+ به فاکتور</button>
+        <a class="q-bale-btn" id="quickConsultBaleLink" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
+      </div>
+    </section>
+
+    <section class="util-grid">
+      <button type="button" id="shareSiteBtn" class="util-btn">اشتراک‌گذاری</button>
+      <button type="button" id="installPwaBtn" class="util-btn">نصب روی گوشی</button>
+    </section>
+
+    <section class="hours-box">
+      <div class="hours-top">
+        <strong>ساعت کاری فروشگاه</strong>
+        <span id="storeStatusBadge" class="status-pill">بررسی وضعیت...</span>
+      </div>
+      <div class="hours-lines">
+        <div>شنبه تا پنجشنبه: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">22:00</span></div>
+        <div>جمعه‌ها: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">13:00</span></div>
+      </div>
+      <div id="storeCountdown" class="hours-note">در حال محاسبه زمان...</div>
+    </section>
+
     <div class="acc-box" id="accSocial">
       <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="panelSocial">
         <span class="acc-trigger-inner">
@@ -551,35 +610,10 @@
       </div>
     </div>
 
-    <section class="quick-order-box">
-      <div class="quick-info">
-        <strong>سفارش سریع یا مشاوره انتخاب قهوه</strong>
-        <p>مورد «مشاوره و انتخاب قهوه سیمرغ» را به فاکتور اضافه کنید یا در بله راهنمایی بگیرید.</p>
-      </div>
-      <div class="quick-btns">
-        <button type="button" class="q-add-btn" id="quickAddConsultBtn" data-add-invoice data-item-id="quick-consult-coffee" data-item-name="مشاوره و انتخاب قهوه سیمرغ">+ به فاکتور</button>
-        <a class="q-bale-btn" id="quickConsultBaleLink" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
-      </div>
-    </section>
-
-    <section class="util-grid">
-      <button type="button" id="shareSiteBtn" class="util-btn">اشتراک‌گذاری</button>
-      <button type="button" id="installPwaBtn" class="util-btn">نصب اپلیکیشن</button>
-    </section>
-
-    <section class="hours-box">
-      <div class="hours-top">
-        <strong>ساعت کاری فروشگاه</strong>
-        <span id="storeStatusBadge" class="status-pill">وضعیت ساعت کاری</span>
-      </div>
-      <div>شنبه تا پنجشنبه: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">22:00</span></div>
-      <div>جمعه‌ها: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">13:00</span></div>
-      <div id="storeCountdown" class="hours-note">در حال محاسبه زمان...</div>
-    </section>
-
     <footer class="footer-addr">
       <strong>تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</strong>
-      <div>پاسخگویی و ثبت سفارش در بله: <span class="ltr-pin">@simorgh_coffee</span></div>
+      <div class="footer-sub">امکان خرید حضوری و ارسال پیک در تهرانپارس و اطراف</div>
+      <button type="button" id="copyAddressBtn" class="copy-addr-btn">کپی آدرس فروشگاه</button>
     </footer>
   </div>
 
@@ -678,13 +712,35 @@
           countdownEl.innerHTML = "<span>زمان باقی‌مانده تا باز شدن امروز (08:00):</span>" + formatHms(openSec - secNow);
         } else {
           var remToday = (24 * 3600) - secNow;
-          countdownEl.innerHTML = "<span>زمان باقی‌مانده تا شروع به کار فردا (08:00):</span>" + formatHms(remToday + openSec);
+          countdownEl.innerHTML = "<span>زمان باقی‌مانده تا باز شدن فردا (08:00):</span>" + formatHms(remToday + openSec);
         }
       }
 
       renderStoreStatus();
       window.addEventListener("load", renderStoreStatus);
       setInterval(renderStoreStatus, 1000);
+
+      var copyAddrBtn = document.getElementById("copyAddressBtn");
+      if (copyAddrBtn) {
+        copyAddrBtn.addEventListener("click", function () {
+          var addrText = "تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸";
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = addrText;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(addrText).catch(function () {});
+          }
+          copyAddrBtn.textContent = "آدرس کپی شد ✓";
+          setTimeout(function () { copyAddrBtn.textContent = "کپی آدرس فروشگاه"; }, 1800);
+        });
+      }
     })();
   </script>
 
@@ -944,7 +1000,7 @@
             deferredPrompt = null;
           } else {
             installBtn.textContent = "از منوی مرورگر نصب کنید";
-            setTimeout(function() { installBtn.textContent = "نصب اپلیکیشن"; }, 1800);
+            setTimeout(function() { installBtn.textContent = "نصب روی گوشی"; }, 1800);
           }
         });
       }
