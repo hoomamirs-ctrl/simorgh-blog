@@ -127,14 +127,16 @@
     .acc-trigger:active {
       outline: none;
       box-shadow: none;
+      background: transparent;
     }
     .acc-trigger > span:first-child {
-      flex: 1;
+      flex: 1 1 auto;
       min-width: 0;
-      overflow-wrap: anywhere;
+      text-align: right;
+      overflow-wrap: break-word;
     }
     .acc-arrow {
-      flex-shrink: 0;
+      flex: 0 0 auto;
       font-size: 13px;
       color: #7c3e08;
       display: inline-block;
@@ -564,7 +566,10 @@
           var willOpen = !box.classList.contains("is-open");
           box.classList.toggle("is-open", willOpen);
           this.setAttribute("aria-expanded", willOpen ? "true" : "false");
-          if (this.blur) this.blur();
+          var btn = this;
+          setTimeout(function () {
+            if (btn && typeof btn.blur === "function") btn.blur();
+          }, 0);
         });
       }
 
