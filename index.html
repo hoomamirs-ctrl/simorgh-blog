@@ -475,7 +475,7 @@
     <section class="hours-box">
       <div class="hours-top">
         <strong>ساعت کاری فروشگاه</strong>
-        <span id="storeStatusBadge" class="status-pill">بررسی وضعیت...</span>
+        <span id="storeStatusBadge" class="status-pill">وضعیت ساعت کاری</span>
       </div>
       <div>شنبه تا پنجشنبه: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">22:00</span></div>
       <div>جمعه‌ها: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">13:00</span></div>
@@ -528,24 +528,21 @@
   </div>
 
   <script>
-    (function updateStoreStatusNow() {
-      var badge = document.getElementById("storeStatusBadge");
-      if (!badge) return;
-      var isOpen = false;
-      try {
+    (function () {
+      function applyStoreStatus() {
+        var badge = document.getElementById("storeStatusBadge");
+        if (!badge) return;
         var now = new Date();
         var day = now.getDay();
         var mins = now.getHours() * 60 + now.getMinutes();
-        if (day === 5) {
-          isOpen = mins >= 8 * 60 && mins <= 13 * 60;
-        } else {
-          isOpen = mins >= 8 * 60 && mins <= 22 * 60;
-        }
-      } catch (e) {
-        isOpen = false;
+        var isOpen = (day === 5)
+          ? (mins >= 8 * 60 && mins <= 13 * 60)
+          : (mins >= 8 * 60 && mins <= 22 * 60);
+        badge.textContent = isOpen ? "فروشگاه باز است" : "فروشگاه بسته است";
+        badge.classList.toggle("open", isOpen);
       }
-      badge.textContent = isOpen ? "فروشگاه باز است" : "فروشگاه بسته است";
-      badge.classList.toggle("open", isOpen);
+      applyStoreStatus();
+      document.addEventListener("DOMContentLoaded", applyStoreStatus);
     })();
   </script>
 
@@ -637,172 +634,3 @@
           items.push({ id: cleanId || ("item-" + Date.now()), name: cleanName, qty: 1 });
         }
         syncState();
-        if (modalEl && modalEl.classList.contains("open")) {
-          renderList();
-        }
-      }
-
-      function changeQty(index, delta) {
-        if (!items[index]) return;
-        var nextQty = (Number(items[index].qty) || 0) + delta;
-        if (nextQty <= 0) {
-          items.splice(index, 1);
-        } else {
-          items[index].qty = nextQty;
-        }
-        syncState();
-        renderList();
-      }
-
-      function renderList() {
-        if (!listEl) return;
-        if (!items.length) {
-          listEl.innerHTML = '<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از دسته‌بندی‌ها یا دکمه «+ به فاکتور» اضافه کنید.</div>';
-          updateBaleHref();
-          return;
-        }
-        var html = "";
-        for (var i = 0; i < items.length; i++) {
-          html += '<div class="fallback-item-row">' +
-            '<span><strong>' + items[i].name + '</strong></span>' +
-            '<div class="qty-controls">' +
-            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="-1">-</button>' +
-            '<span>' + (Number(items[i].qty) || 0) + '</span>' +
-            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="1">+</button>' +
-            '</div></div>';
-        }
-        listEl.innerHTML = html;
-
-        var qtyButtons = listEl.querySelectorAll(".qty-btn");
-        for (var k = 0; k < qtyButtons.length; k++) {
-          qtyButtons[k].addEventListener("click", function() {
-            var idx = Number(this.getAttribute("data-idx"));
-            var delta = Number(this.getAttribute("data-delta"));
-            changeQty(idx, delta);
-          });
-        }
-        updateBaleHref();
-      }
-
-      var addButtons = document.querySelectorAll("[data-add-invoice], .q-add-btn");
-      for (var b = 0; b < addButtons.length; b++) {
-        addButtons[b].addEventListener("click", function(ev) {
-          ev.preventDefault();
-          var btn = this;
-          var itemName = btn.getAttribute("data-item-name") || btn.getAttribute("data-name") || "مشاوره و انتخاب قهوه سیمرغ";
-          var itemId = btn.getAttribute("data-item-id") || btn.getAttribute("data-id") || "";
-          addToCart(itemName, itemId);
-
-          var prevText = btn.textContent;
-          btn.textContent = "اضافه شد ✓";
-          btn.classList.add("added");
-          setTimeout(function() {
-            btn.textContent = prevText || "+ به فاکتور";
-            btn.classList.remove("added");
-          }, 900);
-        });
-      }
-
-      if (quickBaleLink) {
-        var consultMsg = "سلام، برای انتخاب قهوه مناسب (نوع دان، میکس یا آسیاب) در کلبه چای و قهوه سیمرغ نیاز به مشاوره دارم.";
-        quickBaleLink.href = "https://ble.ir/simorgh_coffee?text=" + encodeURIComponent(consultMsg);
-      }
-
-      if (openBtn) {
-        openBtn.addEventListener("click", function() {
-          renderList();
-          if (modalEl) modalEl.classList.add("open");
-        });
-      }
-
-      if (closeBtn && modalEl) {
-        closeBtn.addEventListener("click", function() {
-          modalEl.classList.remove("open");
-        });
-      }
-
-      if (modalEl) {
-        modalEl.addEventListener("click", function(ev) {
-          if (ev.target === modalEl) modalEl.classList.remove("open");
-        });
-      }
-
-      if (clearBtn) {
-        clearBtn.addEventListener("click", function() {
-          items = [];
-          syncState();
-          renderList();
-        });
-      }
-
-      if (copyBtn) {
-        copyBtn.addEventListener("click", function() {
-          var text = buildOrderText();
-          try {
-            var ta = document.createElement("textarea");
-            ta.value = text;
-            ta.style.position = "fixed";
-            ta.style.opacity = "0";
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand("copy");
-            document.body.removeChild(ta);
-          } catch (e) {}
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).catch(function(){});
-          }
-          copyBtn.textContent = "کپی شد ✓";
-          setTimeout(function() { copyBtn.textContent = "کپی متن"; }, 1800);
-        });
-      }
-
-      ["invCustomerName", "invDeliveryType", "invGrindType"].forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el) {
-          el.addEventListener("input", updateBaleHref);
-          el.addEventListener("change", updateBaleHref);
-        }
-      });
-
-      var shareBtn = document.getElementById("shareSiteBtn");
-      if (shareBtn) {
-        shareBtn.addEventListener("click", function() {
-          var shareData = {
-            title: "کلبه چای و قهوه سیمرغ",
-            text: "منو و سفارش آنلاین کلبه چای و قهوه سیمرغ (تهرانپارس)",
-            url: window.location.href
-          };
-          if (navigator.share) {
-            navigator.share(shareData).catch(function(){});
-          } else if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(window.location.href).catch(function(){});
-            shareBtn.textContent = "لینک کپی شد ✓";
-            setTimeout(function() { shareBtn.textContent = "اشتراک‌گذاری"; }, 1600);
-          }
-        });
-      }
-
-      var deferredPrompt = null;
-      window.addEventListener("beforeinstallprompt", function(e) {
-        e.preventDefault();
-        deferredPrompt = e;
-      });
-
-      var installBtn = document.getElementById("installPwaBtn");
-      if (installBtn) {
-        installBtn.addEventListener("click", function() {
-          if (deferredPrompt && deferredPrompt.prompt) {
-            deferredPrompt.prompt();
-            deferredPrompt = null;
-          } else {
-            installBtn.textContent = "از منوی مرورگر نصب کنید";
-            setTimeout(function() { installBtn.textContent = "نصب اپلیکیشن"; }, 1800);
-          }
-        });
-      }
-
-      syncState();
-    })();
-  </script>
-</body>
-</html>
