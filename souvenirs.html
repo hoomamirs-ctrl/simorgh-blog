@@ -1,67 +1,306 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوغاتی‌ها و شیرین‌کام‌ها | کلبه چای و قهوه سیمرغ</title>
-<meta name="description" content="خرید نبات، شیرین‌کام‌ها و سوغاتی‌های همراه چای و قهوه در کلبه چای و قهوه سیمرغ تهرانپارس با امکان ثبت در فاکتور و ارسال در بله.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg-main:#f5f0e8;--card-bg:#fff;--warm-surface:#fcf7f0;--warm-border:#e7d6c0;--espresso:#26130a;--roast:#3d2314;--amber:#b45d0b;--text-muted:#5c534b}
-*{box-sizing:border-box}
-body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg-main);color:#231e1a;margin:0;padding:14px 13px 128px;direction:rtl}
-.wrap{max-width:600px;margin:0 auto;background:var(--card-bg);border-radius:20px;padding:20px 16px;border:1px solid #eee2d3;box-shadow:0 12px 28px rgba(38,19,10,.06)}
-.top-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
-.back-btn{text-decoration:none;background:var(--warm-surface);color:var(--roast);border:1px solid var(--warm-border);padding:8px 12px;border-radius:10px;font-size:.78rem;font-weight:800}
-h1{font-size:1.3rem;color:var(--espresso);margin:0 0 4px;font-weight:800;text-align:center}
-.sub{font-size:.82rem;color:var(--amber);font-weight:700;text-align:center;margin-bottom:16px}
-.prod-card{background:var(--warm-surface);border:1px solid var(--warm-border);border-radius:14px;padding:13px;margin-bottom:10px;text-align:right}
-.prod-title{font-size:.9rem;font-weight:800;color:var(--espresso);margin-bottom:4px}
-.prod-desc{font-size:.76rem;color:var(--text-muted);line-height:1.55;margin-bottom:10px}
-.actions{display:flex;gap:7px}
-.btn-add{flex:1;background:linear-gradient(135deg,#3d2314,#26130a);color:#fff;border:none;border-radius:9px;padding:9px 10px;font-size:.78rem;font-weight:800;cursor:pointer;font-family:inherit}
-.btn-consult{background:#00779b;color:#fff;text-decoration:none;border-radius:9px;padding:9px 12px;font-size:.77rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
-.floating-buttons{position:fixed;bottom:12px;left:14px;right:14px;max-width:560px;margin:0 auto;display:flex;gap:7px;z-index:999}
-.fab-btn{flex:1;padding:10px 8px;border-radius:24px;text-decoration:none;font-weight:800;font-size:.76rem;color:#fff;display:flex;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 16px rgba(0,0,0,.18);border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
-.fab-call{background:linear-gradient(135deg,#059669,#047857)}.fab-bale{background:linear-gradient(135deg,#00779b,#005b77)}.fab-cart{background:linear-gradient(135deg,#b45d0b,#874305)}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2b1409" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>سوغاتی و شیرین‌کام | کلبه چای و قهوه سیمرغ</title>
+  <meta name="description" content="سوغاتی و شیرین‌کام‌های کلبه چای و قهوه سیمرغ در تهرانپارس — نبات و قند یزد، حلوا ارده و شیرین‌کام‌های همراه چای و قهوه." />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+      background: #f5efe6; color: #26130a;
+      font-family: Tahoma, "IranSans", sans-serif; font-size: 13px; line-height: 1.65;
+    }
+    body { padding-bottom: 96px; }
+    .ltr-pin { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+    .page-wrap { width: 100%; max-width: 560px; margin: 0 auto; padding: 12px; }
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      margin-bottom: 10px;
+    }
+    .back-home-btn {
+      text-decoration: none; background: #fffdf9; border: 1px solid #e2ceb3;
+      color: #26130a; padding: 6px 12px; border-radius: 999px;
+      font-size: 11px; font-weight: bold;
+    }
+    .top-pill {
+      background: #fffaf2; border: 1px solid #e6d5bc; color: #6b4c35;
+      padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: bold;
+    }
+    .head-card {
+      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 20px;
+      padding: 15px 14px; text-align: center;
+      box-shadow: 0 6px 18px rgba(38, 19, 10, 0.05); margin-bottom: 10px;
+    }
+    .logo-mini {
+      width: 64px; height: 64px; margin: 0 auto 8px; border-radius: 50%;
+      border: 2px solid #d7b285; background: #fff; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: bold; color: #7c3e08;
+    }
+    .logo-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .head-title { margin: 0 0 4px; font-size: 18px; font-weight: bold; color: #26130a; }
+    .head-sub { margin: 0; font-size: 11.5px; color: #6b5848; }
+    .nav-pills {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px; margin-bottom: 10px;
+    }
+    .nav-pill {
+      display: block; text-align: center; text-decoration: none;
+      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 12px;
+      padding: 8px 6px; font-size: 11px; font-weight: bold; color: #26130a;
+    }
+    .nav-pill.active {
+      background: #2b1409; border-color: #2b1409; color: #ffffff;
+    }
+    .items-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .product-card {
+      background: #fffdf9; border: 1px solid #ead9c1; border-radius: 16px;
+      padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .product-info { flex: 1; min-width: 0; }
+    .product-info strong { display: block; font-size: 12.5px; color: #26130a; margin-bottom: 3px; }
+    .product-info p { margin: 0 0 4px; font-size: 11px; color: #6b5848; }
+    .product-tag {
+      display: inline-block; background: #faf4eb; border: 1px solid #ead9c1;
+      color: #7c3e08; border-radius: 999px; padding: 2px 8px; font-size: 10px; font-weight: bold;
+    }
+    .add-btn {
+      border: 0; background: #d97706; color: #ffffff; padding: 8px 11px;
+      border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;
+      font-family: Tahoma, sans-serif; flex-shrink: 0; white-space: nowrap;
+    }
+    .note-box {
+      background: #fffdf9; border: 1px dashed #d7b285; border-radius: 16px;
+      padding: 12px; text-align: center; font-size: 11px; color: #5c4636; margin-bottom: 12px;
+    }
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; background: #fffdf9;
+      border-top: 1px solid #e5d4bc; padding: 8px; z-index: 4000; direction: rtl;
+    }
+    .bottom-bar-inner {
+      max-width: 560px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr 1.35fr; gap: 6px;
+    }
+    .bar-call, .bar-bale, .bar-invoice {
+      display: flex; align-items: center; justify-content: center; width: 100%;
+      min-height: 38px; border-radius: 11px; padding: 8px 6px; font-weight: bold;
+      font-size: 11.5px; text-decoration: none; border: 0; color: #ffffff;
+      font-family: Tahoma, sans-serif; cursor: pointer; white-space: nowrap;
+    }
+    .bar-call { background: #15803d; }
+    .bar-bale { background: #0284c7; }
+    .bar-invoice { background: #b45d0b; }
+    .fallback-modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 9999;
+      display: none; align-items: center; justify-content: center; padding: 14px;
+    }
+    .fallback-modal-backdrop.open { display: flex; }
+    .fallback-modal-card {
+      width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto;
+      background: #fffdf9; color: #26130a; border-radius: 18px; padding: 16px; direction: rtl;
+    }
+    .fallback-modal-head {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #ead9c1; padding-bottom: 8px; margin-bottom: 10px;
+      font-weight: bold; font-size: 14px;
+    }
+    .fallback-close-btn {
+      border: 0; background: #fee2e2; color: #991b1b; border-radius: 8px;
+      padding: 4px 10px; font-weight: bold; cursor: pointer; font-family: Tahoma, sans-serif;
+    }
+    .fallback-empty {
+      text-align: center; color: #6b5848; background: #faf4eb;
+      border: 1px dashed #e2ceb3; border-radius: 12px; padding: 16px 10px;
+      margin-bottom: 10px; font-size: 12px;
+    }
+    .fallback-item-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+      background: #faf4eb; border: 1px solid #ead9c1; border-radius: 10px;
+      padding: 8px 10px; margin-bottom: 8px; font-size: 11.5px;
+    }
+    .qty-controls { display: flex; align-items: center; gap: 6px; }
+    .qty-btn {
+      width: 24px; height: 24px; border: 1px solid #d7b285; background: #fff;
+      color: #26130a; border-radius: 6px; font-weight: bold; cursor: pointer;
+    }
+    .fallback-field {
+      width: 100%; border: 1px solid #e2ceb3; background: #fff; border-radius: 9px;
+      padding: 7px 10px; margin-bottom: 8px; font-size: 11.5px;
+      font-family: Tahoma, sans-serif; color: #26130a;
+    }
+    .select-grid-2 {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px; margin-bottom: 8px;
+    }
+    .select-grid-2 .fallback-field { margin-bottom: 0; }
+    .fallback-actions {
+      display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; margin-top: 10px;
+    }
+    .fallback-send-bale {
+      text-align: center; text-decoration: none; background: #0284c7; color: #fff;
+      padding: 9px 10px; border-radius: 10px; font-weight: bold; font-size: 11.5px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fallback-copy-btn, .fallback-clear-btn {
+      border: 1px solid #d8c3a8; background: #faf4eb; color: #26130a;
+      padding: 9px 10px; border-radius: 10px; font-weight: bold; font-size: 11.5px;
+      cursor: pointer; font-family: Tahoma, sans-serif;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top-bar">
-    <a href="./index.html" class="back-btn">→ بازگشت به خانه</a>
-    <a href="./coffee.html" class="back-btn">بار قهوه ←</a>
-  </div>
-  <h1>🍯 سوغاتی‌ها و شیرین‌کام‌ها</h1>
-  <div class="sub">همراهان خوش‌طعم چای و قهوه با امکان ثبت سریع در فاکتور</div>
+  <div class="page-wrap">
+    <div class="top-bar">
+      <a class="back-home-btn" href="./index.html">بازگشت به خانه</a>
+      <div class="top-pill">سوغاتی و شیرین‌کام</div>
+    </div>
 
-  <div class="prod-card">
-    <div class="prod-title">نبات زعفرانی و نبات ساده ممتاز</div>
-    <div class="prod-desc">مناسب برای سرو چای، دمنوش و قهوه یزدی با کیفیت پایدار.</div>
-    <div class="actions">
-      <button type="button" class="btn-add" onclick="SimorghCart.add('نبات ممتاز سیمرغ')">+ افزودن به فاکتور</button>
-      <a href="https://ble.ir/simorgh_coffee" class="btn-consult" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
+    <header class="head-card">
+      <div class="logo-mini">
+        <img
+          src="./1760785858698.jpg"
+          alt="لوگوی کلبه چای و قهوه سیمرغ"
+          onload="var f=document.getElementById('sLogoFb');if(f)f.style.display='none';"
+          onerror="this.style.display='none';var f=document.getElementById('sLogoFb');if(f)f.style.display='block';"
+        />
+        <span id="sLogoFb">SIMORGH</span>
+      </div>
+      <h1 class="head-title">سوغاتی و شیرین‌کام سیمرغ</h1>
+      <p class="head-sub">همراهان اصیل و خوش‌طعم چای، دمنوش و قهوه در تهرانپارس</p>
+    </header>
+
+    <nav class="nav-pills" aria-label="بخش‌های منو">
+      <a class="nav-pill" href="./coffee.html">بار قهوه و دان</a>
+      <a class="nav-pill" href="./tea.html">چای و دمنوش</a>
+      <a class="nav-pill active" href="./souvenirs.html">سوغاتی و شیرین‌کام</a>
+    </nav>
+    <section class="items-list">
+      <article class="product-card">
+        <div class="product-info">
+          <strong>نبات یزد (ساده، زعفرانی و طعم‌دار)</strong>
+          <p>مناسب سرو کنار چای، دمنوش و قهوه‌های سنتی و یزدی.</p>
+          <span class="product-tag">سوغاتی یزد</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-nabat-yazd" data-item-name="نبات یزد">+ به فاکتور</button>
+      </article>
+
+      <article class="product-card">
+        <div class="product-info">
+          <strong>قند یزد و قندهای طعم‌دار</strong>
+          <p>انتخاب خوش‌عطر و مناسب مصرف روزانه و پذیرایی.</p>
+          <span class="product-tag">شیرین‌کام اصیل</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-ghand-yazd" data-item-name="قند یزد">+ به فاکتور</button>
+      </article>
+
+      <article class="product-card">
+        <div class="product-info">
+          <strong>حلوا ارده سنتی</strong>
+          <p>مقوی و خوش‌طعم، مناسب صبحانه و عصرانه در کنار چای.</p>
+          <span class="product-tag">سوغاتی سنتی</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-halva-ardeh" data-item-name="حلوا ارده">+ به فاکتور</button>
+      </article>
+
+      <article class="product-card">
+        <div class="product-info">
+          <strong>هل سبز معطر و ادویه قهوه</strong>
+          <p>مناسب دم‌آوری قهوه یزدی، قهوه‌های دم‌کرده و چای‌های معطر.</p>
+          <span class="product-tag">معطرکننده</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-hel-spice" data-item-name="هل سبز معطر و ادویه قهوه">+ به فاکتور</button>
+      </article>
+
+      <article class="product-card">
+        <div class="product-info">
+          <strong>گل محمدی خشک و گلاب ناب</strong>
+          <p>خوشبوکننده طبیعی برای چای، دمنوش و دستورهای سنتی قهوه.</p>
+          <span class="product-tag">طبیعی و معطر</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-rose-golab" data-item-name="گل محمدی و گلاب">+ به فاکتور</button>
+      </article>
+
+      <article class="product-card">
+        <div class="product-info">
+          <strong>پودر کاکائو و شیرین‌کام‌های فله</strong>
+          <p>مناسب تهیه شیر کاکائو غلیظ، نوشیدنی‌های شکلاتی و شیرین‌کام.</p>
+          <span class="product-tag">فله و تازه</span>
+        </div>
+        <button type="button" class="add-btn" data-add-invoice data-item-id="souv-cocoa-bulk" data-item-name="پودر کاکائو و شیرین‌کام فله">+ به فاکتور</button>
+      </article>
+    </section>
+
+    <section class="note-box">
+      <strong>تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</strong>
+      <div>سفارش و هماهنگی سریع در پیام‌رسان بله: <span class="ltr-pin">@simorgh_coffee</span></div>
+    </section>
+  </div>
+
+  <nav class="bottom-bar" aria-label="دسترسی سریع">
+    <div class="bottom-bar-inner">
+      <a class="bar-call" href="tel:02177341312">تماس</a>
+      <a class="bar-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">بله</a>
+      <button type="button" id="openInvoiceBarBtn" class="bar-invoice" data-open-invoice>فاکتور ( <span id="simorghCartCount">0</span> )</button>
+    </div>
+  </nav>
+
+  <div id="simorghFallbackModal" class="fallback-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="fallback-modal-card">
+      <div class="fallback-modal-head">
+        <span>فاکتور سفارش سیمرغ</span>
+        <button type="button" id="fallbackCloseBtn" class="fallback-close-btn">بستن</button>
+      </div>
+      <div id="fallbackItemsList"></div>
+      <input type="text" id="invCustomerName" class="fallback-field" placeholder="نام و نام خانوادگی (اختیاری)" />
+      <div class="select-grid-2">
+        <select id="invDeliveryType" class="fallback-field" aria-label="نوع تحویل">
+          <option value="">نوع تحویل</option>
+          <option value="پیک">پیک</option>
+          <option value="حضوری">حضوری</option>
+        </select>
+        <select id="invGrindType" class="fallback-field" aria-label="نوع آسیاب">
+          <option value="">نوع آسیاب</option>
+          <option value="دانه کامل">دانه کامل</option>
+          <option value="اسپرسو">اسپرسو</option>
+          <option value="موکاپات">موکاپات</option>
+          <option value="فرانسه / دمی">فرانسه / دمی</option>
+          <option value="ترک">ترک</option>
+        </select>
+      </div>
+      <div class="fallback-actions">
+        <a id="fallbackBaleLink" class="fallback-send-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">ارسال به بله</a>
+        <button type="button" id="fallbackCopyBtn" class="fallback-copy-btn">کپی متن</button>
+        <button type="button" id="fallbackClearBtn" class="fallback-clear-btn">پاک کردن</button>
+      </div>
     </div>
   </div>
 
-  <div class="prod-card">
-    <div class="prod-title">شیرین‌کام‌ها و تنقلات همراه نوشیدنی</div>
-    <div class="prod-desc">گزینه‌های شیرین و سنتی برای کنار چای یا قهوه در منزل، محل کار یا هدیه.</div>
-    <div class="actions">
-      <button type="button" class="btn-add" onclick="SimorghCart.add('شیرین‌کام همراه نوشیدنی')">+ افزودن به فاکتور</button>
-      <a href="https://ble.ir/simorgh_coffee" class="btn-consult" target="_blank" rel="noopener noreferrer">مشاوره بله</a>
-    </div>
-  </div>
-</div>
-
-<div class="floating-buttons">
-  <button type="button" onclick="SimorghCart.openModal()" class="fab-btn fab-cart">🧾 فاکتور (<span id="simorghCartCount">0</span>)</button>
-  <a href="https://ble.ir/simorgh_coffee" class="fab-btn fab-bale" target="_blank" rel="noopener noreferrer">💬 پیام در بله</a>
-  <a href="tel:02177341312" class="fab-btn fab-call">📞 تماس سریع</a>
-</div>
-
-<script src="./simorgh-cart.js"></script>
+  <script>
+    (function(){try{
+      var K='simorgh_user_invoice_items_v2';
+      function load(){try{var r=localStorage.getItem(K);if(r){var a=JSON.parse(r);if(Array.isArray(a))return a.filter(function(x){return x&&x.name&&(Number(x.qty)||0)>0;});}}catch(e){}return[];}
+      var items=load(),cnt=document.getElementById('simorghCartCount'),opn=document.getElementById('openInvoiceBarBtn'),mdl=document.getElementById('simorghFallbackModal'),lst=document.getElementById('fallbackItemsList'),cls=document.getElementById('fallbackCloseBtn'),clr=document.getElementById('fallbackClearBtn'),cpb=document.getElementById('fallbackCopyBtn'),blk=document.getElementById('fallbackBaleLink');
+      function bText(){var l=['سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):'];if(!items.length){l.push('• هنوز موردی از منو به فاکتور اضافه نشده است.');}else{for(var i=0;i<items.length;i++)l.push('• '+items[i].name+' — تعداد: '+(Number(items[i].qty)||0));}var cn=(document.getElementById('invCustomerName')&&document.getElementById('invCustomerName').value||'').trim(),dt=(document.getElementById('invDeliveryType')&&document.getElementById('invDeliveryType').value||'').trim(),gt=(document.getElementById('invGrindType')&&document.getElementById('invGrindType').value||'').trim();if(cn)l.push('نام: '+cn);if(dt)l.push('نوع تحویل: '+dt);if(gt)l.push('نوع آسیاب: '+gt);return l.join('\n');}
+      function upBale(){if(blk)blk.href='https://ble.ir/simorgh_coffee?text='+encodeURIComponent(bText());}
+      function sync(){items=items.filter(function(x){return x&&x.name&&(Number(x.qty)||0)>0;});try{localStorage.setItem(K,JSON.stringify(items));}catch(e){}var t=0;for(var i=0;i<items.length;i++)t+=(Number(items[i].qty)||0);if(cnt)cnt.textContent=String(t);upBale();}
+      function addIt(nm,id){var s=String(nm||'').trim();if(!s)return;var f=null;for(var i=0;i<items.length;i++){if((id&&items[i].id===id)||items[i].name===s){f=items[i];break;}}if(f){f.qty=(Number(f.qty)||0)+1;}else{items.push({id:id||String(Date.now()),name:s,qty:1});}sync();}
+      function chg(i,d){if(!items[i])return;var n=(Number(items[i].qty)||0)+d;if(n<=0)items.splice(i,1);else items[i].qty=n;sync();render();}
+      function render(){if(!lst)return;if(!items.length){lst.innerHTML='<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از منو یا دکمه «+ به فاکتور» اضافه کنید.</div>';upBale();return;}var h='';for(var i=0;i<items.length;i++){h+='<div class="fallback-item-row"><span><strong>'+items[i].name+'</strong></span><div class="qty-controls"><button type="button" class="qty-btn" data-qi="'+i+'" data-d="-1">-</button><span>'+(Number(items[i].qty)||0)+'</span><button type="button" class="qty-btn" data-qi="'+i+'" data-d="1">+</button></div></div>';}lst.innerHTML=h;var bs=lst.querySelectorAll('.qty-btn');for(var k=0;k<bs.length;k++){bs[k].addEventListener('click',function(){chg(Number(this.getAttribute('data-qi')),Number(this.getAttribute('data-d')));});}upBale();}
+      document.addEventListener('click',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-add-invoice]'):null;if(!el)return;if(window.SimorghCart&&typeof window.SimorghCart.addItem==='function')return;addIt(el.getAttribute('data-item-name')||el.getAttribute('data-name')||'آیتم انتخاب‌شده',el.getAttribute('data-item-id')||el.getAttribute('data-id')||'');});
+      if(opn){opn.addEventListener('click',function(){if(window.SimorghCart&&typeof window.SimorghCart.openModal==='function')return;render();if(mdl)mdl.classList.add('open');});}
+      if(cls&&mdl)cls.addEventListener('click',function(){mdl.classList.remove('open');});
+      if(mdl)mdl.addEventListener('click',function(e){if(e.target===mdl)mdl.classList.remove('open');});
+      if(clr)clr.addEventListener('click',function(){items=[];sync();render();});
+      function cp(txt,btn,lbl){try{var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}catch(e){}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).catch(function(){});if(btn){btn.textContent='کپی شد ✓';setTimeout(function(){btn.textContent=lbl;},1800);}}
+      if(cpb)cpb.addEventListener('click',function(){cp(bText(),cpb,'کپی متن');});
+      ['invCustomerName','invDeliveryType','invGrindType'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',upBale);if(el)el.addEventListener('change',upBale);});
+      sync();
+    }catch(err){}})();
+  </script>
+  <script src="./simorgh-cart.js?v=57" onerror="void(0)"></script>
 </body>
 </html>
