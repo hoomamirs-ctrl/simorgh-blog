@@ -38,6 +38,9 @@
     .row{display:flex;justify-content:space-between;align-items:center;background:#faf4eb;border:1px solid #ead9c1;border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:11.5px}
     .q{display:flex;align-items:center;gap:6px}
     .q button{width:24px;height:24px;border:1px solid #d7b285;background:#fff;border-radius:6px;font-weight:bold;cursor:pointer}
+    .fld{width:100%;border:1px solid #e2ceb3;background:#fff;border-radius:9px;padding:7px 10px;margin-bottom:8px;font-size:11.5px;font-family:Tahoma,sans-serif;color:#26130a}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+    .g2 .fld{margin-bottom:0}
     .acts{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-top:10px}
     .acts a{text-decoration:none;background:#0284c7;color:#fff;padding:9px;border-radius:10px;font-weight:bold;font-size:11.5px;text-align:center}
     .acts button{border:1px solid #d8c3a8;background:#faf4eb;color:#26130a;padding:9px;border-radius:10px;font-weight:bold;font-size:11.5px;cursor:pointer;font-family:Tahoma,sans-serif}
@@ -108,6 +111,22 @@
     <div class="box">
       <div class="box-h"><span>فاکتور سفارش سیمرغ</span><button type="button" id="cls" class="x">بستن</button></div>
       <div id="listBox"></div>
+      <input type="text" id="custName" class="fld" placeholder="نام و نام خانوادگی (اختیاری)" />
+      <div class="g2">
+        <select id="delivType" class="fld" aria-label="نوع تحویل">
+          <option value="">نوع تحویل</option>
+          <option value="پیک">پیک</option>
+          <option value="حضوری">حضوری</option>
+        </select>
+        <select id="grindType" class="fld" aria-label="نوع آسیاب">
+          <option value="">نوع آسیاب</option>
+          <option value="دانه کامل">دانه کامل</option>
+          <option value="اسپرسو">اسپرسو</option>
+          <option value="موکاپات">موکاپات</option>
+          <option value="فرانسه / دمی">فرانسه / دمی</option>
+          <option value="ترک">ترک</option>
+        </select>
+      </div>
       <div class="acts">
         <a id="baleSend" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">ارسال به بله</a>
         <button type="button" id="copyBtn">کپی متن</button>
@@ -125,6 +144,12 @@
         var l=["سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):"];
         if(!items.length)l.push("• موردی ثبت نشده است.");
         else items.forEach(function(x){l.push("• "+x.name+" — تعداد: "+x.qty);});
+        var cn=(document.getElementById("custName").value||"").trim();
+        var dt=(document.getElementById("delivType").value||"").trim();
+        var gt=(document.getElementById("grindType").value||"").trim();
+        if(cn)l.push("نام: "+cn);
+        if(dt)l.push("نوع تحویل: "+dt);
+        if(gt)l.push("نوع آسیاب: "+gt);
         return l.join("\n");
       }
       function save(){
@@ -134,7 +159,7 @@
         baleSend.href="https://ble.ir/simorgh_coffee?text="+encodeURIComponent(txt());
       }
       function render(){
-        if(!items.length){listBox.innerHTML='<p style="text-align:center;color:#6b5848">فاکتور خالی است.</p>';return;}
+        if(!items.length){listBox.innerHTML='<p style="text-align:center;color:#6b5848">فاکتور خالی است.</p>';save();return;}
         listBox.innerHTML=items.map(function(x,i){
           return '<div class="row"><strong>'+x.name+'</strong><div class="q"><button type="button" data-i="'+i+'" data-d="-1">-</button><span>'+x.qty+'</span><button type="button" data-i="'+i+'" data-d="1">+</button></div></div>';
         }).join("");
@@ -145,6 +170,7 @@
             save();render();
           };
         });
+        save();
       }
       document.querySelectorAll(".add").forEach(function(b){
         b.onclick=function(){
@@ -162,6 +188,10 @@
         if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).catch(function(){});
         this.textContent="کپی شد ✓";
       };
+      ["custName","delivType","grindType"].forEach(function(id){
+        var el=document.getElementById(id);
+        if(el){el.addEventListener("input",save);el.addEventListener("change",save);}
+      });
       save();
     })();
   </script>
