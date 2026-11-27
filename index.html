@@ -158,32 +158,50 @@
       background: #fffdf9;
       border: 1px solid #ead9c1;
       border-radius: 16px;
-      padding: 14px 12px;
+      padding: 13px 12px;
       margin-bottom: 10px;
-      text-align: center;
     }
     .hours-top {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      gap: 8px;
       margin-bottom: 8px;
     }
     .status-pill {
-      padding: 3px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: bold;
-      background: #fee2e2;
+      background: #fef2f2;
       color: #991b1b;
+      border: 1px solid #fecaca;
     }
-    .status-pill.open { background: #dcfce7; color: #166534; }
+    .status-pill.open {
+      background: #f0fdf4;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #dc2626;
+      box-shadow: 0 0 6px rgba(220, 38, 38, 0.75);
+      flex-shrink: 0;
+    }
+    .status-pill.open .status-dot {
+      background: #16a34a;
+      box-shadow: 0 0 7px rgba(22, 163, 74, 0.85);
+    }
     .hours-lines {
       font-size: 11.5px;
       color: #4a3728;
       text-align: center;
-      line-height: 1.8;
+      line-height: 1.85;
     }
     .hours-note {
       display: flex;
@@ -195,7 +213,7 @@
       background: #faf4eb;
       border: 1px solid #ead9c1;
       border-radius: 12px;
-      padding: 9px 10px;
+      padding: 8px 10px;
       font-size: 11.5px;
       text-align: center;
       color: #5c4636;
@@ -571,7 +589,10 @@
     <section class="hours-box">
       <div class="hours-top">
         <strong>ساعت کاری فروشگاه</strong>
-        <span id="storeStatusBadge" class="status-pill">بررسی وضعیت...</span>
+        <span id="storeStatusBadge" class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="storeStatusText">بررسی وضعیت...</span>
+        </span>
       </div>
       <div class="hours-lines">
         <div>شنبه تا پنجشنبه: <span class="ltr-pin">08:00</span> الی <span class="ltr-pin">22:00</span></div>
@@ -693,8 +714,9 @@
 
       function renderStoreStatus() {
         var badge = document.getElementById("storeStatusBadge");
+        var statusText = document.getElementById("storeStatusText");
         var countdownEl = document.getElementById("storeCountdown");
-        if (!badge) return;
+        if (!badge || !statusText) return;
 
         var now = new Date();
         var day = now.getDay();
@@ -704,7 +726,7 @@
         var closeSec = (day === 5) ? (13 * 3600) : (22 * 3600);
         var isOpen = secNow >= openSec && secNow <= closeSec;
 
-        badge.textContent = isOpen ? "فروشگاه باز است" : "فروشگاه بسته است";
+        statusText.textContent = isOpen ? "باز است" : "بسته است";
         badge.classList.toggle("open", isOpen);
 
         if (!countdownEl) return;
