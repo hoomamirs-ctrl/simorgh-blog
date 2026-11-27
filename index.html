@@ -104,46 +104,46 @@
       margin-bottom: 10px;
     }
     .acc-trigger {
+      display: block;
       width: 100%;
-      min-width: 0;
       background: transparent;
       border: 0;
-      outline: none;
+      outline: none !important;
+      box-shadow: none !important;
       padding: 2px 0;
       cursor: pointer;
       font-weight: bold;
       font-size: 12px;
       color: #26130a;
       font-family: Tahoma, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
       text-align: right;
       -webkit-tap-highlight-color: transparent;
     }
     .acc-trigger:focus,
     .acc-trigger:focus-visible,
     .acc-trigger:active {
-      outline: none;
-      box-shadow: none;
-      background: transparent;
+      outline: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
     }
-    .acc-trigger > span:first-child {
-      flex: 1 1 auto;
+    .acc-trigger-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      width: 100%;
+    }
+    .acc-title {
+      flex: 1;
       min-width: 0;
       text-align: right;
       overflow-wrap: break-word;
     }
     .acc-arrow {
-      flex: 0 0 auto;
-      font-size: 13px;
+      flex-shrink: 0;
+      font-size: 12px;
       color: #7c3e08;
-      display: inline-block;
-      transition: transform 0.2s ease;
-    }
-    .acc-box.is-open .acc-arrow {
-      transform: rotate(180deg);
+      line-height: 1;
     }
     .acc-panel {
       display: none;
@@ -245,12 +245,18 @@
       background: #faf4eb;
       border: 1px solid #ead9c1;
       border-radius: 10px;
-      padding: 7px 10px;
+      padding: 8px 10px;
       font-size: 11px;
       text-align: center;
       color: #5c4636;
       margin-top: 6px;
       font-weight: bold;
+    }
+    .timer-digits {
+      font-family: Tahoma, monospace;
+      font-size: 12px;
+      color: #7c3e08;
+      margin-right: 4px;
     }
     .footer-addr {
       background: #fffdf9;
@@ -463,8 +469,10 @@
 
     <div class="acc-box" id="accSocial">
       <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="panelSocial">
-        <span>شبکه‌های اجتماعی و پیام‌رسان</span>
-        <span class="acc-arrow" aria-hidden="true">▾</span>
+        <span class="acc-trigger-inner">
+          <span class="acc-title">شبکه‌های اجتماعی و پیام‌رسان</span>
+          <span class="acc-arrow" aria-hidden="true">▾</span>
+        </span>
       </button>
       <div class="acc-panel" id="panelSocial">
         <a class="acc-link" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">پیام‌رسان بله: <span class="ltr-pin">@simorgh_coffee</span></a>
@@ -475,8 +483,10 @@
 
     <div class="acc-box" id="accContact">
       <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="panelContact">
-        <span>تماس با ما و راه‌های ارتباطی</span>
-        <span class="acc-arrow" aria-hidden="true">▾</span>
+        <span class="acc-trigger-inner">
+          <span class="acc-title">تماس با ما و راه‌های ارتباطی</span>
+          <span class="acc-arrow" aria-hidden="true">▾</span>
+        </span>
       </button>
       <div class="acc-panel" id="panelContact">
         <div>تلفن ثابت: <a href="tel:02177341312"><span class="ltr-pin">021-77341312</span></a></div>
@@ -560,26 +570,32 @@
     (function () {
       var triggers = document.querySelectorAll(".acc-trigger");
       for (var i = 0; i < triggers.length; i++) {
-        triggers[i].addEventListener("click", function () {
+        triggers[i].addEventListener("click", function (ev) {
+          ev.preventDefault();
           var box = this.closest ? this.closest(".acc-box") : this.parentElement;
           if (!box) return;
           var willOpen = !box.classList.contains("is-open");
           box.classList.toggle("is-open", willOpen);
           this.setAttribute("aria-expanded", willOpen ? "true" : "false");
+          var arrow = this.querySelector(".acc-arrow");
+          if (arrow) arrow.textContent = willOpen ? "▴" : "▾";
           var btn = this;
-          setTimeout(function () {
+          requestAnimationFrame(function () {
             if (btn && typeof btn.blur === "function") btn.blur();
-          }, 0);
+          });
         });
       }
 
-      function formatCountdown(diffMins) {
-        if (diffMins < 0) diffMins = 0;
-        var h = Math.floor(diffMins / 60);
-        var m = diffMins % 60;
-        if (h > 0 && m > 0) return h + " ساعت و " + m + " دقیقه";
-        if (h > 0) return h + " ساعت";
-        return m + " دقیقه";
+      function pad2(n) {
+        return n < 10 ? "0" + n : String(n);
+      }
+
+      function formatHms(totalSeconds) {
+        if (totalSeconds < 0) totalSeconds = 0;
+        var h = Math.floor(totalSeconds / 3600);
+        var m = Math.floor((totalSeconds % 3600) / 60);
+        var s = totalSeconds % 60;
+        return '<span class="ltr-pin timer-digits">' + pad2(h) + ":" + pad2(m) + ":" + pad2(s) + "</span>";
       }
 
       function renderStoreStatus() {
@@ -588,12 +604,12 @@
         if (!badge) return;
 
         var now = new Date();
-        var day = now.getDay();
-        var mins = now.getHours() * 60 + now.getMinutes();
+        var day = now.getDay(); // 5 = Friday
+        var secNow = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
 
-        var openMin = 8 * 60;
-        var closeMin = (day === 5) ? (13 * 60) : (22 * 60);
-        var isOpen = mins >= openMin && mins <= closeMin;
+        var openSec = 8 * 3600;
+        var closeSec = (day === 5) ? (13 * 3600) : (22 * 3600);
+        var isOpen = secNow >= openSec && secNow <= closeSec;
 
         badge.textContent = isOpen ? "فروشگاه باز است" : "فروشگاه بسته است";
         badge.classList.toggle("open", isOpen);
@@ -601,18 +617,18 @@
         if (!countdownEl) return;
 
         if (isOpen) {
-          countdownEl.textContent = "تا پایان ساعت کاری امروز: " + formatCountdown(closeMin - mins);
-        } else if (mins < openMin) {
-          countdownEl.textContent = "تا شروع به کار امروز (08:00): " + formatCountdown(openMin - mins);
+          countdownEl.innerHTML = "زمان باقی‌مانده تا پایان کار امروز: " + formatHms(closeSec - secNow);
+        } else if (secNow < openSec) {
+          countdownEl.innerHTML = "زمان باقی‌مانده تا باز شدن امروز (08:00): " + formatHms(openSec - secNow);
         } else {
-          var remToday = (24 * 60) - mins;
-          countdownEl.textContent = "تا شروع به کار فردا (08:00): " + formatCountdown(remToday + openMin);
+          var remToday = (24 * 3600) - secNow;
+          countdownEl.innerHTML = "زمان باقی‌مانده تا باز شدن فردا (08:00): " + formatHms(remToday + openSec);
         }
       }
 
       renderStoreStatus();
       window.addEventListener("load", renderStoreStatus);
-      setInterval(renderStoreStatus, 30000);
+      setInterval(renderStoreStatus, 1000);
     })();
   </script>
 
