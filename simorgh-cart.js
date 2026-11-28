@@ -1,6 +1,6 @@
 (function () {
-  if (window.__simorghInvoiceLoaded) return;
-  window.__simorghInvoiceLoaded = true;
+  if (window.__simorghStandardCartLoaded) return;
+  window.__simorghStandardCartLoaded = true;
 
   var STORAGE_KEY = "simorgh_user_invoice_items_v2";
   var items = [];
@@ -20,9 +20,9 @@
   }
 
   function injectStyles() {
-    if (document.getElementById("simorghInvoiceSharedStyle")) return;
+    if (document.getElementById("simorghStandardCartStyle")) return;
     var style = document.createElement("style");
-    style.id = "simorghInvoiceSharedStyle";
+    style.id = "simorghStandardCartStyle";
     style.textContent =
       ".fallback-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:none;align-items:center;justify-content:center;padding:14px}" +
       ".fallback-modal-backdrop.open{display:flex}" +
@@ -174,7 +174,7 @@
     function renderList() {
       if (!listEl) return;
       if (!items.length) {
-        listEl.innerHTML = '<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از منو یا دکمه «+ به فاکتور» اضافه کنید.</div>';
+        listEl.innerHTML = '<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از دسته‌بندی‌ها یا دکمه «+ به فاکتور» اضافه کنید.</div>';
         updateBaleHref();
         return;
       }
