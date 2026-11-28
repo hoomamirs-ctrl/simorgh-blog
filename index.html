@@ -166,16 +166,16 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       font-size: 12px;
     }
     .status-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 2px 9px;
+      gap: 6px;
+      padding: 3px 10px;
       border-radius: 999px;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: bold;
       background: #fef2f2;
       color: #991b1b;
@@ -192,25 +192,23 @@
       border-radius: 50%;
       background: #dc2626;
       flex-shrink: 0;
-      animation: pulseLamp 1.1s ease-in-out infinite;
+      animation: pulseLampRed 1.1s ease-in-out infinite;
     }
     .status-pill.open .status-dot {
       background: #16a34a;
+      animation: pulseLampGreen 1.1s ease-in-out infinite;
     }
-    @keyframes pulseLamp {
+    @keyframes pulseLampRed {
       0%, 100% {
         opacity: 1;
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.65);
+        box-shadow: 0 0 6px 1px rgba(220, 38, 38, 0.75);
       }
       50% {
         opacity: 0.35;
         transform: scale(0.82);
-        box-shadow: 0 0 6px 2px rgba(220, 38, 38, 0.25);
+        box-shadow: 0 0 2px 0 rgba(220, 38, 38, 0.2);
       }
-    }
-    .status-pill.open .status-dot {
-      animation-name: pulseLampGreen;
     }
     @keyframes pulseLampGreen {
       0%, 100% {
@@ -240,11 +238,11 @@
       background: #faf4eb;
       border: 1px solid #ead9c1;
       border-radius: 10px;
-      padding: 6px 8px;
+      padding: 7px 9px;
       font-size: 11px;
       text-align: center;
       color: #5c4636;
-      margin-top: 6px;
+      margin-top: 7px;
       font-weight: bold;
     }
     .timer-digits {
@@ -260,7 +258,7 @@
       background: #fffdf9;
       border: 1px solid #ead9c1;
       border-radius: 16px;
-      padding: 10px 12px;
+      padding: 11px 12px;
       margin-bottom: 10px;
     }
     .acc-trigger {
@@ -301,8 +299,8 @@
     }
     .acc-arrow {
       flex-shrink: 0;
-      font-size: 12px;
-      color: #7c3e08;
+      font-size: 11px;
+      color: #8a735e;
       line-height: 1;
     }
     .acc-panel {
@@ -676,4 +674,445 @@
   <nav class="bottom-bar" aria-label="دسترسی سریع">
     <div class="bottom-bar-inner">
       <a class="bar-call" href="tel:02177341312">تماس</a>
-      <a
+      <a class="bar-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">بله</a>
+      <button type="button" id="openInvoiceBarBtn" class="bar-invoice" data-open-invoice>فاکتور ( <span id="simorghCartCount">0</span> )</button>
+    </div>
+  </nav>
+
+  <div id="simorghFallbackModal" class="fallback-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="fallback-modal-card">
+      <div class="fallback-modal-head">
+        <span>سبد سفارش سیمرغ</span>
+        <button type="button" id="fallbackCloseBtn" class="fallback-close-btn">بستن</button>
+      </div>
+      <div id="fallbackItemsList"></div>
+      <div class="select-grid-2">
+        <select id="invWeightUnit" class="fallback-field" aria-label="واحد وزن">
+          <option value="گرم">واحد: گرم</option>
+          <option value="کیلوگرم">واحد: کیلوگرم</option>
+        </select>
+        <select id="invGrindType" class="fallback-field" aria-label="نوع آسیاب">
+          <option value="">نوع آسیاب</option>
+          <option value="دانه کامل">دانه کامل</option>
+          <option value="اسپرسو">اسپرسو</option>
+          <option value="موکاپات">موکاپات</option>
+          <option value="فرانسه / دمی">فرانسه / دمی</option>
+          <option value="ترک">ترک</option>
+        </select>
+      </div>
+      <select id="invDeliveryType" class="fallback-field" aria-label="نوع تحویل">
+        <option value="">نوع تحویل</option>
+        <option value="پیک">پیک</option>
+        <option value="حضوری">حضوری</option>
+      </select>
+      <div class="fallback-actions">
+        <a id="fallbackBaleLink" class="fallback-send-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">ارسال به بله</a>
+        <button type="button" id="fallbackCopyBtn" class="fallback-copy-btn">کپی متن</button>
+        <button type="button" id="fallbackClearBtn" class="fallback-clear-btn">پاک کردن</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      function initAccordions() {
+        var triggers = document.querySelectorAll(".acc-trigger");
+        for (var i = 0; i < triggers.length; i++) {
+          triggers[i].addEventListener("click", function (ev) {
+            ev.preventDefault();
+            var box = this.closest ? this.closest(".acc-box") : this.parentElement;
+            if (!box) return;
+            var willOpen = !box.classList.contains("is-open");
+            box.classList.toggle("is-open", willOpen);
+            this.setAttribute("aria-expanded", willOpen ? "true" : "false");
+            var arrow = this.querySelector(".acc-arrow");
+            if (arrow) arrow.textContent = willOpen ? "▴" : "▾";
+            var btn = this;
+            requestAnimationFrame(function () {
+              if (btn && typeof btn.blur === "function") btn.blur();
+            });
+          });
+        }
+      }
+
+      function pad2(n) {
+        return n < 10 ? "0" + n : String(n);
+      }
+
+      function formatHms(totalSeconds) {
+        if (totalSeconds < 0) totalSeconds = 0;
+        var h = Math.floor(totalSeconds / 3600);
+        var m = Math.floor((totalSeconds % 3600) / 60);
+        var s = totalSeconds % 60;
+        return '<span class="timer-digits">' + pad2(h) + ":" + pad2(m) + ":" + pad2(s) + "</span>";
+      }
+
+      function renderStoreStatus() {
+        var badge = document.getElementById("storeStatusBadge");
+        var statusText = document.getElementById("storeStatusText");
+        var countdownEl = document.getElementById("storeCountdown");
+        if (!badge || !statusText) return;
+
+        var now = new Date();
+        var day = now.getDay();
+        var secNow = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+
+        var openSec = 8 * 3600;
+        var closeSec = (day === 5) ? (13 * 3600) : (22 * 3600);
+        var isOpen = secNow >= openSec && secNow <= closeSec;
+
+        statusText.textContent = isOpen ? "باز است" : "بسته است";
+        badge.classList.toggle("open", isOpen);
+
+        if (!countdownEl) return;
+
+        if (isOpen) {
+          countdownEl.innerHTML = "<span>پایان کار امروز در:</span>" + formatHms(closeSec - secNow);
+        } else if (secNow < openSec) {
+          countdownEl.innerHTML = "<span>باز شدن امروز (08:00) در:</span>" + formatHms(openSec - secNow);
+        } else {
+          var remToday = (24 * 3600) - secNow;
+          countdownEl.innerHTML = "<span>شروع به کار فردا (08:00) در:</span>" + formatHms(remToday + openSec);
+        }
+      }
+
+      function initCopyAddress() {
+        var copyAddrBtn = document.getElementById("copyAddressBtn");
+        if (!copyAddrBtn) return;
+        copyAddrBtn.addEventListener("click", function () {
+          var addrText = "تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸";
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = addrText;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(addrText).catch(function () {});
+          }
+          copyAddrBtn.textContent = "آدرس کپی شد ✓";
+          setTimeout(function () { copyAddrBtn.textContent = "کپی آدرس فروشگاه"; }, 1800);
+        });
+      }
+
+      function startPageUi() {
+        initAccordions();
+        initCopyAddress();
+        renderStoreStatus();
+        setInterval(renderStoreStatus, 1000);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startPageUi);
+      } else {
+        startPageUi();
+      }
+      window.addEventListener("load", renderStoreStatus);
+    })();
+  </script>
+
+  <script>
+    (function(){
+      var K = "simorgh_user_invoice_items_v2";
+      var items = [];
+
+      function escapeHtml(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function getCurrentUnit() {
+        var unitEl = document.getElementById("invWeightUnit");
+        var val = unitEl ? unitEl.value : "گرم";
+        return val === "کیلوگرم" ? "کیلوگرم" : "گرم";
+      }
+
+      function loadItems() {
+        try {
+          var raw = localStorage.getItem(K);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) {
+              return parsed.filter(function(x){
+                return x && x.name && (Number(x.qty) || 0) > 0;
+              }).map(function(x){
+                return {
+                  id: x.id || "",
+                  name: String(x.name),
+                  qty: Number(x.qty) || 1,
+                  unit: x.unit === "کیلوگرم" ? "کیلوگرم" : "گرم"
+                };
+              });
+            }
+          }
+        } catch (e) {}
+        return [];
+      }
+
+      items = loadItems();
+
+      var cntEl = document.getElementById("simorghCartCount");
+      var openBtn = document.getElementById("openInvoiceBarBtn");
+      var modalEl = document.getElementById("simorghFallbackModal");
+      var listEl = document.getElementById("fallbackItemsList");
+      var closeBtn = document.getElementById("fallbackCloseBtn");
+      var clearBtn = document.getElementById("fallbackClearBtn");
+      var copyBtn = document.getElementById("fallbackCopyBtn");
+      var baleLink = document.getElementById("fallbackBaleLink");
+      var quickBaleLink = document.getElementById("quickConsultBaleLink");
+      var unitSelectEl = document.getElementById("invWeightUnit");
+
+      function buildOrderText() {
+        var lines = ["سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):"];
+        if (!items.length) {
+          lines.push("• هنوز موردی از منو به سبد سفارش اضافه نشده است.");
+        } else {
+          for (var i = 0; i < items.length; i++) {
+            var q = Number(items[i].qty) || 0;
+            var u = items[i].unit || getCurrentUnit();
+            lines.push("• " + items[i].name + " — مقدار: " + q + " " + u);
+          }
+        }
+        var dt = (document.getElementById("invDeliveryType") && document.getElementById("invDeliveryType").value || "").trim();
+        var gt = (document.getElementById("invGrindType") && document.getElementById("invGrindType").value || "").trim();
+        if (dt) lines.push("نوع تحویل: " + dt);
+        if (gt) lines.push("نوع آسیاب: " + gt);
+        return lines.join("\n");
+      }
+
+      function updateBaleHref() {
+        if (baleLink) {
+          baleLink.href = "https://ble.ir/simorgh_coffee?text=" + encodeURIComponent(buildOrderText());
+        }
+      }
+
+      function syncState() {
+        items = items.filter(function(x){ return x && x.name && (Number(x.qty) || 0) > 0; });
+        try {
+          localStorage.setItem(K, JSON.stringify(items));
+        } catch (e) {}
+        var total = 0;
+        for (var i = 0; i < items.length; i++) {
+          total += (Number(items[i].qty) || 0);
+        }
+        if (cntEl) cntEl.textContent = String(total);
+        updateBaleHref();
+      }
+
+      function addToCart(name, id) {
+        var cleanName = String(name || "").trim();
+        if (!cleanName) return;
+        var cleanId = String(id || "").trim();
+        var activeUnit = getCurrentUnit();
+        var found = null;
+        for (var i = 0; i < items.length; i++) {
+          var sameItem = (cleanId && items[i].id === cleanId) || items[i].name === cleanName;
+          if (sameItem && (items[i].unit || "گرم") === activeUnit) {
+            found = items[i];
+            break;
+          }
+        }
+        if (found) {
+          found.qty = (Number(found.qty) || 0) + 1;
+        } else {
+          items.push({
+            id: cleanId || ("item-" + Date.now()),
+            name: cleanName,
+            qty: 1,
+            unit: activeUnit
+          });
+        }
+        syncState();
+        if (modalEl && modalEl.classList.contains("open")) {
+          renderList();
+        }
+      }
+
+      function changeQty(index, delta) {
+        if (!items[index]) return;
+        var nextQty = (Number(items[index].qty) || 0) + delta;
+        if (nextQty <= 0) {
+          items.splice(index, 1);
+        } else {
+          items[index].qty = nextQty;
+        }
+        syncState();
+        renderList();
+      }
+
+      function renderList() {
+        if (!listEl) return;
+        if (!items.length) {
+          listEl.innerHTML = '<div class="fallback-empty">سبد سفارش شما خالی است. موارد دلخواه را از دسته‌بندی‌ها یا دکمه «+ به فاکتور» اضافه کنید.</div>';
+          updateBaleHref();
+          return;
+        }
+        var html = "";
+        for (var i = 0; i < items.length; i++) {
+          var q = Number(items[i].qty) || 0;
+          var u = items[i].unit || getCurrentUnit();
+          html += '<div class="fallback-item-row">' +
+            '<div><strong>' + escapeHtml(items[i].name) + '</strong>' +
+            '<span class="item-meta-sub">مقدار: ' + q + ' ' + escapeHtml(u) + '</span></div>' +
+            '<div class="qty-controls">' +
+            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="-1">-</button>' +
+            '<span>' + q + '</span>' +
+            '<button type="button" class="qty-btn" data-idx="' + i + '" data-delta="1">+</button>' +
+            '</div></div>';
+        }
+        listEl.innerHTML = html;
+
+        var qtyButtons = listEl.querySelectorAll(".qty-btn");
+        for (var k = 0; k < qtyButtons.length; k++) {
+          qtyButtons[k].addEventListener("click", function() {
+            var idx = Number(this.getAttribute("data-idx"));
+            var delta = Number(this.getAttribute("data-delta"));
+            changeQty(idx, delta);
+          });
+        }
+        updateBaleHref();
+      }
+
+      if (unitSelectEl) {
+        unitSelectEl.addEventListener("change", function() {
+          var chosenUnit = getCurrentUnit();
+          for (var i = 0; i < items.length; i++) {
+            items[i].unit = chosenUnit;
+          }
+          syncState();
+          if (modalEl && modalEl.classList.contains("open")) {
+            renderList();
+          }
+        });
+      }
+
+      var addButtons = document.querySelectorAll("[data-add-invoice], .q-add-btn");
+      for (var b = 0; b < addButtons.length; b++) {
+        addButtons[b].addEventListener("click", function(ev) {
+          ev.preventDefault();
+          var btn = this;
+          var itemName = btn.getAttribute("data-item-name") || btn.getAttribute("data-name") || "مشاوره و انتخاب قهوه سیمرغ";
+          var itemId = btn.getAttribute("data-item-id") || btn.getAttribute("data-id") || "";
+          addToCart(itemName, itemId);
+
+          var prevText = btn.textContent;
+          btn.textContent = "اضافه شد ✓";
+          btn.classList.add("added");
+          setTimeout(function() {
+            btn.textContent = prevText || "+ به فاکتور";
+            btn.classList.remove("added");
+          }, 900);
+        });
+      }
+
+      if (quickBaleLink) {
+        var consultMsg = "سلام، برای انتخاب قهوه مناسب (نوع دان، میکس یا آسیاب) در کلبه چای و قهوه سیمرغ نیاز به مشاوره دارم.";
+        quickBaleLink.href = "https://ble.ir/simorgh_coffee?text=" + encodeURIComponent(consultMsg);
+      }
+
+      if (openBtn) {
+        openBtn.addEventListener("click", function() {
+          renderList();
+          if (modalEl) modalEl.classList.add("open");
+        });
+      }
+
+      if (closeBtn && modalEl) {
+        closeBtn.addEventListener("click", function() {
+          modalEl.classList.remove("open");
+        });
+      }
+
+      if (modalEl) {
+        modalEl.addEventListener("click", function(ev) {
+          if (ev.target === modalEl) modalEl.classList.remove("open");
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", function() {
+          items = [];
+          syncState();
+          renderList();
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function() {
+          var text = buildOrderText();
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (e) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).catch(function(){});
+          }
+          copyBtn.textContent = "کپی شد ✓";
+          setTimeout(function() { copyBtn.textContent = "کپی متن"; }, 1800);
+        });
+      }
+
+      ["invDeliveryType", "invGrindType"].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", updateBaleHref);
+          el.addEventListener("change", updateBaleHref);
+        }
+      });
+
+      var shareBtn = document.getElementById("shareSiteBtn");
+      if (shareBtn) {
+        shareBtn.addEventListener("click", function() {
+          var shareData = {
+            title: "کلبه چای و قهوه سیمرغ",
+            text: "منو و سفارش آنلاین کلبه چای و قهوه سیمرغ (تهرانپارس)",
+            url: window.location.href
+          };
+          if (navigator.share) {
+            navigator.share(shareData).catch(function(){});
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href).catch(function(){});
+            shareBtn.textContent = "لینک کپی شد ✓";
+            setTimeout(function() { shareBtn.textContent = "اشتراک‌گذاری"; }, 1600);
+          }
+        });
+      }
+
+      var deferredPrompt = null;
+      window.addEventListener("beforeinstallprompt", function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      var installBtn = document.getElementById("installPwaBtn");
+      if (installBtn) {
+        installBtn.addEventListener("click", function() {
+          if (deferredPrompt && deferredPrompt.prompt) {
+            deferredPrompt.prompt();
+            deferredPrompt = null;
+          } else {
+            installBtn.textContent = "از منوی مرورگر نصب کنید";
+            setTimeout(function() { installBtn.textContent = "نصب روی گوشی"; }, 1800);
+          }
+        });
+      }
+
+      syncState();
+    })();
+  </script>
+</body>
+</html>
