@@ -55,7 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: bold;
       color: #7c3e08;
     }
@@ -107,7 +107,16 @@
       justify-content: space-between;
       gap: 10px;
     }
-    .quick-btns { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+    .quick-info { flex: 1 1 auto; min-width: 0; text-align: right; }
+    .quick-info strong { display: block; font-size: 12.5px; margin-bottom: 3px; }
+    .quick-info p { margin: 0; font-size: 11px; color: #f3e4d0; line-height: 1.55; }
+    .quick-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 0 0 auto;
+      min-width: 92px;
+    }
     .q-add-btn {
       border: 0;
       background: #d97706;
@@ -133,9 +142,6 @@
       font-size: 11px;
       white-space: nowrap;
     }
-    .quick-info { flex: 1; min-width: 0; text-align: right; }
-    .quick-info strong { display: block; font-size: 12.5px; margin-bottom: 3px; }
-    .quick-info p { margin: 0; font-size: 11px; color: #f3e4d0; }
     .util-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -441,7 +447,13 @@
 
     <header class="hero-card">
       <div class="logo-circle">
-        <img src="./1760785858698.jpg" alt="لوگوی کلبه چای و قهوه سیمرغ" />
+        <img
+          src="./1760785858698.jpg"
+          alt="لوگوی کلبه چای و قهوه سیمرغ"
+          onload="var fb=document.getElementById('idxLogoFb');if(fb)fb.style.display='none';"
+          onerror="this.style.display='none';var fb=document.getElementById('idxLogoFb');if(fb)fb.style.display='block';"
+        />
+        <span id="idxLogoFb">SIMORGH</span>
       </div>
       <h1 class="brand-title">کلبه چای و قهوه سیمرغ</h1>
       <p class="brand-sub">عطر اصیل قهوه تازه رست و چای منتخب در تهرانپارس</p>
@@ -515,85 +527,4 @@
           <a class="acc-action-btn primary" href="https://instagram.com/simorgh_coffee" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
           <a class="acc-action-btn" href="https://www.aparat.com/simorgh_coffee" target="_blank" rel="noopener noreferrer">آپارات</a>
         </div>
-        <div class="contact-info-line">شناسه رسمی در بله، اینستاگرام و آپارات: <span class="ltr-pin">@simorgh_coffee</span></div>
-      </div>
-    </div>
-
-    <div class="acc-box" id="accContact">
-      <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="panelContact">
-        <span class="acc-trigger-inner">
-          <span class="acc-title">تماس با ما و راه‌های ارتباطی</span>
-          <span class="acc-arrow" aria-hidden="true">▾</span>
-        </span>
-      </button>
-      <div class="acc-panel" id="panelContact">
-        <div class="contact-info-line">نشانی: تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</div>
-        <div class="acc-btn-row-2">
-          <a class="acc-action-btn call" href="tel:02177341312">ثابت: <span class="ltr-pin">021-77341312</span></a>
-          <a class="acc-action-btn primary" href="tel:09125183142">همراه: <span class="ltr-pin">09125183142</span></a>
-        </div>
-      </div>
-    </div>
-
-    <footer class="footer-addr">
-      <strong>تهران، تهرانپارس، خیابان جشنواره، روبروی بهزیستی، پلاک ۴۸</strong>
-      <div class="footer-sub">امکان خرید حضوری و ارسال پیک در تهرانپارس و اطراف</div>
-      <button type="button" id="copyAddressBtn" class="copy-addr-btn">کپی آدرس فروشگاه</button>
-    </footer>
-  </div>
-
-  <nav class="bottom-bar" aria-label="دسترسی سریع">
-    <div class="bottom-bar-inner">
-      <a class="bar-call" href="tel:02177341312">تماس</a>
-      <a class="bar-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">بله</a>
-      <button type="button" id="openInvoiceBarBtn" class="bar-invoice" data-open-invoice>فاکتور ( <span id="simorghCartCount">0</span> )</button>
-    </div>
-  </nav>
-
-  <script>
-    (function () {
-      function initAccordions() {
-        var triggers = document.querySelectorAll(".acc-trigger");
-        for (var i = 0; i < triggers.length; i++) {
-          triggers[i].addEventListener("click", function (ev) {
-            ev.preventDefault();
-            var box = this.closest ? this.closest(".acc-box") : this.parentElement;
-            if (!box) return;
-            var willOpen = !box.classList.contains("is-open");
-            box.classList.toggle("is-open", willOpen);
-            this.setAttribute("aria-expanded", willOpen ? "true" : "false");
-            var arrow = this.querySelector(".acc-arrow");
-            if (arrow) arrow.textContent = willOpen ? "▴" : "▾";
-            var btn = this;
-            requestAnimationFrame(function () {
-              if (btn && typeof btn.blur === "function") btn.blur();
-            });
-          });
-        }
-      }
-
-      function pad2(n) {
-        return n < 10 ? "0" + n : String(n);
-      }
-
-      function formatHms(totalSeconds) {
-        if (totalSeconds < 0) totalSeconds = 0;
-        var h = Math.floor(totalSeconds / 3600);
-        var m = Math.floor((totalSeconds % 3600) / 60);
-        var s = totalSeconds % 60;
-        return '<span class="timer-digits">' + pad2(h) + ":" + pad2(m) + ":" + pad2(s) + "</span>";
-      }
-
-      function renderStoreStatus() {
-        var badge = document.getElementById("storeStatusBadge");
-        var statusText = document.getElementById("storeStatusText");
-        var countdownEl = document.getElementById("storeCountdown");
-        if (!badge || !statusText) return;
-
-        var now = new Date();
-        var day = now.getDay();
-        var secNow = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-
-        var openSec = 8 * 3600;
-        var closeSec = (day === 5) ? (13 * 3600) : (22 * 3600);
-        var isOpen = secNow >= openSec && secNow
+        <div class="contact-info-line">شناسه رسمی در بله، اینستاگرام و آپارات: <span
