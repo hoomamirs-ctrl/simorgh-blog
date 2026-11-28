@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2b1409" />
-  <link rel="manifest" href="./manifest.json" />
+  <link rel="manifest" href="./manifest.json?v=20261128" />
   <title>سوغاتی و شیرین‌کام | کلبه چای و قهوه سیمرغ</title>
   <meta name="description" content="سوغاتی و شیرین‌کام‌های کلبه چای و قهوه سیمرغ در تهرانپارس — انواع نبات و قند یزد، حلوا ارده، ارده و شیره نبات." />
   <style>
@@ -182,7 +182,10 @@
       font-family: Tahoma, sans-serif !important;
       flex: 0 0 auto !important;
       white-space: nowrap !important;
+      transition: background 0.18s ease, transform 0.12s ease !important;
     }
+    .add-btn:active { transform: scale(0.97) !important; }
+    .add-btn.added { background: #15803d !important; }
     .link-btn {
       text-decoration: none !important;
       background: #2b1409 !important;
@@ -244,62 +247,6 @@
     .bar-call { background: #15803d !important; }
     .bar-bale { background: #0284c7 !important; }
     .bar-invoice { background: #b45d0b !important; }
-    .fallback-modal-backdrop {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 9999;
-      display: none; align-items: center; justify-content: center; padding: 14px;
-    }
-    .fallback-modal-backdrop.open { display: flex; }
-    .fallback-modal-card {
-      width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto;
-      background: #fffdf9; color: #26130a; border-radius: 18px; padding: 16px; direction: rtl;
-    }
-    .fallback-modal-head {
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid #ead9c1; padding-bottom: 8px; margin-bottom: 10px;
-      font-weight: bold; font-size: 14px;
-    }
-    .fallback-close-btn {
-      border: 0; background: #fee2e2; color: #991b1b; border-radius: 8px;
-      padding: 4px 10px; font-weight: bold; cursor: pointer; font-family: Tahoma, sans-serif;
-    }
-    .fallback-empty {
-      text-align: center; color: #6b5848; background: #faf4eb;
-      border: 1px dashed #e2ceb3; border-radius: 12px; padding: 16px 10px;
-      margin-bottom: 10px; font-size: 12px;
-    }
-    .fallback-item-row {
-      display: flex; justify-content: space-between; align-items: center; gap: 8px;
-      background: #faf4eb; border: 1px solid #ead9c1; border-radius: 10px;
-      padding: 8px 10px; margin-bottom: 8px; font-size: 11.5px;
-    }
-    .qty-controls { display: flex; align-items: center; gap: 6px; }
-    .qty-btn {
-      width: 24px; height: 24px; border: 1px solid #d7b285; background: #fff;
-      color: #26130a; border-radius: 6px; font-weight: bold; cursor: pointer;
-    }
-    .fallback-field {
-      width: 100%; border: 1px solid #e2ceb3; background: #fff; border-radius: 9px;
-      padding: 7px 10px; margin-bottom: 8px; font-size: 11.5px;
-      font-family: Tahoma, sans-serif; color: #26130a;
-    }
-    .select-grid-2 {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px; margin-bottom: 8px;
-    }
-    .select-grid-2 .fallback-field { margin-bottom: 0; }
-    .fallback-actions {
-      display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; margin-top: 10px;
-    }
-    .fallback-send-bale {
-      text-align: center; text-decoration: none; background: #0284c7; color: #fff;
-      padding: 9px 10px; border-radius: 10px; font-weight: bold; font-size: 11.5px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .fallback-copy-btn, .fallback-clear-btn {
-      border: 1px solid #d8c3a8; background: #faf4eb; color: #26130a;
-      padding: 9px 10px; border-radius: 10px; font-weight: bold; font-size: 11.5px;
-      cursor: pointer; font-family: Tahoma, sans-serif;
-    }
   </style>
 </head>
 <body>
@@ -370,6 +317,7 @@
         <button type="button" class="add-btn" data-add-invoice data-item-id="souv-ghand-heli" data-item-name="قند هلی یزد">+ به فاکتور</button>
       </article>
     </section>
+
     <div class="section-label">انواع حلوا ارده</div>
     <section class="items-list">
       <article class="product-card">
@@ -447,59 +395,6 @@
     </div>
   </nav>
 
-  <div id="simorghFallbackModal" class="fallback-modal-backdrop" role="dialog" aria-modal="true">
-    <div class="fallback-modal-card">
-      <div class="fallback-modal-head">
-        <span>فاکتور سفارش سیمرغ</span>
-        <button type="button" id="fallbackCloseBtn" class="fallback-close-btn">بستن</button>
-      </div>
-      <div id="fallbackItemsList"></div>
-      <input type="text" id="invCustomerName" class="fallback-field" placeholder="نام و نام خانوادگی (اختیاری)" />
-      <div class="select-grid-2">
-        <select id="invDeliveryType" class="fallback-field" aria-label="نوع تحویل">
-          <option value="">نوع تحویل</option>
-          <option value="پیک">پیک</option>
-          <option value="حضوری">حضوری</option>
-        </select>
-        <select id="invGrindType" class="fallback-field" aria-label="نوع آسیاب">
-          <option value="">نوع آسیاب</option>
-          <option value="دانه کامل">دانه کامل</option>
-          <option value="اسپرسو">اسپرسو</option>
-          <option value="موکاپات">موکاپات</option>
-          <option value="فرانسه / دمی">فرانسه / دمی</option>
-          <option value="ترک">ترک</option>
-        </select>
-      </div>
-      <div class="fallback-actions">
-        <a id="fallbackBaleLink" class="fallback-send-bale" href="https://ble.ir/simorgh_coffee" target="_blank" rel="noopener noreferrer">ارسال به بله</a>
-        <button type="button" id="fallbackCopyBtn" class="fallback-copy-btn">کپی متن</button>
-        <button type="button" id="fallbackClearBtn" class="fallback-clear-btn">پاک کردن</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    (function(){try{
-      var K='simorgh_user_invoice_items_v2';
-      function load(){try{var r=localStorage.getItem(K);if(r){var a=JSON.parse(r);if(Array.isArray(a))return a.filter(function(x){return x&&x.name&&(Number(x.qty)||0)>0;});}}catch(e){}return[];}
-      var items=load(),cnt=document.getElementById('simorghCartCount'),opn=document.getElementById('openInvoiceBarBtn'),mdl=document.getElementById('simorghFallbackModal'),lst=document.getElementById('fallbackItemsList'),cls=document.getElementById('fallbackCloseBtn'),clr=document.getElementById('fallbackClearBtn'),cpb=document.getElementById('fallbackCopyBtn'),blk=document.getElementById('fallbackBaleLink');
-      function bText(){var l=['سفارش کلبه چای و قهوه سیمرغ (تهرانپارس):'];if(!items.length){l.push('• هنوز موردی از منو به فاکتور اضافه نشده است.');}else{for(var i=0;i<items.length;i++)l.push('• '+items[i].name+' — تعداد: '+(Number(items[i].qty)||0));}var cn=(document.getElementById('invCustomerName')&&document.getElementById('invCustomerName').value||'').trim(),dt=(document.getElementById('invDeliveryType')&&document.getElementById('invDeliveryType').value||'').trim(),gt=(document.getElementById('invGrindType')&&document.getElementById('invGrindType').value||'').trim();if(cn)l.push('نام: '+cn);if(dt)l.push('نوع تحویل: '+dt);if(gt)l.push('نوع آسیاب: '+gt);return l.join('\n');}
-      function upBale(){if(blk)blk.href='https://ble.ir/simorgh_coffee?text='+encodeURIComponent(bText());}
-      function sync(){items=items.filter(function(x){return x&&x.name&&(Number(x.qty)||0)>0;});try{localStorage.setItem(K,JSON.stringify(items));}catch(e){}var t=0;for(var i=0;i<items.length;i++)t+=(Number(items[i].qty)||0);if(cnt)cnt.textContent=String(t);upBale();}
-      function addIt(nm,id){var s=String(nm||'').trim();if(!s)return;var f=null;for(var i=0;i<items.length;i++){if((id&&items[i].id===id)||items[i].name===s){f=items[i];break;}}if(f){f.qty=(Number(f.qty)||0)+1;}else{items.push({id:id||String(Date.now()),name:s,qty:1});}sync();}
-      function chg(i,d){if(!items[i])return;var n=(Number(items[i].qty)||0)+d;if(n<=0)items.splice(i,1);else items[i].qty=n;sync();render();}
-      function render(){if(!lst)return;if(!items.length){lst.innerHTML='<div class="fallback-empty">فاکتور شما خالی است. موارد دلخواه را از منو یا دکمه «+ به فاکتور» اضافه کنید.</div>';upBale();return;}var h='';for(var i=0;i<items.length;i++){h+='<div class="fallback-item-row"><span><strong>'+items[i].name+'</strong></span><div class="qty-controls"><button type="button" class="qty-btn" data-qi="'+i+'" data-d="-1">-</button><span>'+(Number(items[i].qty)||0)+'</span><button type="button" class="qty-btn" data-qi="'+i+'" data-d="1">+</button></div></div>';}lst.innerHTML=h;var bs=lst.querySelectorAll('.qty-btn');for(var k=0;k<bs.length;k++){bs[k].addEventListener('click',function(){chg(Number(this.getAttribute('data-qi')),Number(this.getAttribute('data-d')));});}upBale();}
-      document.addEventListener('click',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-add-invoice]'):null;if(!el)return;if(window.SimorghCart&&typeof window.SimorghCart.addItem==='function')return;addIt(el.getAttribute('data-item-name')||el.getAttribute('data-name')||'آیتم انتخاب‌شده',el.getAttribute('data-item-id')||el.getAttribute('data-id')||'');});
-      if(opn){opn.addEventListener('click',function(){if(window.SimorghCart&&typeof window.SimorghCart.openModal==='function')return;render();if(mdl)mdl.classList.add('open');});}
-      if(cls&&mdl)cls.addEventListener('click',function(){mdl.classList.remove('open');});
-      if(mdl)mdl.addEventListener('click',function(e){if(e.target===mdl)mdl.classList.remove('open');});
-      if(clr)clr.addEventListener('click',function(){items=[];sync();render();});
-      function cp(txt,btn,lbl){try{var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}catch(e){}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).catch(function(){});if(btn){btn.textContent='کپی شد ✓';setTimeout(function(){btn.textContent=lbl;},1800);}}
-      if(cpb)cpb.addEventListener('click',function(){cp(bText(),cpb,'کپی متن');});
-      ['invCustomerName','invDeliveryType','invGrindType'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',upBale);if(el)el.addEventListener('change',upBale);});
-      sync();
-    }catch(err){}})();
-  </script>
-  <script src="./simorgh-cart.js?v=63" onerror="void(0)"></script>
+  <script src="./simorgh-cart.js?v=20261128"></script>
 </body>
 </html>
